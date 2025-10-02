@@ -12,395 +12,601 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0a0a0a;
+            color: #fff;
         }
 
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
-        .wiggle {
-            animation: wiggle 2s ease-in-out infinite;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        header {
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes gradientShift {
+        @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        .logo {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 4px 4px 0px #000, 6px 6px 0px rgba(0,0,0,0.3);
-            letter-spacing: 3px;
-            display: inline-block;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .tagline {
-            font-size: 1.5rem;
-            color: #fff;
-            margin-top: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-style: italic;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 4rem 2rem;
-            text-align: center;
+        header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899, #f59e0b);
+            background-size: 300% 300%;
+            animation: gradientFlow 8s ease infinite;
+            padding: 2rem 2rem 3rem;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: "✨🎨🚀🎪⭐🎯🌈💡";
+        header::before {
+            content: '';
             position: absolute;
-            top: 20%;
-            left: -10%;
-            font-size: 4rem;
-            opacity: 0.2;
-            animation: scroll 20s linear infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
         }
 
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(100vw); }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
         }
 
-        .hero h2 {
-            font-size: 2.8rem;
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
             color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #fbbf24;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fbbf24;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
             margin-bottom: 1.5rem;
-            text-shadow: 3px 3px 0px #000;
-            line-height: 1.3;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #fbbf24 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .weird-word {
+            display: inline-block;
+            font-style: italic;
+            transform: rotate(-3deg);
+            color: #ec4899;
+            text-shadow: 3px 3px 0 #6366f1;
+            -webkit-text-fill-color: #ec4899;
         }
 
         .hero p {
             font-size: 1.3rem;
-            color: white;
             max-width: 700px;
-            margin: 0 auto 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin: 0 auto 2.5rem;
+            color: #d1d5db;
+            line-height: 1.7;
+            animation: slideIn 0.8s ease-out 0.2s both;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: #ffd32a;
-            color: #000;
-            padding: 1.2rem 3rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideIn 0.8s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: white;
+            border: none;
             border-radius: 50px;
-            box-shadow: 0 8px 0 #cc8800, 0 10px 20px rgba(0,0,0,0.3);
-            transition: all 0.2s;
-            border: 4px solid #000;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta-button:hover {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #cc8800, 0 5px 10px rgba(0,0,0,0.3);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
         }
 
-        .cta-button:active {
-            transform: translateY(8px);
-            box-shadow: 0 0px 0 #cc8800, 0 2px 5px rgba(0,0,0,0.3);
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.6);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: transparent;
+            color: white;
+            border: 2px solid #8b5cf6;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #8b5cf6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
         }
 
         .features {
-            background: #fff;
-            padding: 4rem 2rem;
+            background: #0a0a0a;
+            padding: 6rem 2rem;
             position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
         }
 
         .features h2 {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #667eea;
-            text-shadow: 2px 2px 0px #ffd32a;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .features-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 4rem;
+            font-style: italic;
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .feature-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 2.5rem;
             border-radius: 20px;
-            text-align: center;
-            transform: rotate(-2deg);
-            transition: all 0.3s;
-            border: 5px solid #000;
-            box-shadow: 8px 8px 0px #000;
+            border: 1px solid #333;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .feature-card:nth-child(even) {
-            transform: rotate(2deg);
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ec4899, #8b5cf6, #6366f1);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-card:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 12px 12px 0px #000;
+            transform: translateY(-10px);
+            border-color: #8b5cf6;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
         }
 
         .feature-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
             display: inline-block;
-            animation: bounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
         }
 
         .feature-card h3 {
-            font-size: 1.8rem;
-            color: #ffd32a;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 0px #000;
+            color: #fff;
+            font-weight: 700;
         }
 
         .feature-card p {
-            color: white;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            color: #9ca3af;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .weird-section {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .weird-section::before {
+            content: '◆ ▲ ● ■ ◆ ▲ ● ■';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            font-size: 4rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            letter-spacing: 3rem;
+        }
+
+        .weird-section h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            position: relative;
+            z-index: 2;
+        }
+
+        .weird-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glitch-text {
+            display: inline-block;
+            animation: glitch 0.3s infinite;
         }
 
         .testimonials {
-            background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
-            padding: 4rem 2rem;
-            text-align: center;
+            background: #0a0a0a;
+            padding: 6rem 2rem;
         }
 
         .testimonials h2 {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 2rem;
-            text-shadow: 3px 3px 0px #000;
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #fff, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .testimonial {
-            background: white;
+            background: #1a1a1a;
             padding: 2rem;
             border-radius: 15px;
-            max-width: 600px;
-            margin: 2rem auto;
-            border: 4px solid #000;
-            box-shadow: 6px 6px 0px #000;
-            transform: rotate(-1deg);
+            border-left: 4px solid #ec4899;
+            transition: all 0.3s;
         }
 
-        .testimonial:nth-child(odd) {
-            transform: rotate(1deg);
+        .testimonial:hover {
+            transform: translateX(10px);
+            border-left-color: #8b5cf6;
         }
 
         .testimonial p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-style: italic;
-            margin-bottom: 1rem;
-            color: #333;
+            margin-bottom: 1.5rem;
+            color: #d1d5db;
+            line-height: 1.6;
         }
 
         .testimonial-author {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fbbf24;
+            font-style: normal;
         }
 
         footer {
             background: #000;
-            color: white;
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 2rem;
+            border-top: 1px solid #333;
         }
 
         footer p {
-            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
         }
 
-        .emoji-scatter {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.3;
+        .floating-shape {
+            position: fixed;
             pointer-events: none;
+            opacity: 0.1;
+            font-size: 8rem;
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
         }
 
         @media (max-width: 768px) {
-            .logo {
-                font-size: 2.5rem;
+            .nav-links {
+                display: none;
             }
             
-            .hero h2 {
-                font-size: 2rem;
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .cta-button {
-                font-size: 1.2rem;
-                padding: 1rem 2rem;
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="floating-shape" style="top: 10%; left: 5%;">◆</div>
+    <div class="floating-shape" style="top: 60%; right: 10%; animation-delay: 2s;">▲</div>
+    <div class="floating-shape" style="bottom: 20%; left: 15%; animation-delay: 4s;">●</div>
+
     <header>
-        <div class="logo floating">🎪 JOIMIRAE 🎨</div>
-        <div class="tagline">Joy in Studying</div>
+        <nav>
+            <div class="logo">JOIMIRAE</div>
+            <ul class="nav-links">
+                <li><a href="#features">What We Do</a></li>
+                <li><a href="#testimonials">Stories</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </nav>
+        
+        <div class="hero">
+            <h1>What If Learning Didn't Feel So <span class="weird-word">BORRRING?</span></h1>
+            <p>
+                Staring at the page. Knowing you should start. But your brain just... won't. We get it. And we've figured out how to make learning actually stick—by making it interesting enough to begin.
+            </p>
+            <div class="cta-group">
+                <a href="#contact" class="btn-primary">Tell Me More</a>
+                <a href="#features" class="btn-secondary">How It Works</a>
+            </div>
+        </div>
     </header>
 
-    <section class="hero">
-        <h2 class="wiggle">Learning Doesn't Have to Be Boring!</h2>
-        <p>
-            We get it. Starting can be the hardest part. Your brain craves excitement, weirdness, and fun! 
-            That's exactly what we deliver. Education with a twist, a laugh, and a whole lot of joy.
-        </p>
-        <a href="#contact" class="cta-button">🚀 Let's Get Weird!</a>
-    </section>
-
-    <section class="features">
-        <h2>Why Joimirae? Because Normal is Overrated! 🎭</h2>
+    <section class="features" id="features">
+        <h2>Learning That Doesn't Make You Want to Run Away</h2>
+        <p class="features-subtitle">Because "just focus harder" has never worked for anyone.</p>
+        
         <div class="feature-grid">
             <div class="feature-card">
-                <div class="feature-icon">🎪</div>
-                <h3>Excitement First</h3>
-                <p>We hook your brain with curiosity and wonder before diving into learning. No boring intros here!</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">😂</div>
-                <h3>Laughter Included</h3>
-                <p>Learning should make you smile! We use humor and playfulness to make concepts stick in the most fun way possible.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Delightfully Weird</h3>
-                <p>Conventional methods don't work for everyone. We embrace the quirky, the unexpected, and the wonderfully strange.</p>
-            </div>
-            
-            <div class="feature-card">
                 <div class="feature-icon">⚡</div>
-                <h3>ADHD-Friendly</h3>
-                <p>Short bursts, frequent changes, and constant engagement. We design for brains that think differently!</p>
+                <h3>Start Without the Dread</h3>
+                <p>The hardest part? Beginning. We design entry points that actually spark curiosity instead of triggering that "ugh, not this again" feeling.</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">🚀</div>
-                <h3>Kickstart Success</h3>
-                <p>We help you overcome that initial resistance and build momentum for lifelong learning and achievement.</p>
+                <div class="feature-icon">🎭</div>
+                <h3>Unexpected = Memorable</h3>
+                <p>When something surprises you, your brain pays attention. We use the unconventional, the playful, the slightly weird—because that's what makes things stick.</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">🌈</div>
-                <h3>Family Together</h3>
-                <p>Parents and kids learn side-by-side. We believe education strengthens families when it's done right!</p>
+                <div class="feature-icon">🧠</div>
+                <h3>Work With Your Brain</h3>
+                <p>Your mind works differently. That's not a problem—it's an advantage. We tap into how you naturally think instead of forcing you into boxes that don't fit.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Momentum Over Marathon</h3>
+                <p>Forget all-nighters and grinding. We help you build the kind of momentum that actually lasts, starting small and building real consistency.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Structure That Breathes</h3>
+                <p>Too rigid = suffocating. Too loose = chaos. We find that sweet spot where you have enough direction to move forward without feeling trapped.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Family-Wide Breakthrough</h3>
+                <p>When parents understand their own learning blocks, kids benefit too. We work with the whole family because you're all navigating this together.</p>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <h2>Real Families, Real Joy! 💫</h2>
-        
-        <div class="testimonial">
-            <p>"Their grandparents used to sit around when we visit. Now they can take part in learning games!"</p>
-            <div class="testimonial-author">- I T., Parent of 11-year-old</div>
-        </div>
-      
-        
-        <div class="testimonial">
-            <p>"The laughter in our house during learning time is something I never thought possible. Thank you for making education joyful!"</p>
-            <div class="testimonial-author">- W O., Parent of 5-year-old</div>
-        </div>
-    </section>
-
-    <section class="hero" id="contact">
-        <h2>Ready to Transform Learning? 🎉</h2>
+    <section class="weird-section">
+        <h2>Why "Normal" Teaching <span class="glitch-text">Fails</span></h2>
         <p>
-            Join families who've discovered that education can be exciting, weird, and wonderful. 
-            Let's kickstart your journey together!
+            Traditional education assumes everyone learns the same way. Sit still. Read the textbook. Take notes. 
+            But what if your brain needs movement, novelty, and genuine interest to actually engage? 
+            We're not trying to fix you. We're changing the approach.
         </p>
-        <a href="mailto:contact@joimirae.com" class="cta-button">✨ Contact Us Today!</a>
+        <a href="#contact" class="btn-primary">Let's Find Your Way</a>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <h2>What Happens When Learning Finally Clicks</h2>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p>"I've always felt like something was wrong with me because studying felt impossible. Turns out I just needed a different approach. This changed everything."</p>
+                <div class="testimonial-author">— Sarah M., College Student</div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"My kid would melt down every homework session. Now we actually laugh while learning. I can't believe this is the same child."</p>
+                <div class="testimonial-author">— David L., Parent</div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"I thought I was just lazy or broken. Finally understanding that my brain just needs different fuel? Life-changing doesn't even cover it."</p>
+                <div class="testimonial-author">— Alex P., Adult Learner</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="weird-section" id="contact">
+        <h2>Ready to Stop Fighting Your Brain?</h2>
+        <p>
+            If reading this felt like "wait, someone finally gets it"—that's your sign. 
+            Let's talk about what learning could look like when it actually works with you, not against you.
+        </p>
+        <div class="cta-group">
+            <a href="mailto:contact@joimirae.com" class="btn-primary">contact@joimirae.com</a>
+            <a href="tel:+65 81191958" class="btn-secondary">Schedule a Chat</a>
+        </div>
     </section>
 
     <footer>
-        <p>🎪 JOIMIRAE - Making Learning Delightfully Weird Since 2025 🎨</p>
-        <p>📧 contact@joimirae.com | 📱 +65 81191958</p>
+        <p><strong>JoiMirae</strong> • Joy in Studying</p>
+        <p>Learning that doesn't feel like punishment.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">© 2025 JoiMirae. Stay curious. ◆</p>
     </footer>
 
     <script>
-        // Add random floating emojis
-        const emojis = ['✨', '🎨', '🚀', '🎪', '⭐', '🎯', '🌈', '💡', '🎭', '🎉'];
-        const container = document.body;
-        
-        for (let i = 0; i < 15; i++) {
-            const emoji = document.createElement('div');
-            emoji.className = 'emoji-scatter';
-            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + '%';
-            emoji.style.top = Math.random() * 100 + '%';
-            emoji.style.animationDelay = Math.random() * 3 + 's';
-            emoji.classList.add('floating');
-            container.appendChild(emoji);
-        }
+        // Smooth parallax effect for floating shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.floating-shape');
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.02;
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                shape.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
 
-        // Add click effect to buttons
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Create sparkle effect
-                for (let i = 0; i < 10; i++) {
-                    const sparkle = document.createElement('div');
-                    sparkle.textContent = '✨';
-                    sparkle.style.position = 'fixed';
-                    sparkle.style.left = e.clientX + 'px';
-                    sparkle.style.top = e.clientY + 'px';
-                    sparkle.style.fontSize = '2rem';
-                    sparkle.style.pointerEvents = 'none';
-                    sparkle.style.transition = 'all 1s ease-out';
-                    document.body.appendChild(sparkle);
-                    
-                    setTimeout(() => {
-                        sparkle.style.transform = `translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px)`;
-                        sparkle.style.opacity = '0';
-                    }, 10);
-                    
-                    setTimeout(() => sparkle.remove(), 1000);
+        // Add intersection observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Add sparkle effect to primary buttons
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 10);
             });
         });
     </script>
