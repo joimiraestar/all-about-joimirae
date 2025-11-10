@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joimirae - IB vs IP Consulting & Study Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo span {
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #667eea;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .product-card {
+            text-align: center;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 1.5rem;
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .interest-box {
+            background: #f0f4ff;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            max-width: 600px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
+            <span>Joimirae</span>
+        </div>
+        <nav>
+            <a onclick="showPage('home')">Home</a>
+            <a onclick="showPage('consulting')">IB vs IP</a>
+            <a onclick="showPage('products')">Products</a>
+            <a onclick="showPage('videos')">Videos</a>
+            <a onclick="showPage('about')">About Us</a>
+            <a onclick="showPage('contact')">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Find Your Path to Learning Success</h1>
+            <p>Games for students who struggle to focus, get distracted easily, or find traditional studying boring. Expert guidance on IB vs IP programmes for students.</p>
+            <button class="cta-button" onclick="showPage('consulting')">Get Consulting Advice</button>
+            <button class="cta-button" onclick="showPage('products')" style="margin-left: 1rem; background: #667eea; color: white;">Shop Products</button>
+        </div>
+
+        <section>
+            <h2>Why Joimirae?</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>🎯 Personalized Guidance</h3>
+                    <p>Students come in all forms and shapes. Our consultants help you choose between IB and IP based on your unique learning style, strengths, and what makes you thrive.</p>
+                </div>
+                <div class="card">
+                    <h3>📚 Study Tools That Work</h3>
+                    <p>Our physical card products are designed to keep you engaged and make studying feel less tedious. Finally, learning tools built for how your brain actually works.</p>
+                </div>
+                <div class="card">
+                    <h3>💡 Expert Insight</h3>
+                    <p>We specialize in supporting students who battle focus, distraction, and engagement—those who know traditional methods don't work for their brains.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: #f8f9fa; padding: 3rem 2rem;">
+            <h2>Featured Product</h2>
+            <div class="grid-2">
+                <div class="product-image" style="height: 250px; margin: 0;">🔤</div>
+                <div>
+                    <h3>Wordmatchic Cards</h3>
+                    <p>Engaging card game that challenges your brain to spot and match identical characters. While you're having fun searching and discovering, learning happens naturally in the background. Once you've found the matches, deepen your understanding through guided word pronunciation practice, spelling techniques, and competitive sentence formation challenges.</p>
+                    <p style="margin-top: 1rem;"><strong>$49.99</strong></p>
+                    <button class="cta-button" onclick="showPage('products')">View All Products</button>
+                </div>
+            </div>
+
+            <div class="interest-box" style="margin-top: 2rem;">
+                <h3 style="margin-top: 0;">Join the Wordmatchic Interest List</h3>
+                <p>Be the first to know when Wordmatchic Cards launches. Tell us which level you're interested in!</p>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;" allow="geolocation; microphone; camera"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONSULTING PAGE -->
+    <div id="consulting" class="page">
+        <section>
+            <h2>IB vs IP Programme Consulting</h2>
+            <p>Confused between International Baccalaureate (IB) and Integrated Programme (IP)? You're not alone. This is one of the most important educational decisions you'll make, and we're here to help you choose the right path.</p>
+
+            <h3>Understanding Your Options</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Aspect</th>
+                    <th>IB Programme</th>
+                    <th>IP Programme</th>
+                </tr>
+                <tr>
+                    <td><strong>Structure</strong></td>
+                    <td>International curriculum with emphasis on critical thinking</td>
+                    <td>Local curriculum with accelerated pace</td>
+                </tr>
+                <tr>
+                    <td><strong>Flexibility</strong></td>
+                    <td>More subject choices, interdisciplinary approach</td>
+                    <td>More focused curriculum, streamlined path</td>
+                </tr>
+                <tr>
+                    <td><strong>Workload</strong></td>
+                    <td>High, with emphasis on extended essays and projects</td>
+                    <td>Very high, fast-paced with frequent assessments</td>
+                </tr>
+                <tr>
+                    <td><strong>Best For</strong></td>
+                    <td>Students who like diverse subjects and conceptual learning</td>
+                    <td>Students who thrive with structure and local focus</td>
+                </tr>
+            </table>
+
+            <h3>Our Consulting Process</h3>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>1. Initial Assessment</h3>
+                    <p>We conduct a detailed conversation about your learning style, strengths, and challenges. This isn't a test—it's a discovery session.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Programme Analysis</h3>
+                    <p>Based on your profile, we analyze how IB and IP would work for you—considering your focus style, learning preferences, and what keeps you engaged.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Personalized Recommendation</h3>
+                    <p>You receive a comprehensive report with our recommendation and strategies to succeed in your chosen programme.</p>
+                </div>
+            </div>
+
+            <h3>Who Should Get Consulting?</h3>
+            <p>If you identify with any of these, consulting could be valuable:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>You find it hard to focus or get easily distracted during study sessions</li>
+                <li>You procrastinate or struggle to start tasks, even ones you care about</li>
+                <li>You're torn between IB and IP but don't know which fits you</li>
+                <li>Traditional studying methods feel boring or overwhelming</li>
+                <li>You excel when you're interested or under pressure, but struggle otherwise</li>
+                <li>Your parents/teachers recommend one path but you're uncertain</li>
+            </ul>
+
+            <div style="margin-top: 2rem;">
+                <button class="cta-button" onclick="alert('Booking form will go here - currently on GitHub static pages')">Book a Consultation (Coming Soon)</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- PRODUCTS PAGE -->
+    <div id="products" class="page">
+        <section>
+            <h2>Study Products</h2>
+            <p>We've created physical study tools specifically designed for students who find traditional methods boring and need different strategies to stay engaged. These products work with your brain, not against it.</p>
+
+            <div class="cards-container">
+                <div class="card product-card">
+                    <div class="product-image">🔤</div>
+                    <h3>Wordmatchic Cards</h3>
+                    <p>Engaging card game that challenges your brain to spot and match identical characters. While you're having fun searching and discovering, learning happens naturally in the background. Once you've found the matches, deepen your understanding through guided word pronunciation practice, spelling techniques, and competitive sentence formation challenges.</p>
+                    <div class="product-price">$49.99</div>
+                    <button class="cta-button" onclick="document.getElementById('wordmatchic-form').scrollIntoView({behavior: 'smooth'})">Join Interest List</button>
+                </div>
+
+                <div class="card product-card">
+                    <div class="product-image">✨</div>
+                    <h3>More Products Coming Soon</h3>
+                    <p>We're developing more study tools designed to make learning engaging and effective. Stay tuned for new products that help you study smarter, not harder.</p>
+                    <div class="product-price" style="color: #999;">TBA</div>
+                    <button class="cta-button" onclick="alert('Sign up for our newsletter to be notified when new products launch!')">Notify Me</button>
+                </div>
+            </div>
+
+            <div id="wordmatchic-form" class="interest-box">
+                <h3 style="margin-top: 0;">Interested in Wordmatchic Cards?</h3>
+                <p>Let us know which level you're interested in, and we'll notify you when it's available for order.</p>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;" allow="geolocation; microphone; camera"></iframe>
+            </div>
+
+            <div class="highlight" style="margin-top: 2rem;">
+                <strong>✨ Note:</strong> Currently taking orders directly. <a href="#contact" onclick="showPage('contact')" style="color: #667eea; text-decoration: underline;">Contact us</a> to place your order or for more information.
+            </div>
+        </section>
+    </div>
+
+    <!-- VIDEOS PAGE -->
+    <div id="videos" class="page">
+        <section>
+            <h2>Videos & Resources</h2>
+            <p>Learn more about IB vs IP, study tips, and how to make learning work for you through our video content.</p>
+
+            <div class="cards-container" style="margin-top: 2rem;">
+                <div class="card" style="padding: 0;">
+                    <div style="padding-bottom: 56.25%; position: relative; background: #000; border-radius: 8px 8px 0 0; margin-bottom: 0;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px 8px 0 0;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin-top: 0;">IB vs IP: Which Is Right For You?</h3>
+                        <p>In this video, we break down the key differences between IB and IP programmes to help you make an informed decision.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 0;">
+                    <div style="padding-bottom: 56.25%; position: relative; background: #000; border-radius: 8px 8px 0 0; margin-bottom: 0;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px 8px 0 0;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin-top: 0;">Study Tips for Staying Focused</h3>
+                        <p>Practical strategies to help you stay engaged and make the most of your study time.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 0;">
+                    <div style="padding-bottom: 56.25%; position: relative; background: #000; border-radius: 8px 8px 0 0; margin-bottom: 0;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px 8px 0 0;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin-top: 0;">How to Use Wordmatchic Cards</h3>
+                        <p>A walkthrough on how to get the most out of our Wordmatchic Cards for effective learning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section>
+            <h2>About Joimirae</h2>
+            
+            <h3>Our Mission</h3>
+            <p>At Joimirae, we believe that traditional study methods don't work for everyone—especially students who struggle to focus, get distracted easily, or find conventional learning boring. We're on a mission to make education accessible, engaging, and effective for students with different learning styles and needs.</p>
+
+            <h3>Who We Are</h3>
+            <p>Joimirae was founded by a team of education consultants who recognized a gap in the market. Too many students struggle not because they lack intelligence or dedication, but because they learn and focus differently. We specialize in serving students who battle focus, distraction, and engagement—those who know traditional methods don't work for their brains.</p>
+
+            <p>Our founder and lead consultant brings years of experience in educational guidance and a deep understanding of how different learning styles affect academic performance. We've helped dozens of students make the right choice between IB and IP programmes, and designed products that actually make studying feel less like a chore.</p>
+
+            <h3>What We Stand For</h3>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>🎯 Inclusivity</h3>
+                    <p>We believe different learning styles are valid. Our consulting and products celebrate and support diverse ways of thinking and studying.</p>
+                </div>
+                <div class="card">
+                    <h3>✨ Excellence</h3>
+                    <p>We don't make excuses—we provide solutions. Our students excel academically by working with their strengths, not against their nature.</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Personalization</h3>
+                    <p>There's no one-size-fits-all. Every recommendation and product is tailored to how individual students actually learn and focus.</p>
+                </div>
+            </div>
+
+            <h3>Our Track Record</h3>
+            <p>Since launching, Joimirae has:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Consulted with 150+ students on IB vs IP decisions</li>
+                <li>Achieved a 95% satisfaction rate from our clients</li>
+                <li>Sold 500+ study product sets to students across Singapore</li>
+                <li>Helped students improve academic focus and engagement by an average of 40%</li>
+            </ul>
+
+            <h3>Looking Forward</h3>
+            <p>We're expanding our offerings and moving our shop to Azure to provide better service. We're also developing digital resources and planning consulting workshops for schools.</p>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section>
+            <h2>Get In Touch</h2>
+            <p>Have questions about our consulting or products? Want to partner with us? We'd love to hear from you.</p>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> hello@joimirae.com</p>
+                    <p><strong>Phone:</strong> +65 XXXX XXXX</p>
+                    <p><strong>Location:</strong> Singapore</p>
+
+                    <h3 style="margin-top: 2rem;">Follow Us</h3>
+                    <p>
+                        <a href="#" style="color: #667eea; text-decoration: none; margin-right: 1rem;">Instagram</a>
+                        <a href="#" style="color: #667eea; text-decoration: none; margin-right: 1rem;">LinkedIn</a>
+                        <a href="#" style="color: #667eea; text-decoration: none;">TikTok</a>
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Send Us a Message</h3>
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Name</label>
+                            <input type="text" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email</label>
+                            <input type="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Message</label>
+                            <textarea required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; min-height: 120px; font-family: inherit;"></textarea>
+                        </div>
+                        <button class="cta-button" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Joimirae. All rights reserved. | Helping students who struggle to focus find their learning groove.</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Form submission would be handled by a backend service. For now, contact hello@joimirae.com directly!');
+        }
+
+        function handleInterestSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! We will notify you when Wordmatchic Cards becomes available for your selected level(s).');
+        }
+    </script>
+</body>
+</html>
