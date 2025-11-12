@@ -14,16 +14,28 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #fff;
+            color: #f5f5f5;
+            background: #0a0a0a;
         }
 
+        /* ANIMATIONS */
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* FLOATING SHAPES */
         .floating-shape {
             position: fixed;
             pointer-events: none;
@@ -35,17 +47,15 @@
             filter: brightness(0) invert(1);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
+        /* HEADER */
         header {
-            background: #f5f5f5;
-            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+            background-size: 300% 300%;
+            animation: gradientFlow 8s ease infinite;
+            color: white;
             padding: 1.5rem 2rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: display 0.3s;
@@ -53,6 +63,14 @@
 
         header.hidden {
             display: none;
+        }
+
+        .top-nav {
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         .logo {
@@ -70,6 +88,9 @@
 
         .logo span {
             font-size: 1rem;
+            color: #ec4899;
+            font-weight: bold;
+            text-shadow: 0 0 15px #fbbf24;
         }
 
         nav {
@@ -78,7 +99,7 @@
         }
 
         nav a {
-            color: #333;
+            color: white;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s;
@@ -87,20 +108,10 @@
 
         nav a:hover {
             opacity: 0.7;
-            color: #667eea;
+            color: #fbbf24;
         }
 
-        .top-nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            position: relative;
-            z-index: 10;
-        }
-
+        /* PAGE MANAGEMENT */
         .page {
             display: none;
             animation: slideIn 0.6s;
@@ -110,6 +121,7 @@
             display: block;
         }
 
+        /* HERO SECTION */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
             background-size: 300% 300%;
@@ -131,19 +143,8 @@
             margin-right: auto;
         }
 
-        .hero-nav .logo {
-            gap: 0.2rem;
-        }
-
         .hero-nav .logo img {
             height: 50px;
-        }
-
-        .hero-nav .logo span {
-            font-size: 1rem;
-            color: #ec4899;
-            font-weight: bold;
-            text-shadow: 0 0 15px #fbbf24;
         }
 
         .hero-nav nav {
@@ -161,26 +162,20 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.7rem;
             margin-bottom: 1rem;
             animation: slideIn 0.8s ease-out;
             font-weight: 900;
             color: white;
         }
 
-        .hero h1 {
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-        }
-
-        .hero .weird-word {
+        .weird-word {
             display: inline-block;
             font-style: italic;
             color: #fbbf24;
             text-shadow: 4px 4px 0 rgba(0,0,0,0.4);
             transform: rotate(-2deg);
+            font-size: 1.135em;
         }
 
         .hero p {
@@ -199,6 +194,7 @@
             animation: slideIn 0.8s ease-out 0.4s both;
         }
 
+        /* BUTTONS */
         .btn-primary {
             display: inline-block;
             background: white;
@@ -236,6 +232,7 @@
             transform: translateY(-3px);
         }
 
+        /* SECTIONS & CONTENT */
         section {
             padding: 3rem 2rem;
             max-width: 1200px;
@@ -310,19 +307,6 @@
             text-align: center;
         }
 
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
         .product-price {
             font-size: 1.5rem;
             color: #667eea;
@@ -354,7 +338,8 @@
             text-align: center;
             color: white;
             border-radius: 12px;
-            margin: 3rem 0;
+            margin: 3rem auto;
+            max-width: 1200px;
             position: relative;
             overflow: hidden;
         }
@@ -373,6 +358,36 @@
             margin: 0 auto 1.5rem;
         }
 
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        /* FOOTER */
         footer {
             background: #333;
             color: white;
@@ -381,6 +396,7 @@
             margin-top: 3rem;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             nav {
                 display: none;
@@ -448,11 +464,11 @@
             </div>
         </div>
 
-        <section style="background: #0a0a0a; color: white; border-radius: 12px; padding: 3rem 2rem; margin: 3rem auto; max-width: 1200px;">
-            <h2 style="background: linear-gradient(135deg, #fbbf24 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: center;">Learning That Doesn't Make You Want to Run Away</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #d1d5db; margin-bottom: 3rem; font-style: italic;">Because "just focus harder" has never worked for anyone.</p>
+        <section>
+            <h2>Learning That Doesn't Make You Want to Run Away</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #999; margin-bottom: 3rem; font-style: italic;">Because "just focus harder" has never worked for anyone.</p>
             <div class="cards-container">
-                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333;">
+                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
                     <h3 style="color: white;">⚡ Start Without the Dread</h3>
                     <p style="color: #d1d5db;">The hardest part? Beginning. We design entry points that actually spark curiosity instead of triggering that "ugh, not this again" feeling.</p>
                 </div>
@@ -469,20 +485,13 @@
 
         <section style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem;">
             <h2 style="text-align: center;">Featured Product</h2>
-            
-            <div style="margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                <div style="padding-bottom: 56.25%; position: relative; background: #000;">
-                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jH07z4LoF4s?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-            
             <div class="grid-2">
-                                    <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
-                        <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                    </div>
+                <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
                 <div>
                     <h3>Wordmatchic Cards</h3>
-                    <p>You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
+                    <p style="color: #333;">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
                     <p style="margin-top: 1rem;"><strong style="font-size: 1.3rem; color: #667eea;">$49.90</strong></p>
                     <button class="btn-primary" onclick="showPage('products')">View All Products</button>
                 </div>
@@ -512,21 +521,21 @@
             <div class="cards-container">
                 <div class="card">
                     <h3>1. Discovery Session</h3>
-                    <p>We conduct a detailed conversation about your learning style, strengths, and challenges. This isn't a test—it's a discovery session.</p>
+                    <p style="color: #333;">We conduct a detailed conversation about your learning style, strengths, and challenges. This isn't a test—it's a discovery session.</p>
                 </div>
                 <div class="card">
                     <h3>2. Strength Analysis</h3>
-                    <p>Based on your profile, we identify your unique strengths and learning preferences to find what works for you.</p>
+                    <p style="color: #333;">Based on your profile, we identify your unique strengths and learning preferences to find what works for you.</p>
                 </div>
                 <div class="card">
                     <h3>3. Personalized Plan</h3>
-                    <p>You receive a comprehensive strategy with actionable steps to succeed using your natural strengths.</p>
+                    <p style="color: #333;">You receive a comprehensive strategy with actionable steps to succeed using your natural strengths.</p>
                 </div>
             </div>
 
             <h3>Who Should Get Coaching?</h3>
-            <p>If you identify with any of these, coaching could be valuable:</p>
-            <ul style="margin-left: 2rem; margin-top: 1rem;">
+            <p style="color: white;">If you identify with any of these, coaching could be valuable:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem; color: white;">
                 <li>You want to understand your unique learning style and strengths</li>
                 <li>You find it hard to focus or get easily distracted during study sessions</li>
                 <li>You procrastinate or struggle to start tasks, even ones you care about</li>
@@ -549,7 +558,7 @@
             <h2>Study Products</h2>
             <p>Work <span style="color: #ec4899; font-weight: bold;">WITH</span> your brain, not against it! We've created physical study tools for students who find traditional methods boring and need different strategies to stay engaged!</p>
 
-            <div style="margin-top: 3rem; background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem; margin-bottom: 3rem;">
+            <div style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem; margin-bottom: 3rem;">
                 <h3 style="text-align: center; margin-top: 0;">Featured Product</h3>
                 
                 <div style="margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
@@ -579,7 +588,7 @@
 
             <div class="cards-container">
                 <div class="card product-card">
-                    <div class="product-image">✨</div>
+                    <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; margin-bottom: 1rem;">✨</div>
                     <h3>More Products Coming Soon</h3>
                     <p>We're developing more study tools designed to make learning engaging and effective. Stay tuned for new products that help you study smarter, not harder.</p>
                     <div class="product-price" style="color: #999;">TBA</div>
@@ -595,7 +604,7 @@
             <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">灼珉源 JoiMirae</h2>
             <p style="text-align: center; font-size: 1.1rem; color: #667eea; margin-bottom: 2rem; font-weight: 500;">Learning that feels like play — inspiring purpose, curiosity, and courage.<br/>学习如游戏般自然，启迪目标、好奇与勇气。</p>
 
-            <h3 style="text-align: center; color: #333; margin-bottom: 1.5rem;">品牌理念 | Brand Philosophy</h3>
+            <h3 style="text-align: center; color: #fbbf24; margin-bottom: 1.5rem;">品牌理念 | Brand Philosophy</h3>
             
             <p>At JoiMirae (灼珉源), we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
 
@@ -610,15 +619,15 @@
 
             <p style="font-size: 1.1rem; color: #667eea; font-weight: 500; margin-bottom: 2rem;">At JoiMirae, learning shines from within — joyful, purposeful, and courageous.</p>
 
-            <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem;">
-                <h3 style="text-align: center; margin-top: 0;">中文版 | Chinese Version</h3>
+            <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem; color: #333;">
+                <h3 style="text-align: center; margin-top: 0; color: #667eea;">中文版 | Chinese Version</h3>
                 
-                <p>在 灼珉源 (JoiMirae)，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
+                <p style="color: #333;">在 灼珉源 (JoiMirae)，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
 
-                <p>通过实践营沉浸式体验、寓教于乐的探索方式以及个性化的学习洞察，我们帮助孩子建立自信、好奇心与勇气，同时兼顾心智与品格的发展。</p>
+                <p style="color: #333;">通过实践营沉浸式体验、寓教于乐的探索方式以及个性化的学习洞察，我们帮助孩子建立自信、好奇心与勇气，同时兼顾心智与品格的发展。</p>
 
-                <h4 style="margin-top: 1.5rem;">我们的主要项目包括：</h4>
-                <ul style="margin-left: 2rem;">
+                <h4 style="margin-top: 1.5rem; color: #667eea;">我们的主要项目包括：</h4>
+                <ul style="margin-left: 2rem; color: #333;">
                     <li><strong>假期营：</strong>通过游戏和团队合作实现体验式学习</li>
                     <li><strong>学习咨询：</strong>为家长和孩子提供优势导向的学习习惯指导，适合 11 至 15 岁的孩子</li>
                     <li><strong>学习游戏与工具：</strong>通过趣味方式激发孩子的好奇心与成长潜能</li>
@@ -631,15 +640,15 @@
             <div class="cards-container">
                 <div class="card">
                     <h3>🎯 Inclusivity</h3>
-                    <p>We believe different learning styles are valid. Our consulting and products celebrate and support diverse ways of thinking and studying.</p>
+                    <p style="color: #333;">We believe different learning styles are valid. Our consulting and products celebrate and support diverse ways of thinking and studying.</p>
                 </div>
                 <div class="card">
                     <h3>✨ Excellence</h3>
-                    <p>We don't make excuses—we provide solutions. Our students excel academically by working with their strengths, not against their nature.</p>
+                    <p style="color: #333;">We don't make excuses—we provide solutions. Our students excel academically by working with their strengths, not against their nature.</p>
                 </div>
                 <div class="card">
                     <h3>🤝 Personalization</h3>
-                    <p>There's no one-size-fits-all. Every recommendation and product is tailored to how individual students actually learn and focus.</p>
+                    <p style="color: #333;">There's no one-size-fits-all. Every recommendation and product is tailored to how individual students actually learn and focus.</p>
                 </div>
             </div>
 
@@ -716,12 +725,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Hide header on initial page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('header');
-            header.classList.add('hidden');
-        });
-
         function handleFormSubmit(e) {
             e.preventDefault();
             const form = e.target;
@@ -732,6 +735,12 @@
             const mailtoLink = `mailto:contact@joimirae.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
             window.location.href = mailtoLink;
         }
+
+        // Hide header on initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            header.classList.add('hidden');
+        });
     </script>
 </body>
 </html>
