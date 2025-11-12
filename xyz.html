@@ -491,7 +491,7 @@
                 </div>
                 <div>
                     <h3>Wordmatchic Cards</h3>
-                    <p style="color: #333;">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
+                    <p class="text-dark">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
                     <p style="margin-top: 1rem;"><strong style="font-size: 1.3rem; color: #667eea;">$49.90</strong></p>
                     <button class="btn-primary" onclick="showPage('products')">View All Products</button>
                 </div>
@@ -676,12 +676,12 @@
                     <h3>Send Us a Message</h3>
                     <form onsubmit="handleFormSubmit(event)">
                         <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Name</label>
-                            <input type="text" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
-                        </div>
-                        <div style="margin-bottom: 1rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email</label>
                             <input type="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Phone (Optional)</label>
+                            <input type="tel" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="margin-bottom: 1rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Message</label>
@@ -690,6 +690,50 @@
                         <button class="btn-primary" type="submit">Send Message</button>
                     </form>
                 </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: #f5f5f5; border-radius: 8px; color: #333;">
+                <h3 style="color: #667eea; margin-top: 0;">Data Protection & Privacy</h3>
+                <p style="color: #333;"><strong>Your data, your choice.</strong> We only collect information you choose to share with us.</p>
+                
+                <h4 style="color: #667eea; margin-top: 1.5rem;">What We Collect</h4>
+                <p style="color: #333;">When you contact us or fill out our forms, you decide what information to provide:</p>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li><strong>Email:</strong> For order updates and shipping notifications</li>
+                    <li><strong>Phone:</strong> Optional - only if you want SMS updates</li>
+                    <li><strong>Country:</strong> To process your order (auto-detected, you can change it)</li>
+                    <li><strong>Level preferences:</strong> To know which Wordmatchic Cards interest you</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">How We Use Your Data</h4>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li>Process and fulfill your orders</li>
+                    <li>Send shipping and order updates</li>
+                    <li>Contact you about your inquiry (email or phone, your choice)</li>
+                    <li>Improve our products based on feedback</li>
+                    <li><strong>Marketing & Newsletter:</strong> Only if you opt-in via our confirmation email or directly ask us</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Marketing & Newsletter Opt-In</h4>
+                <p style="color: #333;">We send updates about new products, special offers, and Joimirae news - but <strong>only if you choose to</strong>. Here's how:</p>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li>When you submit an order form, we'll ask if you want SMS updates in our confirmation email</li>
+                    <li>We'll also offer to add you to our newsletter for product announcements</li>
+                    <li>You can unsubscribe anytime by replying "STOP" to SMS or clicking unsubscribe in any email</li>
+                    <li><strong>We will never sell or share your email/phone with anyone else</strong></li>
+                </ul>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li>You can request to see what data we have about you</li>
+                    <li>You can ask us to delete your information anytime</li>
+                    <li>You can opt out of marketing emails/SMS at any time</li>
+                    <li>You choose what information to share - nothing is mandatory except what's needed to process your order</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Data Storage & Security</h4>
+                <p style="color: #333;">Your data is stored securely in Google Forms and Google Sheets. We don't share your information with third parties. We comply with Singapore's Personal Data Protection Act 2012.</p>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Questions?</h4>
+                <p style="color: #333;">Email us at <strong>contact@joimirae.com</strong> with any privacy concerns or data requests.</p>
             </div>
         </section>
     </div>
@@ -728,6 +772,62 @@
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
+            
+            // Prefill country field using geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
+                    // Use reverse geocoding API to get country
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const country = data.address.country || 'Singapore';
+                            const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
+                            iframes.forEach(iframe => {
+                                const currentSrc = iframe.getAttribute('src');
+                                if (!currentSrc.includes('entry.1045781291')) {
+                                    const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=' + encodeURIComponent(country);
+                                    iframe.setAttribute('src', newSrc);
+                                }
+                            });
+                        })
+                        .catch(error => {
+                            console.log('Geolocation failed, defaulting to Singapore');
+                            // Default to Singapore if geolocation fails
+                            const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
+                            iframes.forEach(iframe => {
+                                const currentSrc = iframe.getAttribute('src');
+                                if (!currentSrc.includes('entry.1045781291')) {
+                                    const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=Singapore';
+                                    iframe.setAttribute('src', newSrc);
+                                }
+                            });
+                        });
+                }, function(error) {
+                    console.log('Geolocation permission denied, defaulting to Singapore');
+                    // Default to Singapore if user denies permission
+                    const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
+                    iframes.forEach(iframe => {
+                        const currentSrc = iframe.getAttribute('src');
+                        if (!currentSrc.includes('entry.1045781291')) {
+                            const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=Singapore';
+                            iframe.setAttribute('src', newSrc);
+                        }
+                    });
+                });
+            } else {
+                // Fallback to Singapore if geolocation not supported
+                const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
+                iframes.forEach(iframe => {
+                    const currentSrc = iframe.getAttribute('src');
+                    if (!currentSrc.includes('entry.1045781291')) {
+                        const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=Singapore';
+                        iframe.setAttribute('src', newSrc);
+                    }
+                });
+            }
         });
     </script>
 </body>
