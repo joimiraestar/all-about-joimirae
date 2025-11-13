@@ -18,7 +18,6 @@
             background: #0a0a0a;
         }
 
-        /* ANIMATIONS */
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -35,7 +34,6 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* FLOATING SHAPES */
         .floating-shape {
             position: fixed;
             pointer-events: none;
@@ -47,7 +45,6 @@
             filter: brightness(0) invert(1);
         }
 
-        /* HEADER */
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
             background-size: 300% 300%;
@@ -62,7 +59,7 @@
         }
 
         header.hidden {
-            display: none;
+            display: none !important;
         }
 
         .top-nav {
@@ -111,7 +108,6 @@
             color: #fbbf24;
         }
 
-        /* PAGE MANAGEMENT */
         .page {
             display: none;
             animation: slideIn 0.6s;
@@ -121,7 +117,6 @@
             display: block;
         }
 
-        /* HERO SECTION */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
             background-size: 300% 300%;
@@ -141,24 +136,49 @@
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
         }
 
-        .hero-nav .logo img {
-            height: 50px;
+        .hero-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
         }
 
         .hero-nav nav {
+            display: flex;
             gap: 1.5rem;
         }
 
-        .hero-nav nav a {
-            color: white;
-            font-size: 0.95rem;
-        }
+        @media (max-width: 768px) {
+            .hero-menu-toggle {
+                display: block;
+            }
 
-        .hero-nav nav a:hover {
-            color: #fbbf24;
-            opacity: 1;
+            .hero-nav nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column;
+                background: rgba(0,0,0,0.3);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                gap: 0.5rem;
+                border-radius: 4px;
+                z-index: 100;
+                min-width: 200px;
+                text-align: center;
+            }
+
+            .hero-nav nav.show {
+                display: flex !important;
+            }
         }
 
         .hero h1 {
@@ -194,7 +214,6 @@
             animation: slideIn 0.8s ease-out 0.4s both;
         }
 
-        /* BUTTONS */
         .btn-primary {
             display: inline-block;
             background: white;
@@ -232,7 +251,6 @@
             transform: translateY(-3px);
         }
 
-        /* SECTIONS & CONTENT */
         section {
             padding: 3rem 2rem;
             max-width: 1200px;
@@ -303,17 +321,6 @@
             margin-top: 0;
         }
 
-        .product-card {
-            text-align: center;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            color: #667eea;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -358,36 +365,6 @@
             margin: 0 auto 1.5rem;
         }
 
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        .comparison-table th, .comparison-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .comparison-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        .highlight {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 1.5rem;
-            border-left: 4px solid #667eea;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-
-        /* FOOTER */
         footer {
             background: #333;
             color: white;
@@ -396,14 +373,48 @@
             margin-top: 3rem;
         }
 
-        /* RESPONSIVE */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            margin-left: auto;
+        }
+
+        .mobile-menu-toggle.active + nav {
+            display: flex !important;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+            padding: 1rem;
+            gap: 0.5rem;
+            z-index: 1000;
+            min-width: 200px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
         @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             nav {
                 display: none;
             }
 
+            header {
+                position: relative;
+            }
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .grid-2 {
@@ -430,6 +441,7 @@
                 <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
                 <span>Joimirae</span>
             </div>
+            <button class="mobile-menu-toggle" id="mobileMenuBtn" onclick="toggleMobileMenu()">☰</button>
             <nav>
                 <a onclick="showPage('home')">Home</a>
                 <a onclick="showPage('coaching')">Student Coaching</a>
@@ -440,7 +452,6 @@
         </div>
     </header>
 
-    <!-- HOME PAGE -->
     <div id="home" class="page active">
         <div class="hero">
             <div class="hero-nav">
@@ -448,12 +459,13 @@
                     <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
                     <span>Joimirae</span>
                 </div>
-                <nav>
-                    <a onclick="showPage('home')">Home</a>
-                    <a onclick="showPage('coaching')">Student Coaching</a>
-                    <a onclick="showPage('products')">Products</a>
-                    <a onclick="showPage('about')">About Us</a>
-                    <a onclick="showPage('contact')">Contact</a>
+                <button class="hero-menu-toggle" id="heroMenuBtn" onclick="toggleHeroMenu()">☰</button>
+                <nav id="heroNav">
+                    <a onclick="showPage('home'); closeHeroMenu();">Home</a>
+                    <a onclick="showPage('coaching'); closeHeroMenu();">Student Coaching</a>
+                    <a onclick="showPage('products'); closeHeroMenu();">Products</a>
+                    <a onclick="showPage('about'); closeHeroMenu();">About Us</a>
+                    <a onclick="showPage('contact'); closeHeroMenu();">Contact</a>
                 </nav>
             </div>
             <h1>What If Learning Didn't Feel So <span class="weird-word">BORRRRING?</span></h1>
@@ -491,7 +503,7 @@
                 </div>
                 <div>
                     <h3>Wordmatchic Cards</h3>
-                    <p class="text-dark">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
+                    <p style="color: #333;">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
                     <p style="margin-top: 1rem;"><strong style="font-size: 1.3rem; color: #667eea;">$49.90</strong></p>
                     <button class="btn-primary" onclick="showPage('products')">View All Products</button>
                 </div>
@@ -499,13 +511,12 @@
 
             <div class="interest-box">
                 <h3 style="margin-top: 0; text-align: center;">Join the Wordmatchic Interest List</h3>
-                <p style="text-align: center;">Be the first to know when Wordmatchic Cards launches. Tell us which level you're interested in!</p>
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;" allow="geolocation; microphone; camera"></iframe>
+                <p style="text-align: center; color: #333;">Be the first to know when Wordmatchic Cards launches. Tell us which level you're interested in!</p>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;"></iframe>
             </div>
         </section>
     </div>
 
-    <!-- COACHING PAGE -->
     <div id="coaching" class="page">
         <section>
             <h2>Student Coaching</h2>
@@ -552,7 +563,6 @@
         </section>
     </div>
 
-    <!-- PRODUCTS PAGE -->
     <div id="products" class="page">
         <section>
             <h2>Study Products</h2>
@@ -582,13 +592,12 @@
 
             <div id="wordmatchic-form" class="interest-box">
                 <h3 style="margin-top: 0;">Interested in Wordmatchic Cards?</h3>
-                <p>Let us know which level you're interested in, and we'll notify you when it's available for order.</p>
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;" allow="geolocation; microphone; camera"></iframe>
+                <p style="color: #333;">Let us know which level you're interested in, and we'll notify you when it's available for order.</p>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;"></iframe>
             </div>
         </section>
     </div>
 
-    <!-- ABOUT PAGE -->
     <div id="about" class="page">
         <section>
             <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">灼珉源 JoiMirae</h2>
@@ -653,7 +662,6 @@
         </section>
     </div>
 
-    <!-- CONTACT PAGE -->
     <div id="contact" class="page">
         <section>
             <h2>Get In Touch</h2>
@@ -722,6 +730,8 @@
                     <li>You can unsubscribe anytime by replying "STOP" to SMS or clicking unsubscribe in any email</li>
                     <li><strong>We will never sell or share your email/phone with anyone else</strong></li>
                 </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Your Rights</h4>
                 <ul style="margin-left: 2rem; color: #333;">
                     <li>You can request to see what data we have about you</li>
                     <li>You can ask us to delete your information anytime</li>
@@ -754,80 +764,47 @@
                 header.classList.remove('hidden');
             }
             
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.remove('active');
+            }
+            
             window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            btn.classList.toggle('active');
+        }
+
+        function toggleHeroMenu() {
+            const nav = document.getElementById('heroNav');
+            const btn = document.getElementById('heroMenuBtn');
+            nav.classList.toggle('show');
+            btn.textContent = nav.classList.contains('show') ? '✕' : '☰';
+        }
+
+        function closeHeroMenu() {
+            const nav = document.getElementById('heroNav');
+            const btn = document.getElementById('heroMenuBtn');
+            nav.classList.remove('show');
+            btn.textContent = '☰';
         }
 
         function handleFormSubmit(e) {
             e.preventDefault();
             const form = e.target;
-            const name = form.querySelector('input[type="text"]').value;
             const email = form.querySelector('input[type="email"]').value;
+            const phone = form.querySelector('input[type="tel"]').value;
             const message = form.querySelector('textarea').value;
             
-            const mailtoLink = `mailto:contact@joimirae.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            const mailtoLink = `mailto:contact@joimirae.com?subject=Message from Joimirae Website&body=${encodeURIComponent(`Email: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`)}`;
             window.location.href = mailtoLink;
         }
 
-        // Hide header on initial page load
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
-            
-            // Prefill country field using geolocation
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    
-                    // Use reverse geocoding API to get country
-                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const country = data.address.country || 'Singapore';
-                            const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
-                            iframes.forEach(iframe => {
-                                const currentSrc = iframe.getAttribute('src');
-                                if (!currentSrc.includes('entry.1045781291')) {
-                                    const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=' + encodeURIComponent(country);
-                                    iframe.setAttribute('src', newSrc);
-                                }
-                            });
-                        })
-                        .catch(error => {
-                            console.log('Geolocation failed, defaulting to Singapore');
-                            // Default to Singapore if geolocation fails
-                            const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
-                            iframes.forEach(iframe => {
-                                const currentSrc = iframe.getAttribute('src');
-                                if (!currentSrc.includes('entry.1045781291')) {
-                                    const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=Singapore';
-                                    iframe.setAttribute('src', newSrc);
-                                }
-                            });
-                        });
-                }, function(error) {
-                    console.log('Geolocation permission denied, defaulting to Singapore');
-                    // Default to Singapore if user denies permission
-                    const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
-                    iframes.forEach(iframe => {
-                        const currentSrc = iframe.getAttribute('src');
-                        if (!currentSrc.includes('entry.1045781291')) {
-                            const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=Singapore';
-                            iframe.setAttribute('src', newSrc);
-                        }
-                    });
-                });
-            } else {
-                // Fallback to Singapore if geolocation not supported
-                const iframes = document.querySelectorAll('iframe[src*="docs.google.com/forms"]');
-                iframes.forEach(iframe => {
-                    const currentSrc = iframe.getAttribute('src');
-                    if (!currentSrc.includes('entry.1045781291')) {
-                        const newSrc = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'entry.1045781291=Singapore';
-                        iframe.setAttribute('src', newSrc);
-                    }
-                });
-            }
         });
     </script>
 </body>
