@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoiMirae - Joy in Studying</title>
+    <title>Joimirae - Learn Laugh Live</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KYNBFZDX1Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KYNBFZDX1Q');
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -12,24 +22,10 @@
         }
 
         body {
-            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #f5f5f5;
             background: #0a0a0a;
-            color: #fff;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
         }
 
         @keyframes gradientFlow {
@@ -43,120 +39,181 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-shape {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.08;
+            font-size: 6rem;
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+            color: white;
+            filter: brightness(0) invert(1);
+        }
+
         header {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899, #f59e0b);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
             background-size: 300% 300%;
-            animation: gradientFlow 16s ease infinite;
-            padding: 2rem 2rem 3rem;
+            animation: gradientFlow 8s ease infinite;
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: display 0.3s;
+        }
+
+        header.hidden {
+            display: none !important;
+        }
+
+        .top-nav {
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo span {
+            font-size: 1rem;
+            color: #ec4899;
+            font-weight: bold;
+            text-shadow: 0 0 15px #fbbf24;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+            color: #fbbf24;
+        }
+
+        .page {
+            display: none;
+            animation: slideIn 0.6s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+            background-size: 300% 300%;
+            animation: gradientFlow 8s ease infinite;
+            color: white;
+            padding: 2rem 2rem 5rem 2rem;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
-            opacity: 0.3;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
+        .hero-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            background: linear-gradient(45deg, #fff, #fbbf24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #fbbf24;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #fbbf24;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
+            margin-bottom: 3rem;
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
             position: relative;
-            z-index: 5;
+        }
+
+        .hero-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+        }
+
+        .hero-nav nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-menu-toggle {
+                display: block;
+            }
+
+            .hero-nav nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column;
+                background: rgba(0,0,0,0.3);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                gap: 0.5rem;
+                border-radius: 4px;
+                z-index: 100;
+                min-width: 200px;
+                text-align: center;
+            }
+
+            .hero-nav nav.show {
+                display: flex !important;
+            }
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        
-            /* new gradient: light blue → white → golden yellow */
-            background: linear-gradient(135deg, #d0ebff 0%, #ffffff 50%, #fbbf24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        
+            font-size: 5.1rem;
+            margin-bottom: 1rem;
             animation: slideIn 0.8s ease-out;
+            font-weight: 900;
+            color: white;
         }
 
         .weird-word {
             display: inline-block;
             font-style: italic;
-            transform: rotate(-3deg);
-            color: #ec4899;
-            text-shadow: 3px 3px 0 #6366f1;
-            -webkit-text-fill-color: #ec4899;
+            color: #fbbf24;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+            transform: rotate(-2deg);
+            font-size: 1.2em;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            color: #d1d5db;
-            line-height: 1.7;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
             animation: slideIn 0.8s ease-out 0.2s both;
+            line-height: 1.6;
         }
 
         .cta-group {
@@ -168,445 +225,645 @@
         }
 
         .btn-primary {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ec4899, #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
             display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
         .btn-secondary {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
+            display: inline-block;
             background: transparent;
             color: white;
-            border: 2px solid #8b5cf6;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
-            cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid white;
             transition: all 0.3s;
         }
 
         .btn-secondary:hover {
-            background: #8b5cf6;
+            background: rgba(255,255,255,0.1);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
         }
 
-        .features {
-            background: #0a0a0a;
-            padding: 6rem 2rem;
-            position: relative;
+        section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .features::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #8b5cf6);
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 900;
         }
 
-        .features-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #9ca3af;
-            margin-bottom: 4rem;
-            font-style: italic;
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #667eea;
         }
 
-        .feature-grid {
+        h4 {
+            color: #667eea;
+            margin-top: 1rem;
+        }
+
+        .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 2rem 0;
         }
 
-        .feature-card {
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid #333;
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             transition: all 0.4s;
             position: relative;
-            overflow: hidden;
         }
 
-        .feature-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #ec4899, #8b5cf6, #6366f1);
+            background: linear-gradient(90deg, #667eea, #764ba2, #ec4899);
             transform: scaleX(0);
             transition: transform 0.4s;
         }
 
-        .feature-card:hover::before {
+        .card:hover::before {
             transform: scaleX(1);
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: #8b5cf6;
-            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
         }
 
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+        .card h3 {
+            margin-top: 0;
         }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            font-weight: 700;
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: center;
         }
 
-        .feature-card p {
-            color: #9ca3af;
-            line-height: 1.7;
-            font-size: 1rem;
+        .interest-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border: 2px solid #667eea;
         }
 
         .weird-section {
-            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+            background-size: 300% 300%;
+            animation: gradientFlow 8s ease infinite;
             padding: 5rem 2rem;
             text-align: center;
+            color: white;
+            border-radius: 12px;
+            margin: 3rem auto;
+            max-width: 1200px;
             position: relative;
             overflow: hidden;
         }
 
-        .weird-section::before {
-            content: '◆ ▲ ● ■ ◆ ▲ ● ■';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            font-size: 4rem;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-            letter-spacing: 3rem;
-        }
-
         .weird-section h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1.5rem;
-            font-weight: 900;
-            position: relative;
-            z-index: 2;
+            background: none;
+            -webkit-text-fill-color: unset;
+            color: white;
+            font-size: 2.5rem;
         }
 
         .weird-section p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
-        }
-
-        .glitch-text {
-            display: inline-block;
-            animation: glitch 0.3s infinite;
-        }
-
-        .testimonials {
-            background: #0a0a0a;
-            padding: 6rem 2rem;
-        }
-
-        .testimonials h2 {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 4rem;
-            background: linear-gradient(135deg, #fff, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonial {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid #ec4899;
-            transition: all 0.3s;
-        }
-
-        .testimonial:hover {
-            transform: translateX(10px);
-            border-left-color: #8b5cf6;
-        }
-
-        .testimonial p {
+            color: rgba(255,255,255,0.95);
             font-size: 1.1rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: #d1d5db;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: #fbbf24;
-            font-style: normal;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
         }
 
         footer {
-            background: #000;
-            padding: 3rem 2rem;
+            background: #333;
+            color: white;
             text-align: center;
-            border-top: 1px solid #333;
+            padding: 2rem;
+            margin-top: 3rem;
         }
 
-        footer p {
-            color: #6b7280;
-            margin-bottom: 0.5rem;
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            margin-left: auto;
         }
 
-        .floating-shape {
-            position: fixed;
-            pointer-events: none;
-            opacity: 0.1;
-            font-size: 8rem;
-            z-index: 1;
-            animation: float 8s ease-in-out infinite;
+        .mobile-menu-toggle.active + nav {
+            display: flex !important;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+            padding: 1rem;
+            gap: 0.5rem;
+            z-index: 1000;
+            min-width: 200px;
+            text-align: center;
+            border-radius: 4px;
         }
 
         @media (max-width: 768px) {
-            .nav-links {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav {
                 display: none;
             }
-            
+
+            header {
+                position: relative;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
             .cta-group {
                 flex-direction: column;
-                align-items: center;
             }
-            
+
             .btn-primary, .btn-secondary {
                 width: 100%;
-                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="floating-shape" style="top: 10%; left: 5%;">◆</div>
-    <div class="floating-shape" style="top: 60%; right: 10%; animation-delay: 2s;">▲</div>
-    <div class="floating-shape" style="bottom: 20%; left: 15%; animation-delay: 4s;">●</div>
+    <div class="floating-shape" style="top: 10%; left: 5%;">🦋</div>
+    <div class="floating-shape" style="top: 60%; right: 10%; animation-delay: 2s;">●</div>
 
     <header>
-        <nav>
-            <div class="logo">JOIMIRAE</div>
-            <ul class="nav-links">
-                <li><a href="#features">What We Do</a></li>
-                <li><a href="#testimonials">Stories</a></li>
-                <li><a href="#contact">Connect</a></li>
-            </ul>
-        </nav>
-        
-        <div class="hero">
-            <h1>What If Learning Didn't Feel So <span class="weird-word">BORRRING?</span></h1>
-            <p>
-                Staring at the page. Knowing you should start. But your brain just... won't. We get it. And we've figured out how to make learning actually stick—by making it interesting enough to begin.
-            </p>
-            <div class="cta-group">
-                <a href="#contact" class="btn-primary">Tell Me More</a>
-                <a href="#features" class="btn-secondary">How It Works</a>
+        <div class="top-nav">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
+                <span>Joimirae</span>
             </div>
+            <button class="mobile-menu-toggle" id="mobileMenuBtn" onclick="toggleMobileMenu()">☰</button>
+            <nav>
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('coaching')">Student Coaching</a>
+                <a onclick="showPage('products')">Products</a>
+                <a onclick="showPage('about')">About Us</a>
+                <a onclick="showPage('contact')">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <section class="features" id="features">
-        <h2>Learning That Doesn't Make You Want to Run Away</h2>
-        <p class="features-subtitle">Because "just focus harder" has never worked for anyone.</p>
-        
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Start Without the Dread</h3>
-                <p>The hardest part? Beginning. We design entry points that actually spark curiosity instead of triggering that "ugh, not this again" feeling.</p>
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="hero-nav">
+                <div class="logo">
+                    <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
+                    <span>Joimirae</span>
+                </div>
+                <button class="hero-menu-toggle" id="heroMenuBtn" onclick="toggleHeroMenu()">☰</button>
+                <nav id="heroNav">
+                    <a onclick="showPage('home'); closeHeroMenu();">Home</a>
+                    <a onclick="showPage('coaching'); closeHeroMenu();">Student Coaching</a>
+                    <a onclick="showPage('products'); closeHeroMenu();">Products</a>
+                    <a onclick="showPage('about'); closeHeroMenu();">About Us</a>
+                    <a onclick="showPage('contact'); closeHeroMenu();">Contact</a>
+                </nav>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎭</div>
-                <h3>Unexpected = Memorable</h3>
-                <p>When something surprises you, your brain pays attention. We use the unconventional, the playful, the slightly weird—because that's what makes things stick.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>Work With Your Brain</h3>
-                <p>Your mind works differently. That's not a problem—it's an advantage. We tap into how you naturally think instead of forcing you into boxes that don't fit.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Momentum Over Marathon</h3>
-                <p>Forget all-nighters and grinding. We help you build the kind of momentum that actually lasts, starting small and building real consistency.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3>Structure That Breathes</h3>
-                <p>Too rigid = suffocating. Too loose = chaos. We find that sweet spot where you have enough direction to move forward without feeling trapped.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>Family-Wide Breakthrough</h3>
-                <p>When parents understand their own learning blocks, kids benefit too. We work with the whole family because you're all navigating this together.</p>
+            <h1>What If Learning Didn't Feel So <span class="weird-word">BORRRRING?</span></h1>
+            <p>Staring at the page. Knowing you should start. But your brain just... won't. We get it. And we've figured out how to make learning actually stick—by making it interesting enough to begin.</p>
+            <div class="cta-group">
+                <a href="#" onclick="showPage('products')" class="btn-primary">See Our Products</a>
+                <a href="#" onclick="showPage('coaching')" class="btn-secondary">Explore Coaching</a>
             </div>
         </div>
-    </section>
 
-    <section class="weird-section">
-        <h2>Why "Normal" Teaching <span class="glitch-text">Fails</span></h2>
-        <p>
-            Traditional education assumes everyone learns the same way. Sit still. Read the textbook. Take notes. 
-            But what if your brain needs movement, novelty, and genuine interest to actually engage? 
-            We're not trying to fix you. We're changing the approach.
-        </p>
-        <a href="#contact" class="btn-primary">Let's Find Your Way</a>
-    </section>
-
-    <section class="testimonials" id="testimonials">
-        <h2>What Happens When Learning Finally Clicks</h2>
-        
-        <div class="testimonial-grid">
-            <div class="testimonial">
-                <p>"Studying with my kid felt impossible. Turns out I just needed a different approach. This changed everything."</p>
-                <div class="testimonial-author">— I T., Mother of 11 year old</div>
+        <section>
+            <h2>Learning That Doesn't Make You Want to Run Away</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #999; margin-bottom: 3rem; font-style: italic;">Because "just focus harder" has never worked for anyone.</p>
+            <div class="cards-container">
+                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
+                    <h3 style="color: white;">⚡ Start Without the Dread</h3>
+                    <p style="color: #d1d5db;">The hardest part? Beginning. We design entry points that actually spark curiosity instead of triggering that "ugh, not this again" feeling.</p>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
+                    <h3 style="color: white;">🎭 Unexpected = Memorable Study Tools</h3>
+                    <p style="color: #d1d5db;">When something surprises you, your brain pays attention. We use the unconventional, the playful, the slightly weird—because that's what makes things stick. Our card games and study tools are designed to spark curiosity and make learning unforgettable.</p>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('coaching')">
+                    <h3 style="color: white;">🧠 Work With Your Brain</h3>
+                    <p style="color: #d1d5db;">Your mind works differently. That's why you deserve educational pathways built around your unique learning style, strengths, and what makes you thrive. Work with our coaches to find what truly works for you.</p>
+                </div>
             </div>
-            
-            <div class="testimonial">
-                <p>"My nephew would avoid studying sessions. Now we actually laugh while learning. I can't believe this is the same child."</p>
-                <div class="testimonial-author">—W O., Uncle of 9 year old</div>
-            </div>
-            
-        </div>
-    </section>
+        </section>
 
-    <section class="weird-section" id="contact">
-        <h2>Ready to Stop Fighting Your Brain?</h2>
-        <p>
-            If reading this felt like "wait, someone finally gets it"—that's your sign. 
-            Let's talk about what learning could look like when it actually works with you, not against you.
-        </p>
-        <div class="cta-group">
-            <a href="mailto:contact@joimirae.com" class="btn-primary">contact@joimirae.com</a>
-            <a href="tel:+65 81191958" class="btn-secondary">Whatsapp us @ +65 81191958</a>
-        </div>
-    </section>
+        <section style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem;">
+            <h2 style="text-align: center;">Featured Product</h2>
+            
+            <div style="margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                <div style="padding-bottom: 56.25%; position: relative; background: #000;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jH07z4LoF4s?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
+                <div>
+                    <h3>Wordmatchic Cards</h3>
+                    <p style="color: #333;">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
+                    <p style="margin-top: 1rem;"><strong style="font-size: 1.3rem; color: #667eea;">$49.90</strong></p>
+                    <button class="btn-primary" onclick="showPage('products')">View All Products</button>
+                </div>
+            </div>
+
+            <div class="interest-box">
+                <h3 style="margin-top: 0; text-align: center;">Join the Wordmatchic Interest List</h3>
+                <p style="text-align: center; color: #333;">Be the first to know when Wordmatchic Cards launches. Tell us which level you're interested in!</p>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <div id="coaching" class="page">
+        <section>
+            <h2>Student Coaching</h2>
+            <p style="font-size: 1.2rem; color: #667eea; font-style: italic; margin-bottom: 2rem;">Find your best fit-- strength based coaching</p>
+
+            <div class="weird-section">
+                <h2 style="color: white;">Why One-Size-Fits-All Doesn't Work</h2>
+                <p>Every student learns differently. Some thrive with structure, others need flexibility. Some are visual learners, others learn by doing. We help you discover your unique learning style and find the educational path that's right for you—not a generic approach that works for no one.</p>
+                <a href="#" onclick="showPage('contact')" class="btn-primary">Discover Your Learning Style</a>
+            </div>
+
+            <h3>Our Coaching Process</h3>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>1. Discovery Session</h3>
+                    <p style="color: #333;">We conduct a detailed conversation about your learning style, strengths, and challenges. This isn't a test—it's a discovery session.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Strength Analysis</h3>
+                    <p style="color: #333;">Based on your profile, we identify your unique strengths and learning preferences to find what works for you.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Personalized Plan</h3>
+                    <p style="color: #333;">You receive a comprehensive strategy with actionable steps to succeed using your natural strengths.</p>
+                </div>
+            </div>
+
+            <h3>Who Should Get Coaching?</h3>
+            <p style="color: white;">If you identify with any of these, coaching could be valuable:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem; color: white;">
+                <li>You want to understand your unique learning style and strengths</li>
+                <li>You're exploring which educational path (IB, IP, or other) fits your learning style best</li>
+            </ul>
+
+            <div style="margin-top: 2rem;">
+                <a href="https://wa.me/6581119195?text=Hi!%20I'm%20interested%20in%20booking%20a%20coaching%20session%20to%20understand%20my%20learning%20style%20better." target="_blank" class="btn-primary">Book a Coaching Session</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="products" class="page">
+        <section>
+            <h2>Study Products</h2>
+            <p>Work <span style="color: #ec4899; font-weight: bold;">WITH</span> your brain, not against it! We've created physical study tools for students who find traditional methods boring and need different strategies to stay engaged!</p>
+
+            <div style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem; margin-bottom: 3rem;">
+                <h3 style="text-align: center; margin-top: 0;">Featured Product</h3>
+                
+                <div style="margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                    <div style="padding-bottom: 56.25%; position: relative; background: #000;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jH07z4LoF4s?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                        <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                    <div>
+                        <h3>Wordmatchic Cards</h3>
+                        <p style="color: #333;">You don't use Chinese in daily life... yet. So your brain asks, why should I say anything in Chinese? Now get it excited with a challenge to spot and say the word before your opponent does. Once you've found the matches, deepen your understanding through writing it out, making sentences, or finding it in your textbook under 3 seconds! It's a challenge—let's go!</p>
+                        <p style="margin-top: 1rem;"><strong style="font-size: 1.3rem; color: #667eea;">$49.90</strong></p>
+                        <button class="btn-primary" onclick="document.getElementById('wordmatchic-form').scrollIntoView({behavior: 'smooth'})">Join Interest List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wordmatchic-form" class="interest-box">
+                <h3 style="margin-top: 0;">Interested in Wordmatchic Cards?</h3>
+                <p style="color: #333;">Let us know which level you're interested in, and we'll notify you when it's available for order.</p>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <div id="about" class="page">
+        <section>
+            <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">灼珉源 JoiMirae</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #667eea; margin-bottom: 2rem; font-weight: 500;">Learning that feels like play — inspiring purpose, curiosity, and courage.<br/>学习如游戏般自然，启迪目标、好奇与勇气。</p>
+
+            <h3>Brand Philosophy</h3>
+            
+            <p>At JoiMirae (灼珉源), we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
+
+            <p>Through immersive experiences, play-based exploration, and personalized learning insights, we help children build confidence, curiosity, and courage, nurturing both heart and mind.</p>
+
+            <h3>Our Offerings</h3>
+            <ul style="margin-left: 2rem; margin-bottom: 2rem;">
+                <li><strong>Holiday Camps:</strong> experiential learning through play and teamwork</li>
+                <li><strong>Consultancy:</strong> strength-based learning habit insights for parents and children, designed for ages 11 to 15</li>
+                <li><strong>Games and Learning Tools:</strong> playful pathways to curiosity and growth</li>
+            </ul>
+
+            <p style="font-size: 1.1rem; color: #667eea; font-weight: 500; margin-bottom: 2rem;">At JoiMirae, learning shines from within — joyful, purposeful, and courageous.</p>
+
+            <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem; color: #333;">
+                <h3 style="text-align: center; margin-top: 0; color: #667eea;">品牌理念</h3>
+                
+                <p style="color: #333;">在 灼珉源 (JoiMirae)，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
+
+                <p style="color: #333;">通过实践营沉浸式体验、寓教于乐的探索方式以及个性化的学习洞察，我们帮助孩子建立自信、好奇心与勇气，同时兼顾心智与品格的发展。</p>
+
+                <h4 style="margin-top: 1.5rem; color: #667eea;">我们的主要项目包括：</h4>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li><strong>假期营：</strong>通过游戏和团队合作实现体验式学习</li>
+                    <li><strong>学习咨询：</strong>为家长和孩子提供优势导向的学习习惯指导，适合 11 至 15 岁的孩子</li>
+                    <li><strong>学习游戏与工具：</strong>通过趣味方式激发孩子的好奇心与成长潜能</li>
+                </ul>
+
+                <p style="font-size: 1.1rem; color: #667eea; font-weight: 500; margin-top: 2rem; text-align: center;">在 灼珉源，学习是一种自然的喜悦，是探索目标、好奇与勇气的旅程。</p>
+            </div>
+
+            <h3 style="margin-top: 3rem;">Our Values</h3>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>🎯 Inclusivity</h3>
+                    <p style="color: #333;">We believe different learning styles are valid. Our consulting and products celebrate and support diverse ways of thinking and studying.</p>
+                </div>
+                <div class="card">
+                    <h3>✨ Excellence</h3>
+                    <p style="color: #333;">We don't make excuses—we provide solutions. Our students excel academically by working with their strengths, not against their nature.</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Personalization</h3>
+                    <p style="color: #333;">There's no one-size-fits-all. Every recommendation and product is tailored to how individual students actually learn and focus.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact" class="page">
+        <section>
+            <h2>Get In Touch</h2>
+            <p>Have questions about our coaching or products? Want to partner with us? We'd love to hear from you.</p>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> contact@joimirae.com</p>
+                    <p><strong>Phone:</strong> +65 8119195</p>
+                    <p><strong>Location:</strong> Singapore</p>
+
+                    <h3 style="margin-top: 2rem;">Follow Us</h3>
+                    <p>
+                        <a href="https://www.youtube.com/@Joimirae/shorts" style="color: #667eea; text-decoration: none;">YouTube</a>
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Send Us a Message</h3>
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email</label>
+                            <input type="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Phone (Optional)</label>
+                            <input type="tel" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Message</label>
+                            <textarea required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; min-height: 120px; font-family: inherit;"></textarea>
+                        </div>
+                        <button class="btn-primary" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: #f5f5f5; border-radius: 8px; color: #333;">
+                <h3 style="color: #667eea; margin-top: 0;">Data Protection & Privacy</h3>
+                <p style="color: #333;"><strong>Your data, your choice.</strong> We only collect information you choose to share with us.</p>
+                
+                <h4 style="color: #667eea; margin-top: 1.5rem;">What We Collect</h4>
+                <p style="color: #333;">When you contact us or fill out our forms, you decide what information to provide:</p>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li><strong>Email:</strong> For order updates and shipping notifications</li>
+                    <li><strong>Phone:</strong> Optional - only if you want SMS updates</li>
+                    <li><strong>Country:</strong> To process your order (auto-detected, you can change it)</li>
+                    <li><strong>Level preferences:</strong> To know which Wordmatchic Cards interest you</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">How We Use Your Data</h4>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li>Process and fulfill your orders</li>
+                    <li>Send shipping and order updates</li>
+                    <li>Contact you about your inquiry (email or phone, your choice)</li>
+                    <li>Improve our products based on feedback</li>
+                    <li><strong>Marketing & Newsletter:</strong> Only if you opt-in via our confirmation email or directly ask us</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Marketing & Newsletter Opt-In</h4>
+                <p style="color: #333;">We send updates about new products, special offers, and Joimirae news - but <strong>only if you choose to</strong>. Here's how:</p>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li>When you submit an order form, we'll ask if you want SMS updates in our confirmation email</li>
+                    <li>We'll also offer to add you to our newsletter for product announcements</li>
+                    <li>You can unsubscribe anytime by replying "STOP" to SMS or clicking unsubscribe in any email</li>
+                    <li><strong>We will never sell or share your email/phone with anyone else</strong></li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Your Rights</h4>
+                <ul style="margin-left: 2rem; color: #333;">
+                    <li>You can request to see what data we have about you</li>
+                    <li>You can ask us to delete your information anytime</li>
+                    <li>You can opt out of marketing emails/SMS at any time</li>
+                    <li>You choose what information to share - nothing is mandatory except what's needed to process your order</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Data Storage & Security</h4>
+                <p style="color: #333;">Your data is stored securely in Google Forms and Google Sheets. We don't share your information with third parties. We comply with Singapore's Personal Data Protection Act 2012.</p>
+
+                <h4 style="color: #667eea; margin-top: 1.5rem;">Questions?</h4>
+                <p style="color: #333;">Email us at <strong>contact@joimirae.com</strong> with any privacy concerns or data requests.</p>
+            </div>
+        </section>
+    </div>
 
     <footer>
-        <p><strong>JoiMirae</strong> • Joy in Studying • +65 81191958</p>
-        <p>Learning that doesn't feel like punishment.</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">© 2025 JoiMirae. Stay curious. ◆</p>
+        <p><strong>© 2025 Joimirae</strong> • <a href="https://wa.me/6581119195?text=Hi!%20I%20have%20a%20question%20about%20Joimirae." target="_blank" style="color: #25d366; text-decoration: none;">+65 8119195</a> • Learn Laugh Live !</p>
     </footer>
 
     <script>
-        // Smooth parallax effect for floating shapes
-        document.addEventListener('mousemove', (e) => {
-            const shapes = document.querySelectorAll('.floating-shape');
-            shapes.forEach((shape, index) => {
-                const speed = (index + 1) * 0.02;
-                const x = (window.innerWidth - e.pageX * speed) / 100;
-                const y = (window.innerHeight - e.pageY * speed) / 100;
-                shape.style.transform = `translate(${x}px, ${y}px)`;
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            const header = document.querySelector('header');
+            if (pageId === 'home') {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.remove('active');
+            }
+            
+            // Track page navigation
+            gtag('event', 'page_view', {
+                'page_title': pageId.charAt(0).toUpperCase() + pageId.slice(1),
+                'page_location': window.location.href,
+                'page_path': '/' + pageId
             });
-        });
+            
+            // Reset scroll tracking for new page
+            scrollTracked = [];
+            
+            window.scrollTo(0, 0);
+        }
 
-        // Add intersection observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        function toggleMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            btn.classList.toggle('active');
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        function toggleHeroMenu() {
+            const nav = document.getElementById('heroNav');
+            const btn = document.getElementById('heroMenuBtn');
+            nav.classList.toggle('show');
+            btn.textContent = nav.classList.contains('show') ? '✕' : '☰';
+        }
+
+        function closeHeroMenu() {
+            const nav = document.getElementById('heroNav');
+            const btn = document.getElementById('heroMenuBtn');
+            nav.classList.remove('show');
+            btn.textContent = '☰';
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const email = form.querySelector('input[type="email"]').value;
+            const phone = form.querySelector('input[type="tel"]').value;
+            const message = form.querySelector('textarea').value;
+            
+            // Track form submission
+            gtag('event', 'form_submit', {
+                'event_category': 'contact',
+                'event_label': 'Contact Form'
             });
-        }, observerOptions);
+            
+            const mailtoLink = `mailto:contact@joimirae.com?subject=Message from Joimirae Website&body=${encodeURIComponent(`Email: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`)}`;
+            window.location.href = mailtoLink;
+        }
 
-        document.querySelectorAll('.feature-card, .testimonial').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-
-        // Add sparkle effect to primary buttons
-        document.querySelectorAll('.btn-primary').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.animation = 'none';
-                setTimeout(() => {
-                    this.style.animation = '';
-                }, 10);
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            header.classList.add('hidden');
+            
+            // Track scroll depth
+            let scrollDepths = [25, 50, 75, 100];
+            let scrollTracked = [];
+            
+            window.addEventListener('scroll', function() {
+                let scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                
+                scrollDepths.forEach(function(depth) {
+                    if (scrollPercent >= depth && !scrollTracked.includes(depth)) {
+                        scrollTracked.push(depth);
+                        gtag('event', 'scroll', {
+                            'event_category': 'engagement',
+                            'event_label': depth + '% scrolled',
+                            'value': depth
+                        });
+                    }
+                });
             });
+            
+            // Track button clicks
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    gtag('event', 'button_click', {
+                        'event_category': 'engagement',
+                        'event_label': e.target.textContent.trim(),
+                        'page': document.querySelector('.page.active').id
+                    });
+                });
+            });
+            
+            // Track video plays
+            const videoIframe = document.querySelector('iframe[src*="youtube"]');
+            if (videoIframe) {
+                videoIframe.addEventListener('load', function() {
+                    gtag('event', 'video_load', {
+                        'event_category': 'video',
+                        'event_label': 'Wordmatchic Video'
+                    });
+                });
+            }
         });
     </script>
 </body>
