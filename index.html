@@ -447,7 +447,7 @@
 
     <header>
         <div class="top-nav">
-            <div class="logo">
+            <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
                 <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
                 <span>Joimirae</span>
             </div>
@@ -465,7 +465,7 @@
     <div id="home" class="page active">
         <div class="hero">
             <div class="hero-nav">
-                <div class="logo">
+                <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
                     <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
                     <span>Joimirae</span>
                 </div>
@@ -771,16 +771,6 @@
                 mobileMenuBtn.classList.remove('active');
             }
             
-            // Track page navigation
-            gtag('event', 'page_view', {
-                'page_title': pageId.charAt(0).toUpperCase() + pageId.slice(1),
-                'page_location': window.location.href,
-                'page_path': '/' + pageId
-            });
-            
-            // Reset scroll tracking for new page
-            scrollTracked = [];
-            
             window.scrollTo(0, 0);
         }
 
@@ -810,12 +800,6 @@
             const phone = form.querySelector('input[type="tel"]').value;
             const message = form.querySelector('textarea').value;
             
-            // Track form submission
-            gtag('event', 'form_submit', {
-                'event_category': 'contact',
-                'event_label': 'Contact Form'
-            });
-            
             const mailtoLink = `mailto:contact@joimirae.com?subject=Message from Joimirae Website&body=${encodeURIComponent(`Email: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`)}`;
             window.location.href = mailtoLink;
         }
@@ -823,47 +807,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
-            
-            // Track scroll depth
-            let scrollDepths = [25, 50, 75, 100];
-            let scrollTracked = [];
-            
-            window.addEventListener('scroll', function() {
-                let scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                
-                scrollDepths.forEach(function(depth) {
-                    if (scrollPercent >= depth && !scrollTracked.includes(depth)) {
-                        scrollTracked.push(depth);
-                        gtag('event', 'scroll', {
-                            'event_category': 'engagement',
-                            'event_label': depth + '% scrolled',
-                            'value': depth
-                        });
-                    }
-                });
-            });
-            
-            // Track button clicks
-            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(function(button) {
-                button.addEventListener('click', function(e) {
-                    gtag('event', 'button_click', {
-                        'event_category': 'engagement',
-                        'event_label': e.target.textContent.trim(),
-                        'page': document.querySelector('.page.active').id
-                    });
-                });
-            });
-            
-            // Track video plays
-            const videoIframe = document.querySelector('iframe[src*="youtube"]');
-            if (videoIframe) {
-                videoIframe.addEventListener('load', function() {
-                    gtag('event', 'video_load', {
-                        'event_category': 'video',
-                        'event_label': 'Wordmatchic Video'
-                    });
-                });
-            }
         });
     </script>
 </body>
