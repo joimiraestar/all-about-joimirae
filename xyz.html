@@ -613,8 +613,6 @@
         <section>
             <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">灼珉源 JoiMirae</h2>
             <p style="text-align: center; font-size: 1.1rem; color: #667eea; margin-bottom: 2rem; font-weight: 500;">Learning that feels like play — inspiring purpose, curiosity, and courage.<br/>学习如游戏般自然，启迪目标、好奇与勇气。</p>
-
-            <h3 style="text-align: center; color: #fbbf24; margin-bottom: 1.5rem;">品牌理念 | Brand Philosophy</h3>
             
             <p>At JoiMirae (灼珉源), we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
 
@@ -630,7 +628,7 @@
             <p style="font-size: 1.1rem; color: #667eea; font-weight: 500; margin-bottom: 2rem;">At JoiMirae, learning shines from within — joyful, purposeful, and courageous.</p>
 
             <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem; color: #333;">
-                <h3 style="text-align: center; margin-top: 0; color: #667eea;">中文版 | Chinese Version</h3>
+                <h3 style="text-align: center; margin-top: 0; color: #667eea;">品牌理念</h3>
                 
                 <p style="color: #333;">在 灼珉源 (JoiMirae)，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
 
@@ -780,6 +778,16 @@
                 mobileMenuBtn.classList.remove('active');
             }
             
+            // Track page navigation
+            gtag('event', 'page_view', {
+                'page_title': pageId.charAt(0).toUpperCase() + pageId.slice(1),
+                'page_location': window.location.href,
+                'page_path': '/' + pageId
+            });
+            
+            // Reset scroll tracking for new page
+            scrollTracked = [];
+            
             window.scrollTo(0, 0);
         }
 
@@ -809,6 +817,12 @@
             const phone = form.querySelector('input[type="tel"]').value;
             const message = form.querySelector('textarea').value;
             
+            // Track form submission
+            gtag('event', 'form_submit', {
+                'event_category': 'contact',
+                'event_label': 'Contact Form'
+            });
+            
             const mailtoLink = `mailto:contact@joimirae.com?subject=Message from Joimirae Website&body=${encodeURIComponent(`Email: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`)}`;
             window.location.href = mailtoLink;
         }
@@ -816,6 +830,47 @@
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
+            
+            // Track scroll depth
+            let scrollDepths = [25, 50, 75, 100];
+            let scrollTracked = [];
+            
+            window.addEventListener('scroll', function() {
+                let scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                
+                scrollDepths.forEach(function(depth) {
+                    if (scrollPercent >= depth && !scrollTracked.includes(depth)) {
+                        scrollTracked.push(depth);
+                        gtag('event', 'scroll', {
+                            'event_category': 'engagement',
+                            'event_label': depth + '% scrolled',
+                            'value': depth
+                        });
+                    }
+                });
+            });
+            
+            // Track button clicks
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    gtag('event', 'button_click', {
+                        'event_category': 'engagement',
+                        'event_label': e.target.textContent.trim(),
+                        'page': document.querySelector('.page.active').id
+                    });
+                });
+            });
+            
+            // Track video plays
+            const videoIframe = document.querySelector('iframe[src*="youtube"]');
+            if (videoIframe) {
+                videoIframe.addEventListener('load', function() {
+                    gtag('event', 'video_load', {
+                        'event_category': 'video',
+                        'event_label': 'Wordmatchic Video'
+                    });
+                });
+            }
         });
     </script>
 </body>
