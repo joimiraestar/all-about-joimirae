@@ -480,6 +480,7 @@
             </div>
             <h1>What If Learning Didn't Feel So <span class="weird-word">BORRRRING?</span></h1>
             <p>Staring at the page. Knowing you should start. But your brain just... won't. We get it. And we've figured out how to make learning actually stick—by making it interesting enough to begin.</p>
+            <p style="font-size: 1.4rem; font-weight: bold; margin-top: 1rem; color: #fbbf24;">够精彩吗？</p>
             <div class="cta-group">
                 <a href="#" onclick="showPage('products')" class="btn-primary">See Our Products</a>
                 <a href="#" onclick="showPage('coaching')" class="btn-secondary">Explore Coaching</a>
@@ -488,7 +489,7 @@
 
         <section>
             <h2>Learning That Doesn't Make You Want to Run Away</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #999; margin-bottom: 3rem; font-style: italic;">Because "just focus harder" has never worked for anyone.</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #999; margin-bottom: 3rem; font-style: italic;">Lightweight tools like Wordmatchic 对对王 spark curiosity—use them alone or as your study warm-up.</p>
             <div class="cards-container">
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
                     <h3 style="color: white;">⚡ Start Without the Dread</h3>
@@ -864,39 +865,6 @@
                     });
                 });
             }
-            
-            // Track WhatsApp clicks
-            document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    let label = 'Footer WhatsApp';
-                    if (e.target.closest('.btn-primary')) {
-                        label = 'Coaching WhatsApp Button';
-                    }
-                    gtag('event', 'whatsapp_click', {
-                        'event_category': 'contact',
-                        'event_label': label
-                    });
-                });
-            });
-            
-            // Track Google Form views
-            const formObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        gtag('event', 'form_view', {
-                            'event_category': 'product_interest',
-                            'event_label': 'Wordmatchic Interest Form Viewed'
-                        });
-                        formObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            // Observe both interest form boxes
-            const forms = document.querySelectorAll('.interest-box');
-            forms.forEach(form => {
-                if (form) formObserver.observe(form);
-            });
         });
     </script>
 </body>
