@@ -771,6 +771,16 @@
                 mobileMenuBtn.classList.remove('active');
             }
             
+            // Track page navigation
+            gtag('event', 'page_view', {
+                'page_title': pageId.charAt(0).toUpperCase() + pageId.slice(1),
+                'page_location': window.location.href,
+                'page_path': '/' + pageId
+            });
+            
+            // Reset scroll tracking for new page
+            scrollTracked = [];
+            
             window.scrollTo(0, 0);
         }
 
@@ -800,6 +810,12 @@
             const phone = form.querySelector('input[type="tel"]').value;
             const message = form.querySelector('textarea').value;
             
+            // Track form submission
+            gtag('event', 'form_submit', {
+                'event_category': 'contact',
+                'event_label': 'Contact Form'
+            });
+            
             const mailtoLink = `mailto:contact@joimirae.com?subject=Message from Joimirae Website&body=${encodeURIComponent(`Email: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`)}`;
             window.location.href = mailtoLink;
         }
@@ -807,6 +823,80 @@
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
+            
+            // Track scroll depth
+            let scrollDepths = [25, 50, 75, 100];
+            let scrollTracked = [];
+            
+            window.addEventListener('scroll', function() {
+                let scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                
+                scrollDepths.forEach(function(depth) {
+                    if (scrollPercent >= depth && !scrollTracked.includes(depth)) {
+                        scrollTracked.push(depth);
+                        gtag('event', 'scroll', {
+                            'event_category': 'engagement',
+                            'event_label': depth + '% scrolled',
+                            'value': depth
+                        });
+                    }
+                });
+            });
+            
+            // Track button clicks
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    gtag('event', 'button_click', {
+                        'event_category': 'engagement',
+                        'event_label': e.target.textContent.trim(),
+                        'page': document.querySelector('.page.active').id
+                    });
+                });
+            });
+            
+            // Track video plays
+            const videoIframe = document.querySelector('iframe[src*="youtube"]');
+            if (videoIframe) {
+                videoIframe.addEventListener('load', function() {
+                    gtag('event', 'video_load', {
+                        'event_category': 'video',
+                        'event_label': 'Wordmatchic Video'
+                    });
+                });
+            }
+            
+            // Track WhatsApp clicks
+            document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    let label = 'Footer WhatsApp';
+                    if (e.target.closest('.btn-primary')) {
+                        label = 'Coaching WhatsApp Button';
+                    }
+                    gtag('event', 'whatsapp_click', {
+                        'event_category': 'contact',
+                        'event_label': label
+                    });
+                });
+            });
+            
+            // Track Google Form views
+            const formObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gtag('event', 'form_view', {
+                            'event_category': 'product_interest',
+                            'event_label': 'Wordmatchic Interest Form Viewed'
+                        });
+                        formObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            // Observe both interest form boxes
+            const forms = document.querySelectorAll('.interest-box');
+            forms.forEach(form => {
+                if (form) formObserver.observe(form);
+            });
         });
     </script>
 </body>
