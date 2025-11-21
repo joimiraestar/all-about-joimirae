@@ -496,7 +496,7 @@
                 </div>
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
                     <h3 style="color: white;">🎭 Unexpected = Memorable Study Tools</h3>
-                    <p style="color: #d1d5db;">When something surprises you, your brain pays attention. We use the unconventional, the playful, the slightly weird—because that's what makes things stick. Our card games and study tools are designed to spark curiosity and make learning unforgettable.</p>
+                    <p style="color: #d1d5db;">When something surprises you, your brain pays attention. We use the unconventional, the playful, the slightly weird, because that's what makes things stick. Our card games and study tools are designed to spark curiosity and make learning unforgettable.</p>
                 </div>
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('coaching')">
                     <h3 style="color: white;">🧠 Work With Your Brain</h3>
@@ -531,7 +531,7 @@
             <div class="weird-section">
                 <h2 style="color: white;">Why One-Size-Fits-All Doesn't Work</h2>
                 <p>Every student learns differently. Some thrive with structure, others need flexibility. Some are visual learners, others learn by doing. We help you discover your unique learning style and find the educational path that's right for you—not a generic approach that works for no one.</p>
-                <a href="#" onclick="showPage('contact')" class="btn-primary">Discover Your Learning Style</a>
+                <a href="#" onclick="document.querySelector('#coaching h3').scrollIntoView({behavior: 'smooth'}); return false;" class="btn-primary">Discover Your Learning Style</a>
             </div>
 
             <h3>Our Coaching Process</h3>
@@ -551,11 +551,16 @@
             </div>
 
             <h3>Who Should Get Coaching?</h3>
-            <p style="color: white;">If you identify with any of these, coaching could be valuable:</p>
+            <p style="color: white;">Our coaching services help young people discover their strengths and learning styles so they can feel confident and in control of their learning.</p>
+            
+            <p style="color: white; margin-top: 1rem;">We're here for youth who:</p>
             <ul style="margin-left: 2rem; margin-top: 1rem; color: white;">
-                <li>You want to understand your unique learning style and strengths</li>
-                <li>You're exploring which educational path (IB, IP, or other) fits your learning style best</li>
+                <li>Want to understand how they learn best</li>
+                <li>Learn differently and need strategies that truly fit them</li>
+                <li>Are preparing for important decisions, such as choosing academic pathways</li>
             </ul>
+            
+            <p style="color: white; margin-top: 1.5rem; font-style: italic;">Together, we help them grow with clarity, confidence, and purpose.</p>
 
             <div style="margin-top: 2rem;">
                 <a href="https://wa.me/6581191958?text=Hi!%20I'm%20interested%20in%20booking%20a%20coaching%20session%20to%20understand%20my%20learning%20style%20better." target="_blank" class="btn-primary">Book a Coaching Session</a>
@@ -572,8 +577,11 @@
                 <h2 style="text-align: center; margin-top: 0;">Wordmatchic Cards</h2>
 
                 <div class="grid-2">
-                    <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
-                        <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    <div>
+                        <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" alt="Wordmatchic Cards Deluxe Set showing colorful Chinese character cards spread out in a circle pattern" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">Meet the Deluxe Set</p>
                     </div>
                     <div>
                         <p style="color: #333; font-size: 1.1rem; line-height: 1.8;">Your brain doesn't use Chinese daily… so it forgets why it should. Wake it up with a race to spot the word before your opponent! Once you match it — write it, say it, use it. Ready?</p>
@@ -597,12 +605,12 @@
 
     <div id="about" class="page">
         <section>
-            <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">灼珉源 JoiMirae</h2>
+            <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">Joimirae 卓敏源</h2>
             <p style="text-align: center; font-size: 1.1rem; color: #667eea; margin-bottom: 2rem; font-weight: 500;">Learning that feels like play — inspiring purpose, curiosity, and courage.<br/>学习如游戏般自然，启迪目标、好奇与勇气。</p>
 
             <h3>Brand Philosophy</h3>
             
-            <p>At JoiMirae (灼珉源), we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
+            <p>At JoiMirae, we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
 
             <p>Through immersive experiences, play-based exploration, and personalized learning insights, we help children build confidence, curiosity, and courage, nurturing both heart and mind.</p>
 
@@ -618,7 +626,7 @@
             <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem; color: #333;">
                 <h3 style="text-align: center; margin-top: 0; color: #667eea;">品牌理念</h3>
                 
-                <p style="color: #333;">在 灼珉源 (JoiMirae)，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
+                <p style="color: #333;">在卓敏源, 我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
 
                 <p style="color: #333;">通过实践营沉浸式体验、寓教于乐的探索方式以及个性化的学习洞察，我们帮助孩子建立自信、好奇心与勇气，同时兼顾心智与品格的发展。</p>
 
@@ -629,7 +637,7 @@
                     <li><strong>学习游戏与工具：</strong>通过趣味方式激发孩子的好奇心与成长潜能</li>
                 </ul>
 
-                <p style="font-size: 1.1rem; color: #667eea; font-weight: 500; margin-top: 2rem; text-align: center;">在 灼珉源，学习是一种自然的喜悦，是探索目标、好奇与勇气的旅程。</p>
+                <p style="font-size: 1.1rem; color: #667eea; font-weight: 500; margin-top: 2rem; text-align: center;">在卓敏源，学习是一种自然的喜悦，是探索目标、好奇与勇气的旅程。</p>
             </div>
 
             <h3 style="margin-top: 3rem;">Our Values</h3>
