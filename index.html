@@ -81,7 +81,7 @@
         }
 
         .logo {
-            font-size: 2.0rem;
+            font-size: 1.8rem;
             font-weight: bold;
             display: flex;
             flex-direction: column;
@@ -90,11 +90,11 @@
         }
 
         .logo img {
-            height: 130px;
+            height: 50px;
         }
 
         .logo span {
-            font-size: 1.8rem;
+            font-size: 1rem;
             color: #ec4899;
             font-weight: bold;
             text-shadow: 0 0 15px #fbbf24;
@@ -442,7 +442,7 @@
     </style>
 </head>
 <body>
-    <div class="floating-shape" style="top: 30%; left: 3%;">🦋</div>
+    <div class="floating-shape" style="top: 10%; left: 5%;">🦋</div>
     <div class="floating-shape" style="top: 60%; right: 10%; animation-delay: 2s;">●</div>
 
     <header>
@@ -456,6 +456,7 @@
                 <a onclick="showPage('home')">Home</a>
                 <a onclick="showPage('coaching')">Student Coaching</a>
                 <a onclick="showPage('products')">Products</a>
+                <a href="https://escape-mountain-skytop.web.app/" target="_blank">Play Our Game</a>
                 <a onclick="showPage('about')">About Us</a>
                 <a onclick="showPage('contact')">Contact</a>
             </nav>
@@ -474,6 +475,7 @@
                     <a onclick="showPage('home'); closeHeroMenu();">Home</a>
                     <a onclick="showPage('coaching'); closeHeroMenu();">Student Coaching</a>
                     <a onclick="showPage('products'); closeHeroMenu();">Products</a>
+                    <a href="https://escape-mountain-skytop.web.app/" target="_blank" onclick="closeHeroMenu();">Play Our Game</a>
                     <a onclick="showPage('about'); closeHeroMenu();">About Us</a>
                     <a onclick="showPage('contact'); closeHeroMenu();">Contact</a>
                 </nav>
@@ -487,20 +489,20 @@
         </div>
 
         <section>
-            <h2 style="text-align: center;">Learning That Doesn't Make You Want to Run Away</h2>
+            <h2>Learning That Doesn't Make You Want to Run Away</h2>
             <p style="text-align: center; font-size: 1.1rem; color: #999; margin-bottom: 3rem; font-style: italic;">Because "just focus harder" has never worked for anyone.</p>
             <div class="cards-container">
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
                     <h3 style="color: white;">⚡ Start Without the Dread</h3>
-                    <p style="color: #d1d5db;">The hardest part? Beginning. We design entry points that actually spark curiosity instead of triggering that "ugh, not this again" feeling.</p>
+                    <p style="color: #d1d5db;">The hardest part? Beginning. Challenge yourself to spot Chinese words before your opponent does. Our card game makes learning feel like winning.</p>
                 </div>
-                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
-                    <h3 style="color: white;">🎭 Unexpected = Memorable Study Tools</h3>
-                    <p style="color: #d1d5db;">When something surprises you, your brain pays attention. We use the unconventional, the playful, the slightly weird, because that's what makes things stick. Our card games and study tools are designed to spark curiosity and make learning unforgettable.</p>
+                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="window.open('https://escape-mountain-skytop.web.app/', '_blank')">
+                    <h3 style="color: white;">🎭 Unexpected = Memorable</h3>
+                    <p style="color: #d1d5db;">When something surprises you, your brain pays attention. Ready for an adventure? Our escape room puts your skills to the test—learning disguised as play.</p>
                 </div>
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('coaching')">
-                    <h3 style="color: white;">🧠 Work With Your Brain</h3>
-                    <p style="color: #d1d5db;">Your mind works differently. That's why you deserve educational pathways built around your unique learning style, strengths, and what makes you thrive. Work with our coaches to find what truly works for you.</p>
+                    <h3 style="color: white;">🧠 Work With Your Brain, Not Against It</h3>
+                    <p style="color: #d1d5db;">Your mind works differently. That's why you deserve coaching built around your unique learning style. We help you discover your strengths and find your path.</p>
                 </div>
             </div>
         </section>
