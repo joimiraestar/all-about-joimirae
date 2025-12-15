@@ -773,11 +773,14 @@
                 mobileMenuBtn.classList.remove('active');
             }
             
+            // Update URL hash
+            window.location.hash = pageId;
+            
             // Track page navigation
             gtag('event', 'page_view', {
                 'page_title': pageId.charAt(0).toUpperCase() + pageId.slice(1),
                 'page_location': window.location.href,
-                'page_path': '/' + pageId
+                'page_path': '/#' + pageId
             });
             
             // Reset scroll tracking for new page
@@ -825,6 +828,23 @@
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
+            
+            // Handle hash routing on page load
+            function handleHashChange() {
+                const hash = window.location.hash.substring(1); // Remove the #
+                const pageId = hash || 'home'; // Default to home if no hash
+                
+                // Check if the page exists
+                if (document.getElementById(pageId)) {
+                    showPage(pageId);
+                }
+            }
+            
+            // Load the correct page on initial load
+            handleHashChange();
+            
+            // Listen for hash changes (back/forward browser buttons)
+            window.addEventListener('hashchange', handleHashChange);
             
             // Track scroll depth
             let scrollDepths = [25, 50, 75, 100];
