@@ -494,7 +494,7 @@
             <div class="cards-container">
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
                     <h3 style="color: white;">⚡ Start Without the Dread</h3>
-                    <p style="color: #d1d5db;">The hardest part? Beginning. Challenge yourself to spot Chinese words before your opponent does. Our card game makes learning feel like winning.</p>
+                    <p style="color: #d1d5db;">The hardest part? Beginning. Challenge yourself to spot Chinese words before your opponent does. Our Chinese card game makes learning feel like winning.</p>
                 </div>
                 <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="window.open('https://escape-mountain-skytop.web.app/', '_blank')">
                     <h3 style="color: white;">🎭 Unexpected = Memorable</h3>
@@ -511,8 +511,11 @@
             <h2 style="text-align: center;">Featured Product</h2>
             
             <div style="margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <div style="padding-bottom: 56.25%; position: relative; background: #000;">
-                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jH07z4LoF4s?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div id="video-placeholder" style="padding-bottom: 56.25%; position: relative; background: #000; cursor: pointer;" onclick="loadVideo()">
+                    <img src="https://img.youtube.com/vi/jH07z4LoF4s/maxresdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Wordmatchic Cards video preview">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(255,0,0,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 8px;"></div>
+                    </div>
                 </div>
             </div>
 
@@ -825,6 +828,17 @@
             window.location.href = mailtoLink;
         }
 
+        function loadVideo() {
+            const placeholder = document.getElementById('video-placeholder');
+            placeholder.innerHTML = '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jH07z4LoF4s?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            
+            // Track video load
+            gtag('event', 'video_load', {
+                'event_category': 'video',
+                'event_label': 'Wordmatchic Video'
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
             header.classList.add('hidden');
@@ -875,17 +889,6 @@
                     });
                 });
             });
-            
-            // Track video plays
-            const videoIframe = document.querySelector('iframe[src*="youtube"]');
-            if (videoIframe) {
-                videoIframe.addEventListener('load', function() {
-                    gtag('event', 'video_load', {
-                        'event_category': 'video',
-                        'event_label': 'Wordmatchic Video'
-                    });
-                });
-            }
         });
     </script>
 </body>
