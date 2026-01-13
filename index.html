@@ -831,12 +831,12 @@
 
         function loadVideo() {
             const placeholder = document.getElementById('video-placeholder');
-            placeholder.innerHTML = '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jH07z4LoF4s?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            placeholder.innerHTML = '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/videoseries?list=PLdAC-_CDliXCAZffgYa_y66anHjEhbQOl&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
             
             // Track video load
             gtag('event', 'video_load', {
                 'event_category': 'video',
-                'event_label': 'Wordmatchic Video'
+                'event_label': 'Wordmatchic Playlist'
             });
         }
 
