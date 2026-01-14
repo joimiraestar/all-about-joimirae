@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joimirae - Learn Laugh Live</title>
+    <meta name="description" content="Fun Chinese learning games for kids that turn boring revision into competitive play. Interactive flashcards to help children memorize Chinese characters through exciting racing games. Perfect for parents looking to motivate kids to learn Chinese at home.">
+    <title>Wordmatchic Cards - Fun Chinese Learning Games for Kids | Interactive Flashcards</title>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KYNBFZDX1Q"></script>
@@ -24,52 +25,50 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #f5f5f5;
-            background: #0a0a0a;
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            color: #1a1a1a;
+            background: #fff;
+            overflow-x: hidden;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
-        .floating-shape {
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .floating-char {
             position: fixed;
+            font-size: 8rem;
+            font-weight: 900;
+            opacity: 0.03;
             pointer-events: none;
-            opacity: 0.08;
-            font-size: 6rem;
             z-index: 1;
-            animation: float 8s ease-in-out infinite;
-            color: white;
-            filter: brightness(0) invert(1);
+            animation: float 10s ease-in-out infinite;
+            color: #ec4899;
         }
 
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-            background-size: 300% 300%;
-            animation: gradientFlow 8s ease infinite;
             color: white;
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: display 0.3s;
+            transition: padding 0.3s;
         }
 
-        header.hidden {
-            display: none !important;
+        header.slim {
+            padding: 0.8rem 2rem;
         }
 
         .top-nav {
@@ -81,23 +80,27 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         .logo img {
             height: 50px;
         }
 
+        .logo.slim img {
+            height: 35px;
+        }
+
         .logo span {
             font-size: 1rem;
-            color: #ec4899;
+            color: #fbbf24;
             font-weight: bold;
-            text-shadow: 0 0 15px #fbbf24;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
         }
 
         nav {
@@ -118,9 +121,23 @@
             color: #fbbf24;
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            margin-left: auto;
+            border-radius: 8px;
+            min-width: 50px;
+            min-height: 50px;
+        }
+
         .page {
             display: none;
-            animation: slideIn 0.6s;
+            animation: slideUp 0.6s;
         }
 
         .page.active {
@@ -129,148 +146,174 @@
 
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-            background-size: 300% 300%;
-            animation: gradientFlow 8s ease infinite;
-            color: white;
-            padding: 2rem 2rem 5rem 2rem;
+            padding: 6rem 2rem;
             text-align: center;
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
+        .hero::before {
+            content: '学';
+            position: absolute;
+            top: -50px;
+            right: 10%;
+            font-size: 20rem;
+            opacity: 0.05;
+            font-weight: 900;
+        }
+
+        .hero::after {
+            content: '习';
+            position: absolute;
+            bottom: -80px;
+            left: 5%;
+            font-size: 25rem;
+            opacity: 0.05;
+            font-weight: 900;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
             position: relative;
-        }
-
-        .hero-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-        }
-
-        .hero-nav nav {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-menu-toggle {
-                display: block;
-            }
-
-            .hero-nav nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                flex-direction: column;
-                background: rgba(0,0,0,0.3);
-                backdrop-filter: blur(10px);
-                padding: 1rem;
-                gap: 0.5rem;
-                border-radius: 4px;
-                z-index: 100;
-                min-width: 200px;
-                text-align: center;
-            }
-
-            .hero-nav nav.show {
-                display: flex !important;
-            }
+            z-index: 2;
+            animation: slideUp 0.8s ease-out;
         }
 
         .hero h1 {
-            font-size: 5.1rem;
-            margin-bottom: 1rem;
-            animation: slideIn 0.8s ease-out;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             font-weight: 900;
-            color: white;
+            line-height: 1.2;
         }
 
-        .weird-word {
-            display: inline-block;
-            font-style: italic;
+        .highlight {
             color: #fbbf24;
-            text-shadow: 4px 4px 0 rgba(0,0,0,0.4);
-            transform: rotate(-2deg);
-            font-size: 1.2em;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            display: inline-block;
+            transform: rotate(-1deg);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            animation: slideIn 0.8s ease-out 0.2s both;
-            line-height: 1.6;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .cta-group {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideIn 0.8s ease-out 0.4s both;
-        }
-
-        .btn-primary {
+        .cta-primary {
             display: inline-block;
             background: white;
             color: #667eea;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
             border: none;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .btn-secondary {
-            display: inline-block;
-            background: transparent;
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
             cursor: pointer;
-            border: 2px solid white;
-            transition: all 0.3s;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
+        .cta-primary:hover {
             transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .price-tag {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         section {
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        .video-showcase {
+            background: linear-gradient(135deg, #f0f4ff 0%, #fef3ff 100%);
+            padding: 5rem 2rem;
+            margin-bottom: 0;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .video-placeholder {
+            padding-bottom: 56.25%;
+            position: relative;
+            background: #000;
+        }
+
+        .video-placeholder img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: rgba(236, 72, 153, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .video-placeholder:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(236, 72, 153, 1);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 30px solid white;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            margin-left: 8px;
+        }
+
+        .video-caption {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
         h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #ec4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -278,15 +321,233 @@
         }
 
         h3 {
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
+            font-size: 1.5rem;
             margin-bottom: 0.8rem;
             color: #667eea;
         }
 
-        h4 {
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+            align-items: center;
+        }
+
+        .problem {
+            background: #fee;
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 6px solid #ef4444;
+        }
+
+        .problem h3 {
+            color: #dc2626;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #333;
+        }
+
+        .problem li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: 900;
+        }
+
+        .solution {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 6px solid #10b981;
+        }
+
+        .solution h3 {
+            color: #059669;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .solution li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #333;
+        }
+
+        .solution li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-top: 4px solid transparent;
+        }
+
+        .feature-card:nth-child(1) { border-top-color: #667eea; }
+        .feature-card:nth-child(2) { border-top-color: #764ba2; }
+        .feature-card:nth-child(3) { border-top-color: #ec4899; }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
             color: #667eea;
+        }
+
+        .pricing-section { background: #1a1a1a; padding: 5rem 2rem; color: white; text-align: center; }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .pricing-card {
+            background: white;
+            color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #ec4899);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #ec4899;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::after {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #ec4899;
+            color: white;
+            padding: 0.3rem 3rem;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+
+        .price-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .price-features li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .price-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 900;
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #ec4899 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
             margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cta-secondary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
         .cards-container {
@@ -327,10 +588,6 @@
             box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
         }
 
-        .card h3 {
-            margin-top: 0;
-        }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -339,33 +596,19 @@
             align-items: center;
         }
 
-        .interest-box {
-            background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-top: 2rem;
-            border: 2px solid #667eea;
-        }
-
         .weird-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-            background-size: 300% 300%;
-            animation: gradientFlow 8s ease infinite;
             padding: 5rem 2rem;
             text-align: center;
             color: white;
             border-radius: 12px;
             margin: 3rem auto;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
         }
 
         .weird-section h2 {
             background: none;
             -webkit-text-fill-color: unset;
             color: white;
-            font-size: 2.5rem;
         }
 
         .weird-section p {
@@ -383,71 +626,60 @@
             margin-top: 3rem;
         }
 
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            margin-left: auto;
-        }
-
-        .mobile-menu-toggle.active + nav {
-            display: flex !important;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-            padding: 1rem;
-            gap: 0.5rem;
-            z-index: 1000;
-            min-width: 200px;
-            text-align: center;
-            border-radius: 4px;
-        }
-
         @media (max-width: 768px) {
             .mobile-menu-toggle {
-                display: block;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                z-index: 9999 !important;
             }
 
-            nav {
-                display: none;
+            .top-nav nav {
+                display: none !important;
+            }
+            
+            header.slim {
+                padding: 0.5rem 2rem;
             }
 
             header {
                 position: relative;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-group {
+            .mobile-menu-toggle.active + nav {
+                display: flex !important;
                 flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+                padding: 1rem;
+                gap: 0.5rem;
+                z-index: 1000;
+                min-width: 200px;
+                text-align: center;
+                border-radius: 4px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             }
 
-            .btn-primary, .btn-secondary {
-                width: 100%;
-            }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            .problem-solution { grid-template-columns: 1fr; gap: 2rem; }
+            .pricing-cards { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: scale(1); }
+            .floating-char { display: none; }
+            .grid-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="floating-shape" style="top: 10%; left: 5%;">🦋</div>
-    <div class="floating-shape" style="top: 60%; right: 10%; animation-delay: 2s;">●</div>
+    <div class="floating-char" style="top: 15%; left: 5%;">学</div>
+    <div class="floating-char" style="top: 60%; right: 8%; animation-delay: 2s;">习</div>
+    <div class="floating-char" style="bottom: 20%; left: 10%; animation-delay: 4s;">字</div>
 
     <header>
         <div class="top-nav">
-            <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
+            <div class="logo" onclick="showPage('home')">
                 <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
                 <span>Joimirae</span>
             </div>
@@ -463,86 +695,214 @@
         </div>
     </header>
 
+    <!-- HOME PAGE - WORDMATCHIC LANDING -->
     <div id="home" class="page active">
-        <div class="hero">
-            <div class="hero-nav">
-                <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
-                    <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
-                    <span>Joimirae</span>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Turn Chinese Revision Into a <span class="highlight">Race to Win</span></h1>
+                <p>For kids who'd rather compete than sit still. Wordmatchic transforms boring character practice into an adrenaline-pumping showdown where the fastest brain wins.</p>
+                <a class="cta-primary" onclick="document.getElementById('order').scrollIntoView({behavior: 'smooth'})">Get Wordmatchic Now</a>
+                <div class="price-tag">From S$19.90 • Ships in Singapore</div>
+            </div>
+        </section>
+
+        <section id="video" class="video-showcase">
+            <h2>See How This Chinese Learning Game Works</h2>
+            <p class="subtitle">Watch how Wordmatchic makes Chinese revision actually enjoyable - perfect for parents looking for fun ways to help kids learn Chinese at home</p>
+            <div class="video-container" onclick="loadVideo()">
+                <div id="video-placeholder" class="video-placeholder">
+                    <img src="https://img.youtube.com/vi/jH07z4LoF4s/maxresdefault.jpg" alt="Wordmatchic Cards gameplay">
+                    <div class="play-button"></div>
                 </div>
-                <button class="hero-menu-toggle" id="heroMenuBtn" onclick="toggleHeroMenu()">☰</button>
-                <nav id="heroNav">
-                    <a onclick="showPage('home'); closeHeroMenu();">Home</a>
-                    <a onclick="showPage('coaching'); closeHeroMenu();">Student Coaching</a>
-                    <a onclick="showPage('products'); closeHeroMenu();">Products</a>
-                    <a href="https://joimirae-games-hub.web.app" target="_blank" onclick="closeHeroMenu();">Play Our Game</a>
-                    <a onclick="showPage('about'); closeHeroMenu();">About Us</a>
-                    <a onclick="showPage('contact'); closeHeroMenu();">Contact</a>
-                </nav>
             </div>
-            <h1>What If Learning Didn't Feel So <span class="weird-word">BORRRRING?</span></h1>
-            <p>Staring at the page. Knowing you should start. But your brain just... won't. We get it. And we've figured out how to make learning actually stick—by making it interesting enough to begin.</p>
-            <div class="cta-group">
-                <a href="#products" onclick="showPage('products')" class="btn-primary">See Our Products</a>
-                <a href="#coaching" onclick="showPage('coaching')" class="btn-secondary">Explore Coaching</a>
-            </div>
-        </div>
+            <p class="video-caption">Who's faster? Challenge your siblings, race your friends, beat your own time.</p>
+        </section>
 
         <section>
-            <h2>Learning That Doesn't Make You Want to Run Away</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #999; margin-bottom: 3rem; font-style: italic;">Because "just focus harder" has never worked for anyone.</p>
-            <div class="cards-container">
-                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('products')">
-                    <h3 style="color: white;">⚡ Start Without the Dread</h3>
-                    <p style="color: #d1d5db;">The hardest part? Beginning. Challenge yourself to spot Chinese words before your opponent does. Our Chinese card game makes learning feel like winning.</p>
+            <h2>The Problem With Traditional Chinese Revision</h2>
+            <p class="subtitle">Most Chinese learning games for kids miss the mark. Here's what parents tell us:</p>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>Old Way: Painful & Slow</h3>
+                    <ul>
+                        <li>Sitting still feels like torture</li>
+                        <li>Flashcards put them to sleep</li>
+                        <li>They'd rather do literally anything else</li>
+                        <li>Words forgotten by tomorrow</li>
+                        <li>Constant battles to practice</li>
+                    </ul>
                 </div>
-                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="window.open('https://joimirae-games-hub.web.app', '_blank')">
-                    <h3 style="color: white;">🎭 Unexpected = Memorable</h3>
-                    <p style="color: #d1d5db;">When something surprises you, your brain pays attention. Ready for an adventure? Our escape room puts your skills to the test—learning disguised as play.</p>
-                </div>
-                <div class="card" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border: 1px solid #333; cursor: pointer;" onclick="showPage('coaching')">
-                    <h3 style="color: white;">🧠 Work With Your Brain, Not Against It</h3>
-                    <p style="color: #d1d5db;">Your mind works differently. That's why you deserve coaching built around your unique learning style. We help you discover your strengths and find your path.</p>
+                <div class="solution">
+                    <h3>New Way: Fast & Fun</h3>
+                    <ul>
+                        <li>Racing keeps energy channeled</li>
+                        <li>Competitive edge = laser focus</li>
+                        <li>They ask to play "one more round"</li>
+                        <li>Active recall makes it stick</li>
+                        <li>Siblings actually want to practice together</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem;">
-            <h2 style="text-align: center;">Featured Product</h2>
-            
-            <div style="margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <div id="video-placeholder" style="padding-bottom: 56.25%; position: relative; background: #000; cursor: pointer;" onclick="loadVideo()">
-                    <img src="https://img.youtube.com/vi/jH07z4LoF4s/maxresdefault.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" alt="Wordmatchic Cards video preview">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(255,0,0,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                        <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 8px;"></div>
-                    </div>
+        <section id="features">
+            <h2>Why These Interactive Flashcards Work</h2>
+            <p class="subtitle">Learning disguised as competition - hands-on Chinese revision that kids actually want to play</p>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Channels Their Energy</h3>
+                    <p>That restless energy? Now it's laser-focused on winning. This exciting activity to make studying Chinese enjoyable keeps fidgety kids engaged and alert.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Motivates Kids to Learn Chinese</h3>
+                    <p>Kids who can't sit still for worksheets will play round after round trying to beat their record. Winning feels too good to stop.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Helps Children Memorize Chinese Characters</h3>
+                    <p>The thrill of the hunt makes characters memorable. After the race, they write it, say it, own it. No nagging needed.</p>
                 </div>
             </div>
+        </section>
 
-            <div style="text-align: center;">
-                <h3>Wordmatchic Cards</h3>
-                <p style="color: #333; max-width: 600px; margin: 1rem auto;">Challenge yourself to spot and say Chinese words before your opponent does. Make learning Chinese exciting and effective!</p>
-                <p style="margin-top: 1rem; color: #667eea; font-weight: 600; font-size: 1.1rem;">Two adventures await: S$19.90 or go all-in at S$49.90!</p>
-                <button class="btn-primary" onclick="showPage('products'); setTimeout(() => document.getElementById('wordmatchic-form').scrollIntoView({behavior: 'smooth'}), 100)" style="margin-top: 1rem; font-size: 1.2rem; padding: 1.2rem 3rem;">Reserve Your Set</button>
+        <section id="pricing" class="pricing-section">
+            <h2 style="text-align: center;">Choose Your Chinese Flashcard Set</h2>
+            <p class="subtitle" style="color: rgba(255,255,255,0.8);">Interactive Chinese learning cards for Primary 1 to Primary 6 students in Singapore - quick warm-up fun or deep chapter-by-chapter mastery</p>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <p class="price-label">Thriller Set</p>
+                    <div class="price">S$19.90</div>
+                    <ul class="price-features">
+                        <li>114 essential Chinese words</li>
+                        <li>Choose your year: P1, P2, P3, P4, P5, or P6</li>
+                        <li>Handpicked highlights from the year</li>
+                        <li>Quick warm-up game for any session</li>
+                        <li>Hands-on Chinese revision for young learners</li>
+                        <li>2-6 players</li>
+                    </ul>
+                    <a href="#order" class="cta-secondary" onclick="event.preventDefault(); document.getElementById('order').scrollIntoView({behavior: 'smooth'})">Reserve Thriller Set</a>
+                </div>
+                <div class="pricing-card featured">
+                    <p class="price-label">Deluxe Set</p>
+                    <div class="price">S$49.90</div>
+                    <ul class="price-features">
+                        <li>399 characters for deep mastery</li>
+                        <li>Choose your year: P1, P2, P3, P4, P5, or P6</li>
+                        <li>Perfect for revision every 2-3 chapters</li>
+                        <li>Complete coverage of the year's content</li>
+                        <li>Maximum variety & replayability</li>
+                        <li>2-6 players</li>
+                        <li><strong>Best value per card</strong></li>
+                    </ul>
+                    <a href="#order" class="cta-secondary" onclick="event.preventDefault(); document.getElementById('order').scrollIntoView({behavior: 'smooth'})">Reserve Deluxe Set</a>
+                </div>
             </div>
+        </section>
 
-            <div class="interest-box" style="margin-top: 3rem;">
-                <h3 style="margin-top: 0; text-align: center;">Wordmatchic Cards – Interest List</h3>
-                <p style="text-align: center; color: #333;">Let us know which level interests you, and we'll notify you once pre-orders open!</p>
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;"></iframe>
+        <section id="order" style="background: linear-gradient(135deg, #f0f4ff 0%, #fef3ff 100%); border-radius: 16px; padding: 3rem 2rem;">
+            <h2>Reserve Your Set Now</h2>
+            <p class="subtitle">Join the waitlist—we'll notify you when pre-orders open!</p>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem; border-radius: 8px;"></iframe>
+        </section>
+
+        <section style="background: #f9fafb; padding: 4rem 2rem; margin-top: 0;">
+            <h2>5 Fun Ways to Help Your Child Learn Chinese (Without Making It a Chore)</h2>
+            <p class="subtitle">Learning Chinese doesn't have to be all drills and rote memorization. With the right mix of fun, engagement, and creativity, you can help your child practice Chinese daily, retain new words, and actually enjoy the process.</p>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top: 0;">1. Make a Daily "5 Words of the Day" List</h3>
+                    <p style="color: #333;">Instead of overwhelming your child with a long vocabulary list, pick five words each day. Ask your child to read them, use them in a sentence, or even teach them to a sibling.</p>
+                    <ul style="margin-left: 2rem; color: #333; margin-top: 1rem;">
+                        <li>Rotate the words into a weekly list as they become proficient</li>
+                        <li>Encourage your child to review past words regularly, so learning sticks</li>
+                    </ul>
+                    <p style="color: #667eea; font-weight: 600; margin-top: 1rem; font-style: italic;">💡 Pro tip: You can use your Wordmatchic Chinese Revision Cards to hold the daily words when you have worked up to 8 words. They're perfect for quick daily practice and can be rotated easily from day to day. Just one card on top of the pile for quick revision.</p>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top: 0;">2. Watch Chinese Media Together, One Line at a Time</h3>
+                    <p style="color: #333;">Pick a short video, TV show, or even Little Red Book (小红书) clips to watch together. Start small: read one line of subtitles a day and encourage your child to repeat it.</p>
+                    <ul style="margin-left: 2rem; color: #333; margin-top: 1rem;">
+                        <li>Kids pick up pronunciation, sentence structure, and new words without feeling pressured</li>
+                        <li>Watching together gives you opportunities to ask questions and interact naturally</li>
+                    </ul>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top: 0;">3. Try All Types of Multimedia</h3>
+                    <p style="color: #333;">Every child has a different "click" moment. Explore:</p>
+                    <ul style="margin-left: 2rem; color: #333; margin-top: 1rem;">
+                        <li>Movies and TV shows</li>
+                        <li>YouTube videos</li>
+                        <li>Music or songs</li>
+                        <li>Interactive apps</li>
+                    </ul>
+                    <p style="color: #333; margin-top: 1rem;">Some will resonate, some won't—and that's okay. The goal is to expose your child to language in varied, fun ways.</p>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top: 0;">4. Play Card Games Together</h3>
+                    <p style="color: #333;">Turn learning into play. Use your Wordmatchic Chinese Revision Cards as the basis for simple games:</p>
+                    <ul style="margin-left: 2rem; color: #333; margin-top: 1rem;">
+                        <li>Spread the games throughout the week rather than clustering daily</li>
+                        <li>Bring cards with you when traveling or waiting—they're perfect boredom-busters</li>
+                        <li>Make it social. Siblings, friends, or even parents can join</li>
+                    </ul>
+                    <p style="color: #333; margin-top: 1rem;">Games make learning interactive and memorable. Kids are more likely to retain words they've practiced while having fun.</p>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top: 0;">5. Say Absurd Things in Chinese and Let Your Child Correct You</h3>
+                    <p style="color: #333;">Inject humor and creativity into practice. Say something obviously wrong, like:</p>
+                    <p style="color: #667eea; font-weight: 600; margin: 1rem 0; padding: 1rem; background: #f0f4ff; border-radius: 8px; font-style: italic;">"我感觉很冷，所以我喝了冰水。" ("I feel cold, so I drank ice water.")</p>
+                    <ul style="margin-left: 2rem; color: #333; margin-top: 1rem;">
+                        <li>Let your child spot the mistake and correct you</li>
+                        <li>This encourages active thinking, sentence comprehension, and speaking practice</li>
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2.5rem; border-radius: 12px; color: white; text-align: center;">
+                    <h3 style="margin-top: 0; color: white;">Why Wordmatchic Chinese Revision Cards Make Learning Fun and Easy</h3>
+                    <p style="margin: 1.5rem 0;">Wordmatchic Chinese Revision Cards are portable, versatile, and engaging, making them a perfect companion for your child's language journey. They:</p>
+                    <ul style="list-style: none; padding: 0; margin: 1.5rem auto; text-align: left; max-width: 600px;">
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">✓</span>
+                            Encourage daily practice without overwhelming your child
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">✓</span>
+                            Make games and challenges simple to organize anywhere, anytime
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">✓</span>
+                            Help kids remember words through repetition and playful activities
+                        </li>
+                    </ul>
+                    <p style="font-size: 1.1rem; margin-top: 2rem;">With just a deck of Wordmatchic Chinese Revision Cards, you can turn everyday moments into learning opportunities, and your child will actually enjoy practicing Chinese.</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="color: #667eea; margin-top: 0;">Final Thought</h3>
+                    <p style="color: #333; font-size: 1.1rem; line-height: 1.8;">Learning Chinese doesn't have to be boring or stressful. By making it fun, interactive, and creative, you can help your child develop a lifelong love for the language—while using simple tools like Wordmatchic Chinese Revision Cards to make learning practical and enjoyable.</p>
+                    <button class="cta-primary" onclick="document.getElementById('order').scrollIntoView({behavior: 'smooth'})" style="margin-top: 1.5rem; animation: none;">Get Your Cards Now</button>
+                </div>
             </div>
         </section>
     </div>
 
+    <!-- COACHING PAGE -->
     <div id="coaching" class="page">
         <section>
             <h2>Student Coaching</h2>
-            <p style="font-size: 1.2rem; color: #667eea; font-style: italic; margin-bottom: 2rem;">Find your best fit-- strength based coaching</p>
+            <p style="font-size: 1.2rem; color: #667eea; font-style: italic; margin-bottom: 2rem; text-align: center;">Find your best fit - strength based coaching</p>
 
             <div class="weird-section">
                 <h2 style="color: white;">Why One-Size-Fits-All Doesn't Work</h2>
                 <p>Every student learns differently. Some thrive with structure, others need flexibility. Some are visual learners, others learn by doing. We help you discover your unique learning style and find the educational path that's right for you, not a generic approach that works for no one.</p>
-                <a href="#" onclick="document.querySelector('#coaching h3').scrollIntoView({behavior: 'smooth'}); return false;" class="btn-primary">Discover Your Learning Style</a>
+                <a href="#" onclick="document.querySelector('#coaching .cards-container').scrollIntoView({behavior: 'smooth'}); return false;" class="cta-primary" style="animation: none;">Discover Your Learning Style</a>
             </div>
 
             <h3>Our Coaching Process</h3>
@@ -562,58 +922,50 @@
             </div>
 
             <h3>Who Should Get Coaching?</h3>
-            <p style="color: white;">Our coaching services help young people discover their strengths and learning styles so they can feel confident and in control of their learning.</p>
+            <p style="color: #333;">Our coaching services help young people discover their strengths and learning styles so they can feel confident and in control of their learning.</p>
             
-            <p style="color: white; margin-top: 1rem;">We're here for youth who:</p>
-            <ul style="margin-left: 2rem; margin-top: 1rem; color: white;">
+            <p style="color: #333; margin-top: 1rem;">We're here for youth who:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem; color: #333;">
                 <li>Want to understand how they learn best</li>
                 <li>Learn differently and need strategies that truly fit them</li>
                 <li>Are preparing for important decisions, such as choosing academic pathways</li>
             </ul>
             
-            <p style="color: white; margin-top: 1.5rem; font-style: italic;">Together, we help them grow with clarity, confidence, and purpose.</p>
+            <p style="color: #333; margin-top: 1.5rem; font-style: italic;">Together, we help them grow with clarity, confidence, and purpose.</p>
 
             <div style="margin-top: 2rem;">
-                <a href="https://wa.me/6581191958?text=Hi!%20I'm%20interested%20in%20booking%20a%20coaching%20session%20to%20understand%20my%20learning%20style%20better." target="_blank" class="btn-primary">Book a Coaching Session</a>
+                <a href="https://wa.me/6581191958?text=Hi!%20I'm%20interested%20in%20booking%20a%20coaching%20session%20to%20understand%20my%20learning%20style%20better." target="_blank" class="cta-primary" style="animation: none;">Book a Coaching Session</a>
             </div>
         </section>
     </div>
 
+    <!-- PRODUCTS PAGE -->
     <div id="products" class="page">
         <section>
             <h2>Study Products</h2>
-            <p>Work <span style="color: #ec4899; font-weight: bold;">WITH</span> your brain, not against it! We've created physical study tools for students who find traditional methods boring and need different strategies to stay engaged!</p>
+            <p style="color: #333; text-align: center;">Work <span style="color: #ec4899; font-weight: bold;">WITH</span> your brain, not against it! We've created physical study tools for students who find traditional methods boring and need different strategies to stay engaged!</p>
 
-            <div style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem; margin-bottom: 3rem;">
+            <div style="background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%); border-radius: 12px; padding: 3rem 2rem; margin: 3rem 0;">
                 <h2 style="text-align: center; margin-top: 0;">Wordmatchic Cards</h2>
 
                 <div class="grid-2">
                     <div>
                         <div style="height: 250px; margin: 0; border-radius: 8px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
-                            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" alt="Wordmatchic Cards Deluxe Set showing colorful Chinese character cards spread out in a circle pattern" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicphoto2a.png" alt="Wordmatchic Cards Deluxe Set" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                         </div>
                         <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">Meet the Deluxe Set</p>
                     </div>
                     <div>
                         <p style="color: #333; font-size: 1.1rem; line-height: 1.8;">Your brain doesn't use Chinese daily… so it forgets why it should. Wake it up with a race to spot the word before your opponent! Once you match it — write it, say it, use it. Ready?</p>
                         <p style="margin-top: 1.5rem; color: #667eea; font-weight: 600; font-size: 1.1rem;">Two adventures await: S$19.90 or go all-in at S$49.90!</p>
-                        <button class="btn-primary" onclick="document.getElementById('wordmatchic-form').scrollIntoView({behavior: 'smooth'})" style="margin-top: 1.5rem; font-size: 1.2rem; padding: 1.2rem 3rem;">Reserve Your Set</button>
+                        <button class="cta-primary" onclick="showPage('home'); setTimeout(() => document.getElementById('order').scrollIntoView({behavior: 'smooth'}), 100)" style="margin-top: 1.5rem; font-size: 1.2rem; padding: 1.2rem 3rem; animation: none;">Reserve Your Set</button>
                     </div>
-                </div>
-            </div>
-
-            <div id="wordmatchic-form" class="interest-box">
-                <h3 style="margin-top: 0; text-align: center;">Wordmatchic Cards – Interest List</h3>
-                <p style="color: #333; text-align: center;">Let us know which level interests you, and we'll notify you once pre-orders open!</p>
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="margin-top: 1.5rem;"></iframe>
-                
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn-primary" onclick="showPage('home'); setTimeout(() => document.querySelector('.hero').nextElementSibling.nextElementSibling.scrollIntoView({behavior: 'smooth'}), 100)" style="background: #667eea; color: white;">See This in Action! 🎬</button>
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- ABOUT PAGE -->
     <div id="about" class="page">
         <section>
             <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">Joimirae 卓敏源</h2>
@@ -621,12 +973,12 @@
 
             <h3>Brand Philosophy</h3>
             
-            <p>At JoiMirae, we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
+            <p style="color: #333;">At JoiMirae, we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
 
-            <p>Through immersive experiences, play-based exploration, and personalized learning insights, we help children build confidence, curiosity, and courage, nurturing both heart and mind.</p>
+            <p style="color: #333;">Through immersive experiences, play-based exploration, and personalized learning insights, we help children build confidence, curiosity, and courage, nurturing both heart and mind.</p>
 
             <h3>Our Offerings</h3>
-            <ul style="margin-left: 2rem; margin-bottom: 2rem;">
+            <ul style="margin-left: 2rem; margin-bottom: 2rem; color: #333;">
                 <li><strong>Holiday Camps:</strong> experiential learning through play and teamwork</li>
                 <li><strong>Consultancy:</strong> strength-based learning habit insights for parents and children, designed for ages 11 to 15</li>
                 <li><strong>Games and Learning Tools:</strong> playful pathways to curiosity and growth</li>
@@ -669,20 +1021,21 @@
         </section>
     </div>
 
+    <!-- CONTACT PAGE -->
     <div id="contact" class="page">
         <section>
             <h2>Get In Touch</h2>
-            <p>Have questions about our coaching or products? Want to partner with us? We'd love to hear from you.</p>
+            <p style="color: #333; text-align: center;">Have questions about our coaching or products? Want to partner with us? We'd love to hear from you.</p>
 
             <div class="grid-2">
                 <div>
                     <h3>Contact Information</h3>
-                    <p><strong>Email:</strong> contact@joimirae.com</p>
-                    <p><strong>Phone:</strong> +65 81191958</p>
-                    <p><strong>Location:</strong> Singapore</p>
+                    <p style="color: #333;"><strong>Email:</strong> contact@joimirae.com</p>
+                    <p style="color: #333;"><strong>Phone:</strong> +65 81191958</p>
+                    <p style="color: #333;"><strong>Location:</strong> Singapore</p>
 
                     <h3 style="margin-top: 2rem;">Follow Us</h3>
-                    <p>
+                    <p style="color: #333;">
                         <a href="https://www.youtube.com/@Joimirae/shorts" style="color: #667eea; text-decoration: none;">YouTube</a> • 
                         <a href="https://www.instagram.com/joimirae/" target="_blank" style="color: #667eea; text-decoration: none;">Instagram</a>
                     </p>
@@ -692,18 +1045,18 @@
                     <h3>Send Us a Message</h3>
                     <form onsubmit="handleFormSubmit(event)">
                         <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email</label>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Email</label>
                             <input type="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Phone (Optional)</label>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Phone (Optional)</label>
                             <input type="tel" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
                         </div>
                         <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Message</label>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Message</label>
                             <textarea required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; min-height: 120px; font-family: inherit;"></textarea>
                         </div>
-                        <button class="btn-primary" type="submit">Send Message</button>
+                        <button class="cta-primary" type="submit" style="animation: none;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -757,7 +1110,7 @@
     </div>
 
     <footer>
-        <p><strong>© 2025 Joimirae</strong> • <a href="https://wa.me/6581191958?text=Hi!%20I%20have%20a%20question%20about%20Joimirae." target="_blank" style="color: #25d366; text-decoration: none;">+65 81191958</a> • Learn Laugh Live !</p>
+        <p><strong>© 2025 Joimirae</strong> • <a href="https://wa.me/6581191958?text=Hi!%20I%20have%20a%20question%20about%20Joimirae." target="_blank" style="color: #25d366; text-decoration: none;">+65 81191958</a> • Learn Laugh Live!</p>
     </footer>
 
     <script>
@@ -766,10 +1119,14 @@
             document.getElementById(pageId).classList.add('active');
             
             const header = document.querySelector('header');
+            const logo = document.querySelector('.logo');
+            
             if (pageId === 'home') {
-                header.classList.add('hidden');
+                header.classList.add('slim');
+                logo.classList.add('slim');
             } else {
-                header.classList.remove('hidden');
+                header.classList.remove('slim');
+                logo.classList.remove('slim');
             }
             
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -777,18 +1134,13 @@
                 mobileMenuBtn.classList.remove('active');
             }
             
-            // Update URL hash
             window.location.hash = pageId;
             
-            // Track page navigation
             gtag('event', 'page_view', {
                 'page_title': pageId.charAt(0).toUpperCase() + pageId.slice(1),
                 'page_location': window.location.href,
                 'page_path': '/#' + pageId
             });
-            
-            // Reset scroll tracking for new page
-            scrollTracked = [];
             
             window.scrollTo(0, 0);
         }
@@ -798,20 +1150,6 @@
             btn.classList.toggle('active');
         }
 
-        function toggleHeroMenu() {
-            const nav = document.getElementById('heroNav');
-            const btn = document.getElementById('heroMenuBtn');
-            nav.classList.toggle('show');
-            btn.textContent = nav.classList.contains('show') ? '✕' : '☰';
-        }
-
-        function closeHeroMenu() {
-            const nav = document.getElementById('heroNav');
-            const btn = document.getElementById('heroMenuBtn');
-            nav.classList.remove('show');
-            btn.textContent = '☰';
-        }
-
         function handleFormSubmit(e) {
             e.preventDefault();
             const form = e.target;
@@ -819,7 +1157,6 @@
             const phone = form.querySelector('input[type="tel"]').value;
             const message = form.querySelector('textarea').value;
             
-            // Track form submission
             gtag('event', 'form_submit', {
                 'event_category': 'contact',
                 'event_label': 'Contact Form'
@@ -833,7 +1170,6 @@
             const placeholder = document.getElementById('video-placeholder');
             placeholder.innerHTML = '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/videoseries?list=PLdAC-_CDliXCAZffgYa_y66anHjEhbQOl&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
             
-            // Track video load
             gtag('event', 'video_load', {
                 'event_category': 'video',
                 'event_label': 'Wordmatchic Playlist'
@@ -842,46 +1178,23 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
-            header.classList.add('hidden');
+            const logo = document.querySelector('.logo');
+            header.classList.add('slim');
+            logo.classList.add('slim');
             
-            // Handle hash routing on page load
             function handleHashChange() {
-                const hash = window.location.hash.substring(1); // Remove the #
-                const pageId = hash || 'home'; // Default to home if no hash
+                const hash = window.location.hash.substring(1);
+                const pageId = hash || 'home';
                 
-                // Check if the page exists
                 if (document.getElementById(pageId)) {
                     showPage(pageId);
                 }
             }
             
-            // Load the correct page on initial load
             handleHashChange();
-            
-            // Listen for hash changes (back/forward browser buttons)
             window.addEventListener('hashchange', handleHashChange);
             
-            // Track scroll depth
-            let scrollDepths = [25, 50, 75, 100];
-            let scrollTracked = [];
-            
-            window.addEventListener('scroll', function() {
-                let scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                
-                scrollDepths.forEach(function(depth) {
-                    if (scrollPercent >= depth && !scrollTracked.includes(depth)) {
-                        scrollTracked.push(depth);
-                        gtag('event', 'scroll', {
-                            'event_category': 'engagement',
-                            'event_label': depth + '% scrolled',
-                            'value': depth
-                        });
-                    }
-                });
-            });
-            
-            // Track button clicks
-            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(function(button) {
+            document.querySelectorAll('.cta-primary, .cta-secondary').forEach(function(button) {
                 button.addEventListener('click', function(e) {
                     gtag('event', 'button_click', {
                         'event_category': 'engagement',
