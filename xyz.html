@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wordmatchic Cards – Fun Chinese Learning Games for Kids | Joimirae</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KYNBFZDX1Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KYNBFZDX1Q');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -406,7 +414,8 @@
   .hero-stats-col {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
+    align-items: flex-start;
   }
   .hero-card-float {
     background: white;
@@ -1048,7 +1057,34 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── COLLAPSIBLE SECTIONS ── */
+  /* ── STOCK BADGE & DYNAMIC SUBMIT ── */
+  .stock-badge {
+    display: none;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .stock-badge.in-stock {
+    background: var(--green-light);
+    color: var(--green);
+    border: 1.5px solid #A8DFC4;
+  }
+  .stock-badge.pre-order {
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    border: 1.5px solid #A8E0DE;
+  }
+  .submit-btn.buy-now {
+    background: var(--green);
+    box-shadow: 0 6px 20px rgba(46,158,122,0.35);
+  }
+  .submit-btn.buy-now:hover {
+    background: #247a5e;
+    box-shadow: 0 10px 28px rgba(46,158,122,0.45);
+  }
   .section-toggle {
     width: 100%;
     background: none;
@@ -1110,7 +1146,7 @@
     .form-row { grid-template-columns: 1fr; }
     .hero-product-img, .hero-product-img-placeholder { width: 100%; max-width: 380px; height: 220px; }
     .hero-product-row { gap: 20px; flex-direction: column; align-items: center; }
-    .hero-stats-col { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .hero-stats-col { flex-direction: column; align-items: stretch; width: 100%; max-width: 380px; }
     .hero-card-float { min-width: 140px; padding: 14px 16px; }
     #about .about-bilingual { grid-template-columns: 1fr !important; }
   }
@@ -1150,7 +1186,7 @@
   </h1>
 
   <p class="hero-sub">Turn Chinese Revision Into a Race to Win</p>
-  <p class="hero-tagline">Interactive flashcard games for kids who'd rather compete than sit still — P1 to P6</p>
+  <p class="hero-tagline">Snap style card games for kids who'd rather compete than sit still — P1 to P6</p>
 
   <div class="hero-pills">
     <span class="pill">⚡ Fast-paced gameplay</span>
@@ -1186,17 +1222,34 @@
     </div>
     <!-- STAT CARDS -->
     <div class="hero-stats-col">
-      <div class="hero-card-float">
-        <span class="big-num" style="color:var(--yellow-dark);">399</span>
-        Chinese words in the Deluxe Set
+      <p style="font-family:'Lilita One',cursive;font-size:1.1rem;color:var(--teal-dark);margin-bottom:2px;text-align:left;display:block;">How It Works</p>
+      <p style="font-size:0.75rem;color:var(--text-muted);font-weight:700;margin-bottom:10px;text-align:left;display:block;">Three steps to Chinese fun 🎉</p>
+      <div class="hero-card-float" style="padding:12px 16px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">🃏</span>
+          <div>
+            <strong style="font-family:'Baloo 2',sans-serif;color:var(--navy);font-size:0.88rem;display:block;">Shuffle & Deal</strong>
+            <span style="font-weight:600;font-size:0.76rem;color:var(--text-soft);">Lay out the cards face up. The hunt is on.</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-card-float">
-        <span class="big-num" style="color:var(--green);">114</span>
-        Chinese words in the Thriller Set
+      <div class="hero-card-float" style="padding:12px 16px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">⚡</span>
+          <div>
+            <strong style="font-family:'Baloo 2',sans-serif;color:var(--navy);font-size:0.88rem;display:block;">Race to Match</strong>
+            <span style="font-weight:600;font-size:0.76rem;color:var(--text-soft);">Spot the character first. Fastest brain wins.</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-card-float teal">
-        <span class="big-num">2–6</span>
-        players per round
+      <div class="hero-card-float" style="padding:12px 16px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">✍️</span>
+          <div>
+            <strong style="font-family:'Baloo 2',sans-serif;color:var(--navy);font-size:0.88rem;display:block;">Write, Say, Own It</strong>
+            <span style="font-weight:600;font-size:0.76rem;color:var(--text-soft);">Say it aloud, write it down. It sticks!</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1206,7 +1259,7 @@
 <section id="order">
   <p class="section-eyebrow">Reserve Your Set</p>
   <h2 class="section-title">Choose Your Adventure</h2>
-  <p class="section-sub">Fill in the quick form below — we'll notify you the moment pre-orders open!</p>
+  <p class="section-sub">Fill in the quick form below. Some limited decks are available now. For the rest, we will notify you for preorders!</p>
 
   <div class="order-layout">
     <!-- SET SELECTOR -->
@@ -1218,7 +1271,7 @@
         </div>
         <p class="set-desc">Quick warm-up game for any revision session.</p>
         <ul class="set-dot-list">
-          <li>114 essential Chinese words</li>
+          <li>114 Chinese words across 2 decks</li>
           <li>Choose your year: P1–P6</li>
           <li>Handpicked highlights from the year</li>
           <li>2–6 players</li>
@@ -1233,7 +1286,7 @@
         </div>
         <p class="set-desc">Complete coverage — chapter by chapter mastery.</p>
         <ul class="set-dot-list">
-          <li>399 characters for deep mastery</li>
+          <li>399 Chinese words across 7 decks</li>
           <li>Choose your year: P1–P6</li>
           <li>Perfect for revision every 2–3 chapters</li>
           <li>Maximum variety & replayability</li>
@@ -1285,97 +1338,20 @@
           <label for="f_consent">I agree to be contacted by Joimirae about updates, pricing and pre-order details.</label>
         </div>
 
-        <button class="submit-btn" onclick="submitOrder()">🎴 Reserve My Set Now!</button>
+        <div class="stock-badge" id="stockBadge"></div>
+
+        <button class="submit-btn" id="submitBtn" onclick="window._gaSubmitOrder ? window._gaSubmitOrder() : submitOrder()">🎴 Reserve My Set Now!</button>
         <p class="form-note">🔒 Your data is safe with us · PDPA compliant · No spam, ever</p>
       </div>
 
       <div class="success-message" id="successMsg">
-        <span class="success-icon">🎉</span>
-        <h3>You're on the list!</h3>
-        <p>Thanks for reserving your Wordmatchic set. We'll WhatsApp/email you the moment pre-orders open.<br><br>
-        Keep practising — the race is almost here! 🏆</p>
+        <span class="success-icon" id="successIcon">🎉</span>
+        <h3 id="successTitle">You're on the list!</h3>
+        <p id="successText">Thanks for your order! We'll WhatsApp/email you shortly to confirm payment and delivery details. 🏆</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- HOW IT WORKS — collapsible -->
-<div class="collapsible-section" id="sec-how">
-  <button class="section-toggle open" onclick="toggleSection('sec-how')" aria-expanded="true">
-    <div class="toggle-header">
-      <div class="toggle-titles">
-        <p class="section-eyebrow" style="margin-bottom:4px;">How It Works</p>
-        <h2 class="section-title" style="margin-bottom:0;">Three Steps to Chinese Fun</h2>
-      </div>
-      <div class="toggle-arrow">▾</div>
-    </div>
-  </button>
-  <div class="collapsible-body open" id="body-sec-how">
-    <section id="how" style="padding-top:0;">
-      <p class="section-sub" style="margin-top:0;">No setup fuss. No boring drills. Just race, match, and win.</p>
-      <div class="how-grid">
-        <div class="how-card">
-          <span class="how-icon">🃏</span>
-          <p class="how-step">Step 1</p>
-          <h3>Shuffle & Deal</h3>
-          <p>Lay out the cards face up. Every player scans the pile — the hunt is on.</p>
-        </div>
-        <div class="how-card">
-          <span class="how-icon">⚡</span>
-          <p class="how-step">Step 2</p>
-          <h3>Race to Match</h3>
-          <p>Spot the character before your opponent. Fastest brain takes the card.</p>
-        </div>
-        <div class="how-card">
-          <span class="how-icon">✍️</span>
-          <p class="how-step">Step 3</p>
-          <h3>Write, Say, Own It</h3>
-          <p>After the race, write the word, say it aloud, use it in a sentence. It sticks!</p>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<!-- WHY IT WORKS — collapsible -->
-<div class="collapsible-section" id="sec-why">
-  <button class="section-toggle open" onclick="toggleSection('sec-why')" aria-expanded="true">
-    <div class="toggle-header">
-      <div class="toggle-titles">
-        <p class="section-eyebrow" style="margin-bottom:4px;">Why Wordmatchic Works</p>
-        <h2 class="section-title" style="margin-bottom:0;">Old Way vs The Wordmatchic Way</h2>
-      </div>
-      <div class="toggle-arrow">▾</div>
-    </div>
-  </button>
-  <div class="collapsible-body open" id="body-sec-why">
-    <section id="why" style="padding-top:0;">
-      <p class="section-sub" style="margin-top:0;">Traditional revision doesn't work for most kids. Here's the difference.</p>
-      <div class="compare-grid">
-        <div class="compare-card old">
-          <h3>😩 Old Way: Painful & Slow</h3>
-          <ul class="compare-list">
-            <li><span class="icon">❌</span> Sitting still feels like torture</li>
-            <li><span class="icon">❌</span> Flashcards put them to sleep</li>
-            <li><span class="icon">❌</span> They'd rather do anything else</li>
-            <li><span class="icon">❌</span> Words forgotten by tomorrow</li>
-            <li><span class="icon">❌</span> Constant battles to practise</li>
-          </ul>
-        </div>
-        <div class="compare-card new">
-          <h3>🏆 New Way: Fast & Fun</h3>
-          <ul class="compare-list">
-            <li><span class="icon">✅</span> Racing keeps energy channelled</li>
-            <li><span class="icon">✅</span> Competitive edge = laser focus</li>
-            <li><span class="icon">✅</span> They ask to play "one more round"</li>
-            <li><span class="icon">✅</span> Active recall makes it stick</li>
-            <li><span class="icon">✅</span> Siblings want to practise together</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
 
 <!-- VIDEO — collapsible -->
 <div class="collapsible-section" id="sec-video">
@@ -1419,11 +1395,11 @@
           <div class="testimonial-img-wrap">
             <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicreview1.jpg" alt="Parent review 1">
           </div>
-          <p class="testimonial-text">"My two sons had such a great time trying to win the game!"</p>
+          <p class="testimonial-text">"My P4 son enjoys the game alot! His older brother also plays with him and they changed the rules to make it even more fun for them!"</p>
           <div class="testimonial-author">
             <div class="author-avatar">M</div>
             <div>
-              <div class="author-name">Mum of P4 and P5 students</div>
+              <div class="author-name">Mum of P4 student</div>
               <div class="author-sub">Singapore</div>
             </div>
           </div>
@@ -1433,11 +1409,11 @@
           <div class="testimonial-img-wrap">
             <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicreview2.jpg" alt="Parent review 2">
           </div>
-          <p class="testimonial-text">"My P4 son enjoys the game alot! His older brother also plays with him and they changed the rules to make it even more fun for them!"</p>
+          <p class="testimonial-text">"My two sons had such a great time trying to win the game!"</p>
           <div class="testimonial-author">
             <div class="author-avatar">M</div>
             <div>
-              <div class="author-name">Mum of P4 student</div>
+              <div class="author-name">Mum of P4 and P5 students</div>
               <div class="author-sub">Singapore</div>
             </div>
           </div>
@@ -1621,6 +1597,104 @@
 </footer>
 
 <script>
+  // ── GOOGLE ANALYTICS EVENT TRACKING ──
+
+  // Track CTA button clicks
+  document.querySelectorAll('.btn-primary, .btn-secondary, .nav-cta').forEach(btn => {
+    btn.addEventListener('click', function() {
+      gtag('event', 'button_click', {
+        button_text: this.innerText.trim(),
+        button_href: this.getAttribute('href') || 'none',
+      });
+    });
+  });
+
+  // Track set card selection (Thriller vs Deluxe)
+  document.querySelectorAll('.set-card').forEach(card => {
+    card.addEventListener('click', function() {
+      gtag('event', 'set_selected', {
+        set_name: this.dataset.set,
+      });
+    });
+  });
+
+  // Track year chip selection
+  document.querySelectorAll('.year-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      gtag('event', 'year_selected', {
+        school_year: this.dataset.year,
+      });
+    });
+  });
+
+  // Track form submission attempt
+  const realSubmitOrder = submitOrder;
+  window._gaSubmitOrder = function() {
+    gtag('event', 'form_submit_attempt', {
+      set_choice: selectedSet,
+      school_year: selectedYear,
+    });
+    realSubmitOrder();
+  };
+
+  // Track form success
+  const realShowSuccess = showSuccess;
+  window.showSuccess = function() {
+    gtag('event', 'reservation_complete', {
+      set_choice: selectedSet,
+      school_year: selectedYear,
+    });
+    realShowSuccess();
+  };
+
+  // Track collapsible section opens
+  const realToggleSection = toggleSection;
+  window.toggleSection = function(id) {
+    const body = document.getElementById('body-' + id);
+    const isOpening = !body.classList.contains('open');
+    if (isOpening) {
+      gtag('event', 'section_opened', { section_id: id });
+    }
+    realToggleSection(id);
+  };
+
+  // Track carousel navigation
+  const realMoveCarousel = moveCarousel;
+  window.moveCarousel = function(dir) {
+    gtag('event', 'carousel_navigate', { direction: dir === 1 ? 'next' : 'prev' });
+    realMoveCarousel(dir);
+  };
+
+  // Track scroll depth (25%, 50%, 75%, 100%)
+  const scrollMilestones = [25, 50, 75, 100];
+  const scrollFired = new Set();
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.round((scrollTop / docHeight) * 100);
+    scrollMilestones.forEach(milestone => {
+      if (pct >= milestone && !scrollFired.has(milestone)) {
+        scrollFired.add(milestone);
+        gtag('event', 'scroll_depth', { depth_percent: milestone });
+      }
+    });
+  });
+
+  // Track video play
+  const realLoadVideo = loadVideo;
+  window.loadVideo = function(el) {
+    gtag('event', 'video_play', { video_id: el.dataset.vid });
+    realLoadVideo(el);
+  };
+
+  // Track nav hamburger open on mobile
+  const realToggleNav = toggleNav;
+  window.toggleNav = function() {
+    const isOpen = !document.getElementById('navLinks').classList.contains('open');
+    if (isOpen) gtag('event', 'mobile_nav_open');
+    realToggleNav();
+  };
+
   // ── PRODUCT CAROUSEL ──
   let currentSlide = 0;
   const totalSlides = 2;
@@ -1705,12 +1779,49 @@
     });
   });
 
+  // ── STOCK AWARENESS ──
+  // P1–P5 Deluxe = in stock (4 each). Everything else = pre-order.
+  const IN_STOCK_SETS = ['Deluxe'];
+  const IN_STOCK_YEARS = ['Primary 1','Primary 2','Primary 3','Primary 4','Primary 5'];
+  const STOCK_COUNT = 4;
+
+  function isInStock() {
+    return selectedSet.includes('Deluxe') && IN_STOCK_YEARS.includes(selectedYear);
+  }
+
+  function updateStockUI() {
+    const badge  = document.getElementById('stockBadge');
+    const btn    = document.getElementById('submitBtn');
+
+    if (!selectedYear) {
+      badge.style.display = 'none';
+      btn.textContent = '🎴 Reserve My Set Now!';
+      btn.className = 'submit-btn';
+      return;
+    }
+
+    badge.style.display = 'block';
+
+    if (isInStock()) {
+      badge.className = 'stock-badge in-stock';
+      badge.innerHTML = `✅ <strong>In Stock!</strong> Only ${STOCK_COUNT} Deluxe sets left for ${selectedYear} — ships within 3–5 working days.`;
+      btn.textContent = '🛒 Buy Now — S$49.90';
+      btn.className = 'submit-btn buy-now';
+    } else {
+      badge.className = 'stock-badge pre-order';
+      badge.innerHTML = `📋 <strong>Pre-Order.</strong> We'll contact you with payment details and estimated delivery once stock is ready.`;
+      btn.textContent = '📋 Pre-Order Now!';
+      btn.className = 'submit-btn';
+    }
+  }
+
   // ── SET SELECTION ──
   let selectedSet = "Deluxe – (Comprehensive coverage) -- (399 cards @ $49.90 )";
   function selectSet(el) {
     document.querySelectorAll('.set-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     selectedSet = el.dataset.set;
+    updateStockUI();
   }
 
   // ── YEAR SELECTION ──
@@ -1719,6 +1830,7 @@
     document.querySelectorAll('.year-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     selectedYear = el.dataset.year;
+    updateStockUI();
   }
 
   // ── FORM SUBMISSION → GOOGLE FORMS ──
@@ -1772,7 +1884,17 @@
 
   function showSuccess() {
     document.getElementById('orderFormInner').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
+    const msg = document.getElementById('successMsg');
+    msg.style.display = 'block';
+    if (isInStock()) {
+      document.getElementById('successIcon').textContent = '🛒';
+      document.getElementById('successTitle').textContent = 'Order received!';
+      document.getElementById('successText').textContent = 'Thanks! We\'ll WhatsApp or email you within 1 working day to confirm payment and arrange delivery. Can\'t wait for you to play! 🏆';
+    } else {
+      document.getElementById('successIcon').textContent = '📋';
+      document.getElementById('successTitle').textContent = 'Pre-order confirmed!';
+      document.getElementById('successText').textContent = 'You\'re on the list! We\'ll contact you as soon as your set is ready. Keep practising — the race is almost here! 🎴';
+    }
   }
 
   // ── VIDEO EMBED ──
