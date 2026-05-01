@@ -91,6 +91,63 @@
   }
   .nav-cta:hover { background: var(--teal-dark) !important; color: white !important; transform: scale(1.04); }
 
+  /* Hamburger button */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .hamburger:hover { background: var(--teal-light); }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--navy);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Mobile nav drawer */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: var(--warm-white);
+      flex-direction: column;
+      gap: 0;
+      padding: 12px 0 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 13px 24px;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .nav-cta {
+      margin: 12px 24px 0;
+      display: block;
+      text-align: center;
+      border-radius: 50px;
+      padding: 12px 20px !important;
+    }
+  }
+
   /* ── HERO ── */
   .hero {
     background: linear-gradient(160deg, #E8F8F7 0%, #D0F0EF 45%, #EEF9F0 100%);
@@ -227,21 +284,137 @@
   }
   .btn-secondary:hover { transform: translateY(-2px); border-color: var(--teal); }
 
-  .hero-image-row {
+  /* ── HERO PRODUCT IMAGE ── */
+  .hero-product-row {
     margin-top: 44px;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    align-items: flex-end;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
     animation: fadeUp 0.7s 0.5s ease both;
+  }
+  .hero-product-img-wrap {
+    flex-shrink: 0;
+  }
+  .hero-product-img {
+    width: 420px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: 0 16px 48px rgba(29,158,154,0.22);
+    display: block;
+  }
+  .hero-product-img-placeholder {
+    width: 420px;
+    height: 280px;
+    border-radius: var(--radius);
+    border: 3px solid #1a1a1a;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ── PRODUCT CAROUSEL ── */
+  .product-carousel {
+    width: 420px;
+    height: 280px;
+    border-radius: var(--radius);
+    border: 3px solid #1a1a1a;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .carousel-track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    transition: transform 0.4s ease;
+  }
+  .carousel-slide {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.85);
+    border: none;
+    border-radius: 50%;
+    width: 34px; height: 34px;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    transition: background 0.15s, transform 0.15s;
+    z-index: 2;
+    color: var(--navy);
+    font-weight: 900;
+  }
+  .carousel-btn:hover { background: white; transform: translateY(-50%) scale(1.1); }
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
+  .carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 7px;
+    z-index: 2;
+  }
+  .carousel-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  .carousel-dot.active { background: white; transform: scale(1.25); }
+  @media (max-width: 768px) {
+    .product-carousel { width: 100%; max-width: 380px; height: 220px; }
+  }
+  .placeholder-icon { font-size: 3rem; }
+  .placeholder-text {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    color: var(--teal-dark);
+    font-size: 1rem;
+  }
+  .placeholder-hint {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .hero-stats-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
   .hero-card-float {
     background: white;
     border-radius: var(--radius);
-    padding: 18px 22px;
+    padding: 16px 20px;
     box-shadow: var(--shadow-warm);
     text-align: left;
-    max-width: 180px;
+    min-width: 180px;
     font-size: 0.82rem;
     font-weight: 700;
     color: var(--text-soft);
@@ -698,6 +871,30 @@
     text-align: center;
     border: 2px dashed #E0D8CC;
     margin-bottom: 8px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .testimonial-img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    border: 3px solid #1a1a1a;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .testimonial-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
 
   /* ── COACHING & PRODUCTS ── */
@@ -851,18 +1048,70 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── RESPONSIVE ── */
+  /* ── COLLAPSIBLE SECTIONS ── */
+  .section-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: block;
+  }
+  .toggle-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 28px 5% 24px;
+    position: relative;
+  }
+  .toggle-header .toggle-titles {
+    text-align: center;
+  }
+  .toggle-arrow {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: transform 0.3s, background 0.2s;
+    color: var(--teal-dark);
+  }
+  .section-toggle.open .toggle-arrow {
+    transform: rotate(180deg);
+    background: var(--teal);
+    color: white;
+  }
+  .collapsible-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .collapsible-body.open {
+    max-height: 9999px;
+    transition: max-height 0.7s ease;
+  }
+  .collapsible-section {
+    border-top: 2px solid rgba(0,0,0,0.06);
+  }
+  .collapsible-section:last-of-type { border-bottom: 2px solid rgba(0,0,0,0.06); }
+
+  /* ── OLD RESPONSIVE (kept, minus nav override now handled above) ── */
   @media (max-width: 768px) {
     nav { padding: 12px 4%; }
-    .nav-links { display: none; }
     .hero { padding: 44px 5% 36px; }
     .order-layout, .compare-grid, .coaching-layout, .contact-layout { grid-template-columns: 1fr; }
     .how-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
-    .hero-image-row { gap: 12px; }
-    .hero-card-float { max-width: 140px; padding: 14px 16px; }
+    .hero-product-img, .hero-product-img-placeholder { width: 100%; max-width: 380px; height: 220px; }
+    .hero-product-row { gap: 20px; flex-direction: column; align-items: center; }
+    .hero-stats-col { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .hero-card-float { min-width: 140px; padding: 14px 16px; }
     #about .about-bilingual { grid-template-columns: 1fr !important; }
   }
 </style>
@@ -875,14 +1124,17 @@
     <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/jmcolourlogo.svg" alt="Joimirae">
     <span>Joimirae</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#coaching">Student Coaching</a></li>
-    <li><a href="#order">Products</a></li>
-    <li><a href="https://joimirae-games-hub.web.app" target="_blank">Play Our Game</a></li>
-    <li><a href="#about">About Us</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#order" class="nav-cta">Reserve Now</a></li>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" onclick="closeNav()">Home</a></li>
+    <li><a href="#coaching" onclick="closeNav()">Student Coaching</a></li>
+    <li><a href="#order" onclick="closeNav()">Products</a></li>
+    <li><a href="https://joimirae-games-hub.web.app" target="_blank" onclick="closeNav()">Online Mini Games</a></li>
+    <li><a href="#about" onclick="closeNav()">About Us</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    <li><a href="#order" class="nav-cta" onclick="closeNav()">Reserve Now</a></li>
   </ul>
 </nav>
 
@@ -912,18 +1164,40 @@
     <a href="#video" class="btn-secondary">▶ Watch It In Action</a>
   </div>
 
-  <div class="hero-image-row">
-    <div class="hero-card-float">
-      <span class="big-num">114</span>
-      Chinese words in the Thriller Set
+  <div class="hero-product-row">
+    <!-- PRODUCT SHOT -->
+    <div class="hero-product-img-wrap">
+      <div class="product-carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicp1product1.jpg" alt="Wordmatchic Card Set 1">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicp1product2.jpg" alt="Wordmatchic Card Set 2">
+          </div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+        <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+        <div class="carousel-dots">
+          <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+          <span class="carousel-dot" onclick="goToSlide(1)"></span>
+        </div>
+      </div>
     </div>
-    <div class="hero-card-float green">
-      <span class="big-num">399</span>
-      characters in the Deluxe Set
-    </div>
-    <div class="hero-card-float teal">
-      <span class="big-num">2–6</span>
-      players per round
+    <!-- STAT CARDS -->
+    <div class="hero-stats-col">
+      <div class="hero-card-float">
+        <span class="big-num" style="color:var(--yellow-dark);">399</span>
+        Chinese words in the Deluxe Set
+      </div>
+      <div class="hero-card-float">
+        <span class="big-num" style="color:var(--green);">114</span>
+        Chinese words in the Thriller Set
+      </div>
+      <div class="hero-card-float teal">
+        <span class="big-num">2–6</span>
+        players per round
+      </div>
     </div>
   </div>
 </section>
@@ -937,7 +1211,7 @@
   <div class="order-layout">
     <!-- SET SELECTOR -->
     <div class="set-cards" id="setCards">
-      <div class="set-card selected" data-set="Thriller – (Quick warm-up) -- (114 cards @ $19.90 )" onclick="selectSet(this)">
+      <div class="set-card" data-set="Thriller – (Quick warm-up) -- (114 cards @ $19.90 )" onclick="selectSet(this)">
         <div class="set-card-header">
           <span class="set-name">🎭 Thriller Set</span>
           <span class="set-price">S$19.90</span>
@@ -951,7 +1225,7 @@
         </ul>
       </div>
 
-      <div class="set-card" data-set="Deluxe – (Comprehensive coverage) -- (399 cards @ $49.90 )" onclick="selectSet(this)">
+      <div class="set-card selected" data-set="Deluxe – (Comprehensive coverage) -- (399 cards @ $49.90 )" onclick="selectSet(this)">
         <span class="set-badge">Best Value</span>
         <div class="set-card-header">
           <span class="set-name">👑 Deluxe Set</span>
@@ -1025,252 +1299,320 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
-  <p class="section-eyebrow">How It Works</p>
-  <h2 class="section-title">Three Steps to Chinese Fun</h2>
-  <p class="section-sub">No setup fuss. No boring drills. Just race, match, and win.</p>
-
-  <div class="how-grid">
-    <div class="how-card">
-      <span class="how-icon">🃏</span>
-      <p class="how-step">Step 1</p>
-      <h3>Shuffle & Deal</h3>
-      <p>Lay out the cards face up. Every player scans the pile — the hunt is on.</p>
+<!-- HOW IT WORKS — collapsible -->
+<div class="collapsible-section" id="sec-how">
+  <button class="section-toggle open" onclick="toggleSection('sec-how')" aria-expanded="true">
+    <div class="toggle-header">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;">How It Works</p>
+        <h2 class="section-title" style="margin-bottom:0;">Three Steps to Chinese Fun</h2>
+      </div>
+      <div class="toggle-arrow">▾</div>
     </div>
-    <div class="how-card">
-      <span class="how-icon">⚡</span>
-      <p class="how-step">Step 2</p>
-      <h3>Race to Match</h3>
-      <p>Spot the character before your opponent. Fastest brain takes the card.</p>
-    </div>
-    <div class="how-card">
-      <span class="how-icon">✍️</span>
-      <p class="how-step">Step 3</p>
-      <h3>Write, Say, Own It</h3>
-      <p>After the race, write the word, say it aloud, use it in a sentence. It sticks!</p>
-    </div>
+  </button>
+  <div class="collapsible-body open" id="body-sec-how">
+    <section id="how" style="padding-top:0;">
+      <p class="section-sub" style="margin-top:0;">No setup fuss. No boring drills. Just race, match, and win.</p>
+      <div class="how-grid">
+        <div class="how-card">
+          <span class="how-icon">🃏</span>
+          <p class="how-step">Step 1</p>
+          <h3>Shuffle & Deal</h3>
+          <p>Lay out the cards face up. Every player scans the pile — the hunt is on.</p>
+        </div>
+        <div class="how-card">
+          <span class="how-icon">⚡</span>
+          <p class="how-step">Step 2</p>
+          <h3>Race to Match</h3>
+          <p>Spot the character before your opponent. Fastest brain takes the card.</p>
+        </div>
+        <div class="how-card">
+          <span class="how-icon">✍️</span>
+          <p class="how-step">Step 3</p>
+          <h3>Write, Say, Own It</h3>
+          <p>After the race, write the word, say it aloud, use it in a sentence. It sticks!</p>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
+</div>
 
-<!-- PROBLEM / SOLUTION -->
-<section id="why">
-  <p class="section-eyebrow">Why Wordmatchic Works</p>
-  <h2 class="section-title">Old Way vs The Wordmatchic Way</h2>
-  <p class="section-sub">Traditional revision doesn't work for most kids. Here's the difference.</p>
-
-  <div class="compare-grid">
-    <div class="compare-card old">
-      <h3>😩 Old Way: Painful & Slow</h3>
-      <ul class="compare-list">
-        <li><span class="icon">❌</span> Sitting still feels like torture</li>
-        <li><span class="icon">❌</span> Flashcards put them to sleep</li>
-        <li><span class="icon">❌</span> They'd rather do anything else</li>
-        <li><span class="icon">❌</span> Words forgotten by tomorrow</li>
-        <li><span class="icon">❌</span> Constant battles to practise</li>
-      </ul>
+<!-- WHY IT WORKS — collapsible -->
+<div class="collapsible-section" id="sec-why">
+  <button class="section-toggle open" onclick="toggleSection('sec-why')" aria-expanded="true">
+    <div class="toggle-header">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;">Why Wordmatchic Works</p>
+        <h2 class="section-title" style="margin-bottom:0;">Old Way vs The Wordmatchic Way</h2>
+      </div>
+      <div class="toggle-arrow">▾</div>
     </div>
-    <div class="compare-card new">
-      <h3>🏆 New Way: Fast & Fun</h3>
-      <ul class="compare-list">
-        <li><span class="icon">✅</span> Racing keeps energy channelled</li>
-        <li><span class="icon">✅</span> Competitive edge = laser focus</li>
-        <li><span class="icon">✅</span> They ask to play "one more round"</li>
-        <li><span class="icon">✅</span> Active recall makes it stick</li>
-        <li><span class="icon">✅</span> Siblings want to practise together</li>
-      </ul>
+  </button>
+  <div class="collapsible-body open" id="body-sec-why">
+    <section id="why" style="padding-top:0;">
+      <p class="section-sub" style="margin-top:0;">Traditional revision doesn't work for most kids. Here's the difference.</p>
+      <div class="compare-grid">
+        <div class="compare-card old">
+          <h3>😩 Old Way: Painful & Slow</h3>
+          <ul class="compare-list">
+            <li><span class="icon">❌</span> Sitting still feels like torture</li>
+            <li><span class="icon">❌</span> Flashcards put them to sleep</li>
+            <li><span class="icon">❌</span> They'd rather do anything else</li>
+            <li><span class="icon">❌</span> Words forgotten by tomorrow</li>
+            <li><span class="icon">❌</span> Constant battles to practise</li>
+          </ul>
+        </div>
+        <div class="compare-card new">
+          <h3>🏆 New Way: Fast & Fun</h3>
+          <ul class="compare-list">
+            <li><span class="icon">✅</span> Racing keeps energy channelled</li>
+            <li><span class="icon">✅</span> Competitive edge = laser focus</li>
+            <li><span class="icon">✅</span> They ask to play "one more round"</li>
+            <li><span class="icon">✅</span> Active recall makes it stick</li>
+            <li><span class="icon">✅</span> Siblings want to practise together</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- VIDEO — collapsible -->
+<div class="collapsible-section" id="sec-video">
+  <button class="section-toggle open" onclick="toggleSection('sec-video')" aria-expanded="true">
+    <div class="toggle-header">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;">See It In Action</p>
+        <h2 class="section-title" style="margin-bottom:0;">Watch How Wordmatchic Works</h2>
+      </div>
+      <div class="toggle-arrow">▾</div>
     </div>
+  </button>
+  <div class="collapsible-body open" id="body-sec-video">
+    <section id="video" style="padding-top:0;">
+      <p class="section-sub" style="margin-top:0;">Perfect for parents looking for fun ways to help kids learn Chinese at home.</p>
+      <div class="video-wrap" onclick="loadVideo(this)" data-vid="jH07z4LoF4s">
+        <img class="video-thumb" src="https://img.youtube.com/vi/jH07z4LoF4s/maxresdefault.jpg" alt="Wordmatchic gameplay video">
+        <div class="play-btn">▶</div>
+      </div>
+    </section>
   </div>
-</section>
+</div>
 
-<!-- VIDEO -->
-<section id="video">
-  <p class="section-eyebrow">See It In Action</p>
-  <h2 class="section-title">Watch How Wordmatchic Works</h2>
-  <p class="section-sub">Perfect for parents looking for fun ways to help kids learn Chinese at home.</p>
-
-  <div class="video-wrap" onclick="loadVideo(this)" data-vid="jH07z4LoF4s">
-    <img class="video-thumb" src="https://img.youtube.com/vi/jH07z4LoF4s/maxresdefault.jpg" alt="Wordmatchic gameplay video">
-    <div class="play-btn">▶</div>
+<!-- TESTIMONIALS — collapsible -->
+<div class="collapsible-section" id="sec-testimonials">
+  <button class="section-toggle open" onclick="toggleSection('sec-testimonials')" aria-expanded="true">
+    <div class="toggle-header">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;">What Parents Say</p>
+        <h2 class="section-title" style="margin-bottom:0;">Real Families, Real Results</h2>
+      </div>
+      <div class="toggle-arrow">▾</div>
+    </div>
+  </button>
+  <div class="collapsible-body open" id="body-sec-testimonials">
+    <section id="testimonials" style="padding-top:0;">
+      <p class="section-sub" style="margin-top:0;">Don't take our word for it — here's what Singapore parents are saying.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-img-wrap">
+            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicreview1.jpg" alt="Parent review 1">
+          </div>
+          <p class="testimonial-text">"My two sons had such a great time trying to win the game!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Mum of P4 and P5 students</div>
+              <div class="author-sub">Singapore</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-img-wrap">
+            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicreview2.jpg" alt="Parent review 2">
+          </div>
+          <p class="testimonial-text">"My P4 son enjoys the game alot! His older brother also plays with him and they changed the rules to make it even more fun for them!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Mum of P4 student</div>
+              <div class="author-sub">Singapore</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-img-wrap">
+            <img src="https://raw.githubusercontent.com/joimiraestar/all-about-joimirae/main/wordmatchicreview3.jpg" alt="Parent review 3">
+          </div>
+          <p class="testimonial-text">"I gave my daughter points for pointing out the words and more for reading the words out!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">F</div>
+            <div>
+              <div class="author-name">Father of P3 student</div>
+              <div class="author-sub">Singapore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
+</div>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <p class="section-eyebrow">What Parents Say</p>
-  <h2 class="section-title">Real Families, Real Results</h2>
-  <p class="section-sub">Don't take our word for it — here's what Singapore parents are saying.</p>
+<!-- STUDENT COACHING — collapsible -->
+<div class="collapsible-section" id="sec-coaching">
+  <button class="section-toggle" onclick="toggleSection('sec-coaching')" aria-expanded="false">
+    <div class="toggle-header">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;">Student Coaching</p>
+        <h2 class="section-title" style="margin-bottom:0;">Find Your Best Learning Style</h2>
+      </div>
+      <div class="toggle-arrow">▾</div>
+    </div>
+  </button>
+  <div class="collapsible-body" id="body-sec-coaching">
+    <section id="coaching" style="padding-top:0;">
+      <div class="coaching-layout">
+        <div class="coaching-text">
+          <h2 style="font-family:'Lilita One',cursive;font-size:clamp(1.4rem,4vw,2rem);color:var(--navy);margin-bottom:14px;">Strength-Based Learning for Every Student</h2>
+          <p>Every student learns differently. We help you discover your unique strengths and find the educational path that's truly right for you — not a one-size-fits-all approach.</p>
+          <a href="https://wa.me/6581191958?text=Hi!%20I'm%20interested%20in%20booking%20a%20coaching%20session" class="btn-primary" target="_blank" style="display:inline-block;margin-top:20px;">Book a Coaching Session</a>
+        </div>
+        <div class="coaching-steps">
+          <div class="coaching-step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Discovery Session</h4>
+              <p>A conversation about your learning style, strengths, and challenges — not a test.</p>
+            </div>
+          </div>
+          <div class="coaching-step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Strength Analysis</h4>
+              <p>We identify your unique strengths and learning preferences to find what works for you.</p>
+            </div>
+          </div>
+          <div class="coaching-step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Personalised Plan</h4>
+              <p>A comprehensive strategy with actionable steps to succeed using your natural strengths.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
 
-  <div class="testimonials-grid">
-    <!-- TESTIMONIAL 1 — replace text & screenshot src -->
-    <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <p class="screenshot-placeholder">📸 Add your screenshot image here<br><small>(replace src in &lt;img&gt; below)</small></p>
-      <!-- <img src="YOUR_SCREENSHOT_1.jpg" style="width:100%;border-radius:10px;margin-bottom:8px;" alt="Parent testimonial screenshot"> -->
-      <p class="testimonial-text">"My daughter actually asks to practise now — something that NEVER happened with worksheets. We play a round every evening before dinner!"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">M</div>
+<!-- ABOUT — collapsible -->
+<div class="collapsible-section" id="sec-about">
+  <button class="section-toggle" onclick="toggleSection('sec-about')" aria-expanded="false">
+    <div class="toggle-header" style="background:var(--navy);">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;color:var(--yellow);">About Joimirae 卓敏源</p>
+        <h2 class="section-title" style="margin-bottom:0;color:white;">Learning That Feels Like Play</h2>
+      </div>
+      <div class="toggle-arrow" style="background:rgba(255,255,255,0.12);color:var(--yellow);">▾</div>
+    </div>
+  </button>
+  <div class="collapsible-body" id="body-sec-about">
+    <section id="about" style="padding-top:24px;">
+      <p class="section-sub" style="margin-top:0;color:rgba(255,255,255,0.65);">学习如游戏般自然，启迪目标、好奇与勇气。<br>Inspiring purpose, curiosity, and courage.</p>
+
+      <div style="max-width:780px;margin:0 auto 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px 24px;">
+          <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:1rem;margin-bottom:12px;">Brand Philosophy</h3>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.75;margin-bottom:14px;">At JoiMirae, we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.75;margin-bottom:16px;">Through immersive experiences, play-based exploration, and personalised learning insights, we help children build confidence, curiosity, and courage, nurturing both heart and mind.</p>
+          <h4 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:0.88rem;margin-bottom:10px;">Our Offerings</h4>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
+            <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🏕️</span><span><strong style="color:rgba(255,255,255,0.9);">Holiday Camps:</strong> experiential learning through play and teamwork</span></li>
+            <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🧭</span><span><strong style="color:rgba(255,255,255,0.9);">Consultancy:</strong> strength-based learning habit insights for parents and children, designed for ages 11 to 15</span></li>
+            <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🎮</span><span><strong style="color:rgba(255,255,255,0.9);">Games and Learning Tools:</strong> playful pathways to curiosity and growth</span></li>
+          </ul>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.8rem;margin-top:14px;font-style:italic;">At JoiMirae, learning shines from within. Joyful, purposeful, and courageous.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px 24px;">
+          <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:1rem;margin-bottom:12px;">品牌理念</h3>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.85;margin-bottom:14px;">在卓敏源，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.85;margin-bottom:16px;">通过实践营沉浸式体验、寓教于乐的探索方式以及个性化的学习洞察，我们帮助孩子建立自信、好奇心与勇气，同时兼顾心智与品格的发展。</p>
+          <h4 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:0.88rem;margin-bottom:10px;">我们的主要项目包括：</h4>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
+            <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🏕️</span><span><strong style="color:rgba(255,255,255,0.9);">假期营：</strong>通过游戏和团队合作实现体验式学习</span></li>
+            <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🧭</span><span><strong style="color:rgba(255,255,255,0.9);">学习咨询：</strong>为家长和孩子提供优势导向的学习习惯指导，适合 11 至 15 岁的孩子</span></li>
+            <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🎮</span><span><strong style="color:rgba(255,255,255,0.9);">学习游戏与工具：</strong>通过趣味方式激发孩子的好奇心与成长潜能</span></li>
+          </ul>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.8rem;margin-top:14px;font-style:italic;">在卓敏源，学习是一种自然的喜悦，是探索目标、好奇与勇气的旅程。</p>
+        </div>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="v-icon">🎯</span>
+          <h4>Inclusivity</h4>
+          <p>We believe different learning styles are valid. Our consulting and products celebrate and support diverse ways of thinking and studying.</p>
+        </div>
+        <div class="value-card">
+          <span class="v-icon">✨</span>
+          <h4>Excellence</h4>
+          <p>We don't make excuses. We provide solutions. Our students excel academically by working with their strengths, not against their nature.</p>
+        </div>
+        <div class="value-card">
+          <span class="v-icon">🤝</span>
+          <h4>Personalisation</h4>
+          <p>There's no one-size-fits-all. Every recommendation and product is tailored to how individual students actually learn and focus.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:36px;">
+        <a href="https://www.youtube.com/@Joimirae/shorts" target="_blank" class="btn-secondary" style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);">▶ YouTube</a>
+        <a href="https://www.instagram.com/joimirae/" target="_blank" class="btn-secondary" style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);">📸 Instagram</a>
+        <a href="https://joimirae-games-hub.web.app" target="_blank" class="btn-secondary" style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);">🎮 Online Mini Games</a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- CONTACT — collapsible -->
+<div class="collapsible-section" id="sec-contact">
+  <button class="section-toggle" onclick="toggleSection('sec-contact')" aria-expanded="false">
+    <div class="toggle-header">
+      <div class="toggle-titles">
+        <p class="section-eyebrow" style="margin-bottom:4px;">Get In Touch</p>
+        <h2 class="section-title" style="margin-bottom:0;">We'd Love to Hear From You</h2>
+      </div>
+      <div class="toggle-arrow">▾</div>
+    </div>
+  </button>
+  <div class="collapsible-body" id="body-sec-contact">
+    <section id="contact" style="padding-top:0;">
+      <p class="section-sub" style="margin-top:0;">Questions about our products or coaching? Want to partner with us?</p>
+      <div class="contact-layout">
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <div class="contact-item"><span>📧</span> contact@joimirae.com</div>
+          <div class="contact-item"><span>📱</span> +65 81191958</div>
+          <div class="contact-item"><span>📍</span> Singapore</div>
+          <div style="margin-top:20px;">
+            <a href="https://wa.me/6581191958?text=Hi!%20I%20have%20a%20question%20about%20Joimirae." target="_blank" class="btn-primary" style="font-size:0.95rem;padding:12px 24px;">💬 WhatsApp Us</a>
+          </div>
+        </div>
         <div>
-          <div class="author-name">Mum of P3 student</div>
-          <div class="author-sub">Singapore</div>
+          <div class="contact-form-simple">
+            <input type="email" placeholder="Your email address">
+            <input type="text" placeholder="Subject">
+            <textarea placeholder="Your message..."></textarea>
+            <button class="submit-btn" style="font-size:0.95rem;" onclick="alert('Thank you! We\'ll be in touch soon 😊')">Send Message</button>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- TESTIMONIAL 2 -->
-    <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <p class="screenshot-placeholder">📸 Add your screenshot image here<br><small>(replace src in &lt;img&gt; below)</small></p>
-      <!-- <img src="YOUR_SCREENSHOT_2.jpg" style="width:100%;border-radius:10px;margin-bottom:8px;" alt="Parent testimonial screenshot"> -->
-      <p class="testimonial-text">"Both my kids fight over who gets to play first — that's how I know it works. Chinese used to be a battle, now it's the highlight of revision time."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">D</div>
-        <div>
-          <div class="author-name">Dad of P4 & P2 students</div>
-          <div class="author-sub">Singapore</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TESTIMONIAL 3 -->
-    <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <p class="screenshot-placeholder">📸 Add your screenshot image here<br><small>(replace src in &lt;img&gt; below)</small></p>
-      <!-- <img src="YOUR_SCREENSHOT_3.jpg" style="width:100%;border-radius:10px;margin-bottom:8px;" alt="Parent testimonial screenshot"> -->
-      <p class="testimonial-text">"The competitive element is genius. My son is so motivated to beat his own score. His teacher even noticed an improvement in his character recognition!"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">S</div>
-        <div>
-          <div class="author-name">Mum of P5 student</div>
-          <div class="author-sub">Singapore</div>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
-</section>
-
-<!-- STUDENT COACHING -->
-<section id="coaching">
-  <p class="section-eyebrow">Student Coaching</p>
-  <div class="coaching-layout">
-    <div class="coaching-text">
-      <h2>Find Your Best Learning Style</h2>
-      <p>Every student learns differently. We help you discover your unique strengths and find the educational path that's truly right for you — not a one-size-fits-all approach.</p>
-      <a href="https://wa.me/6581191958?text=Hi!%20I'm%20interested%20in%20booking%20a%20coaching%20session" class="btn-primary" target="_blank" style="display:inline-block;">Book a Coaching Session</a>
-    </div>
-    <div class="coaching-steps">
-      <div class="coaching-step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Discovery Session</h4>
-          <p>A conversation about your learning style, strengths, and challenges — not a test.</p>
-        </div>
-      </div>
-      <div class="coaching-step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Strength Analysis</h4>
-          <p>We identify your unique strengths and learning preferences to find what works for you.</p>
-        </div>
-      </div>
-      <div class="coaching-step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Personalised Plan</h4>
-          <p>A comprehensive strategy with actionable steps to succeed using your natural strengths.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <p class="section-eyebrow" style="color:var(--yellow-light)">About Joimirae 卓敏源</p>
-  <h2 class="section-title">Learning That Feels Like Play</h2>
-  <p class="section-sub">学习如游戏般自然，启迪目标、好奇与勇气。<br>Inspiring purpose, curiosity, and courage.</p>
-
-  <div style="max-width:780px;margin:0 auto 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
-    <!-- English -->
-    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px 24px;">
-      <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:1rem;margin-bottom:12px;">Brand Philosophy</h3>
-      <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.75;margin-bottom:14px;">At JoiMirae, we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
-      <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.75;margin-bottom:16px;">Through immersive experiences, play-based exploration, and personalised learning insights, we help children build confidence, curiosity, and courage, nurturing both heart and mind.</p>
-      <h4 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:0.88rem;margin-bottom:10px;">Our Offerings</h4>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
-        <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🏕️</span><span><strong style="color:rgba(255,255,255,0.9);">Holiday Camps:</strong> experiential learning through play and teamwork</span></li>
-        <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🧭</span><span><strong style="color:rgba(255,255,255,0.9);">Consultancy:</strong> strength-based learning habit insights for parents and children, designed for ages 11 to 15</span></li>
-        <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🎮</span><span><strong style="color:rgba(255,255,255,0.9);">Games and Learning Tools:</strong> playful pathways to curiosity and growth</span></li>
-      </ul>
-      <p style="color:rgba(255,255,255,0.55);font-size:0.8rem;margin-top:14px;font-style:italic;">At JoiMirae, learning shines from within. Joyful, purposeful, and courageous.</p>
-    </div>
-
-    <!-- Chinese -->
-    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px 24px;">
-      <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:1rem;margin-bottom:12px;">品牌理念</h3>
-      <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.85;margin-bottom:14px;">在卓敏源，我们相信真正的学习始于好奇，并在探索与游戏中茁壮成长。寓教于乐因每个孩子而异，通过趣味与挑战相结合的体验，帮助孩子在各个成长阶段培养坚毅、韧性与创造力。</p>
-      <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.85;margin-bottom:16px;">通过实践营沉浸式体验、寓教于乐的探索方式以及个性化的学习洞察，我们帮助孩子建立自信、好奇心与勇气，同时兼顾心智与品格的发展。</p>
-      <h4 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:0.88rem;margin-bottom:10px;">我们的主要项目包括：</h4>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
-        <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🏕️</span><span><strong style="color:rgba(255,255,255,0.9);">假期营：</strong>通过游戏和团队合作实现体验式学习</span></li>
-        <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🧭</span><span><strong style="color:rgba(255,255,255,0.9);">学习咨询：</strong>为家长和孩子提供优势导向的学习习惯指导，适合 11 至 15 岁的孩子</span></li>
-        <li style="color:rgba(255,255,255,0.7);font-size:0.83rem;line-height:1.5;display:flex;gap:8px;"><span style="color:var(--yellow);">🎮</span><span><strong style="color:rgba(255,255,255,0.9);">学习游戏与工具：</strong>通过趣味方式激发孩子的好奇心与成长潜能</span></li>
-      </ul>
-      <p style="color:rgba(255,255,255,0.55);font-size:0.8rem;margin-top:14px;font-style:italic;">在卓敏源，学习是一种自然的喜悦，是探索目标、好奇与勇气的旅程。</p>
-    </div>
-  </div>
-
-  <div class="values-grid">
-    <div class="value-card">
-      <span class="v-icon">🎯</span>
-      <h4>Inclusivity</h4>
-      <p>We believe different learning styles are valid. Our consulting and products celebrate and support diverse ways of thinking and studying.</p>
-    </div>
-    <div class="value-card">
-      <span class="v-icon">✨</span>
-      <h4>Excellence</h4>
-      <p>We don't make excuses. We provide solutions. Our students excel academically by working with their strengths, not against their nature.</p>
-    </div>
-    <div class="value-card">
-      <span class="v-icon">🤝</span>
-      <h4>Personalisation</h4>
-      <p>There's no one-size-fits-all. Every recommendation and product is tailored to how individual students actually learn and focus.</p>
-    </div>
-  </div>
-
-  <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:36px;">
-    <a href="https://www.youtube.com/@Joimirae/shorts" target="_blank" class="btn-secondary" style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);">▶ YouTube</a>
-    <a href="https://www.instagram.com/joimirae/" target="_blank" class="btn-secondary" style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);">📸 Instagram</a>
-    <a href="https://joimirae-games-hub.web.app" target="_blank" class="btn-secondary" style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);">🎮 Play Our Game</a>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <p class="section-eyebrow">Get In Touch</p>
-  <h2 class="section-title">We'd Love to Hear From You</h2>
-  <p class="section-sub">Questions about our products or coaching? Want to partner with us?</p>
-
-  <div class="contact-layout">
-    <div class="contact-info">
-      <h3>Contact Information</h3>
-      <div class="contact-item"><span>📧</span> contact@joimirae.com</div>
-      <div class="contact-item"><span>📱</span> +65 81191958</div>
-      <div class="contact-item"><span>📍</span> Singapore</div>
-      <div style="margin-top:20px;">
-        <a href="https://wa.me/6581191958?text=Hi!%20I%20have%20a%20question%20about%20Joimirae." target="_blank" class="btn-primary" style="font-size:0.95rem;padding:12px 24px;">💬 WhatsApp Us</a>
-      </div>
-    </div>
-    <div>
-      <div class="contact-form-simple">
-        <input type="email" placeholder="Your email address">
-        <input type="text" placeholder="Subject">
-        <textarea placeholder="Your message..."></textarea>
-        <button class="submit-btn" style="font-size:0.95rem;" onclick="alert('Thank you! We\'ll be in touch soon 😊')">Send Message</button>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1279,9 +1621,92 @@
 </footer>
 
 <script>
-  // ── SET SELECTION ──
-  let selectedSet = "Thriller – (Quick warm-up) -- (114 cards @ $19.90 )";
+  // ── PRODUCT CAROUSEL ──
+  let currentSlide = 0;
+  const totalSlides = 2;
 
+  function moveCarousel(dir) {
+    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+  }
+  function updateCarousel() {
+    document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 50}%)`;
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+  // Auto-advance every 4 seconds
+  setInterval(() => moveCarousel(1), 4000);
+
+  // ── HAMBURGER NAV ──
+  function toggleNav() {
+    const nav   = document.getElementById('navLinks');
+    const btn   = document.getElementById('hamburger');
+    const open  = nav.classList.toggle('open');
+    btn.classList.toggle('open', open);
+  }
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+  // Close nav if user clicks outside
+  document.addEventListener('click', function(e) {
+    const nav = document.getElementById('navLinks');
+    const btn = document.getElementById('hamburger');
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+      closeNav();
+    }
+  });
+
+  // ── COLLAPSIBLE SECTIONS ──
+  function toggleSection(id) {
+    const wrapper = document.getElementById(id);
+    const body    = document.getElementById('body-' + id);
+    const btn     = wrapper.querySelector('.section-toggle');
+    const arrow   = wrapper.querySelector('.toggle-arrow');
+    const isOpen  = body.classList.contains('open');
+
+    body.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+
+    // Smooth scroll into view when opening
+    if (!isOpen) {
+      setTimeout(() => {
+        wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }
+
+  // Allow nav links to sections to auto-open the right collapsible
+  const sectionNavMap = {
+    '#how':          'sec-how',
+    '#why':          'sec-why',
+    '#video':        'sec-video',
+    '#testimonials': 'sec-testimonials',
+    '#coaching':     'sec-coaching',
+    '#about':        'sec-about',
+    '#contact':      'sec-contact',
+  };
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function() {
+      const hash = this.getAttribute('href');
+      const secId = sectionNavMap[hash];
+      if (secId) {
+        const body = document.getElementById('body-' + secId);
+        if (!body.classList.contains('open')) {
+          toggleSection(secId);
+        }
+      }
+    });
+  });
+
+  // ── SET SELECTION ──
+  let selectedSet = "Deluxe – (Comprehensive coverage) -- (399 cards @ $49.90 )";
   function selectSet(el) {
     document.querySelectorAll('.set-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
@@ -1290,7 +1715,6 @@
 
   // ── YEAR SELECTION ──
   let selectedYear = '';
-
   function selectYear(el) {
     document.querySelectorAll('.year-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
@@ -1299,18 +1723,16 @@
 
   // ── FORM SUBMISSION → GOOGLE FORMS ──
   const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/formResponse';
-
-  // Field ID mapping from pre-filled URL
   const FIELDS = {
-    setChoice1:   'entry.305199733',
-    setChoice2:   'entry.781277786',
-    setChoice3:   'entry.1246839027',
-    setChoice4:   'entry.674304367',
-    setChoice5:   'entry.1681459916',
-    country:      'entry.1298436821',
-    note:         'entry.1009839429',
-    address:      'entry.851517012',
-    consent:      'entry.907406912',
+    setChoice1: 'entry.305199733',
+    setChoice2: 'entry.781277786',
+    setChoice3: 'entry.1246839027',
+    setChoice4: 'entry.674304367',
+    setChoice5: 'entry.1681459916',
+    country:    'entry.1298436821',
+    note:       'entry.1009839429',
+    address:    'entry.851517012',
+    consent:    'entry.907406912',
   };
 
   function submitOrder() {
@@ -1320,44 +1742,37 @@
     const address = document.getElementById('f_address').value.trim();
     const consent = document.getElementById('f_consent').checked;
 
-    if (!name)    { alert('Please enter your name 😊'); return; }
-    if (!email)   { alert('Please enter your email address 😊'); return; }
+    if (!name)         { alert('Please enter your name 😊'); return; }
+    if (!email)        { alert('Please enter your email address 😊'); return; }
     if (!selectedYear) { alert('Please select your child\'s school year 😊'); return; }
-    if (!address) { alert('Please enter your delivery address 😊'); return; }
+    if (!address)      { alert('Please enter your delivery address 😊'); return; }
 
     const consentText = consent
       ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
       : 'No consent given';
-
     const noteText = selectedSet.includes('Thriller')
       ? 'Important Note: If you buy a Thriller set, there will not be a top-up to "upgrade" to the Deluxe Set later. To get both, you would need to purchase the Full Set separately at $49.90'
       : 'Deluxe Set selected – comprehensive coverage';
 
-    // Build form data
     const data = new FormData();
     data.append(FIELDS.setChoice1, selectedSet);
-    data.append(FIELDS.setChoice2, name);          // name likely maps here
+    data.append(FIELDS.setChoice2, name);
     data.append(FIELDS.setChoice3, selectedYear);
     data.append(FIELDS.setChoice4, email);
     data.append(FIELDS.setChoice5, phone || 'NA');
-    data.append(FIELDS.country,   'Singapore');
-    data.append(FIELDS.note,      noteText);
-    data.append(FIELDS.address,   address);
-    data.append(FIELDS.consent,   consentText);
+    data.append(FIELDS.country,    'Singapore');
+    data.append(FIELDS.note,       noteText);
+    data.append(FIELDS.address,    address);
+    data.append(FIELDS.consent,    consentText);
 
-    // Submit silently via fetch (no-cors — Google Forms doesn't allow CORS, but submission still goes through)
-    fetch(FORM_ACTION, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: data
-    }).then(() => {
-      document.getElementById('orderFormInner').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-    }).catch(() => {
-      // Even on network errors show success — Google Forms submission is fire-and-forget
-      document.getElementById('orderFormInner').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-    });
+    fetch(FORM_ACTION, { method: 'POST', mode: 'no-cors', body: data })
+      .then(() => showSuccess())
+      .catch(() => showSuccess());
+  }
+
+  function showSuccess() {
+    document.getElementById('orderFormInner').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
   }
 
   // ── VIDEO EMBED ──
