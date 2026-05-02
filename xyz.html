@@ -1333,14 +1333,14 @@
         </div>
 
         <div class="form-group">
-          <label>SCHOOL YEAR *</label>
+          <label>SCHOOL YEAR * <span style="font-weight:600;color:var(--text-muted);font-size:0.78rem;">(select all that apply)</span></label>
           <div class="year-chips" id="yearChips">
-            <span class="year-chip" onclick="selectYear(this)" data-year="Primary 1">P1</span>
-            <span class="year-chip" onclick="selectYear(this)" data-year="Primary 2">P2</span>
-            <span class="year-chip" onclick="selectYear(this)" data-year="Primary 3">P3</span>
-            <span class="year-chip" onclick="selectYear(this)" data-year="Primary 4">P4</span>
-            <span class="year-chip" onclick="selectYear(this)" data-year="Primary 5">P5</span>
-            <span class="year-chip" onclick="selectYear(this)" data-year="Primary 6">P6</span>
+            <span class="year-chip" onclick="toggleYear(this)" data-year="P1">P1</span>
+            <span class="year-chip" onclick="toggleYear(this)" data-year="P2">P2</span>
+            <span class="year-chip" onclick="toggleYear(this)" data-year="P3">P3</span>
+            <span class="year-chip" onclick="toggleYear(this)" data-year="P4">P4</span>
+            <span class="year-chip" onclick="toggleYear(this)" data-year="P5">P5</span>
+            <span class="year-chip" onclick="toggleYear(this)" data-year="P6">P6</span>
           </div>
         </div>
 
@@ -1383,9 +1383,16 @@
   <div class="collapsible-body open" id="body-sec-video">
     <section id="video" style="padding-top:0;">
       <p class="section-sub" style="margin-top:0;">Perfect for parents looking for fun ways to help kids learn Chinese at home.</p>
-      <div class="video-wrap" onclick="loadVideo(this)" data-vid="jH07z4LoF4s">
-        <img class="video-thumb" src="https://img.youtube.com/vi/jH07z4LoF4s/maxresdefault.jpg" alt="Wordmatchic gameplay video">
-        <div class="play-btn">▶</div>
+      <div class="video-wrap">
+        <iframe
+          width="100%"
+          height="420"
+          src="https://www.youtube.com/embed/videoseries?list=PLdAC-_CDliXCAZffgYa_y66anHjEhbQOl&rel=0"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="display:block;">
+        </iframe>
       </div>
     </section>
   </div>
@@ -1705,7 +1712,7 @@
   window._gaSubmitOrder = function() {
     gtag('event', 'form_submit_attempt', {
       set_choice: selectedSet,
-      school_year: selectedYear,
+      school_year: selectedYears.join(", "),
     });
     realSubmitOrder();
   };
@@ -1715,7 +1722,7 @@
   window.showSuccess = function() {
     gtag('event', 'reservation_complete', {
       set_choice: selectedSet,
-      school_year: selectedYear,
+      school_year: selectedYears.join(", "),
     });
     realShowSuccess();
   };
@@ -1854,19 +1861,18 @@
 
   // ── STOCK AWARENESS ──
   // P1–P5 Deluxe = in stock (4 each). Everything else = pre-order.
-  const IN_STOCK_SETS = ['Deluxe'];
-  const IN_STOCK_YEARS = ['Primary 1','Primary 2','Primary 3','Primary 4','Primary 5'];
   const STOCK_COUNT = 4;
 
   function isInStock() {
-    return selectedSet.includes('Deluxe') && IN_STOCK_YEARS.includes(selectedYear);
+    return selectedSet.includes('Deluxe') &&
+           selectedYears.some(y => ['P1','P2','P3','P4','P5'].includes(y));
   }
 
   function updateStockUI() {
-    const badge  = document.getElementById('stockBadge');
-    const btn    = document.getElementById('submitBtn');
+    const badge = document.getElementById('stockBadge');
+    const btn   = document.getElementById('submitBtn');
 
-    if (!selectedYear) {
+    if (!selectedYears.length) {
       badge.style.display = 'none';
       btn.textContent = '🎴 Reserve My Set Now!';
       btn.className = 'submit-btn';
@@ -1875,10 +1881,18 @@
 
     badge.style.display = 'block';
 
-    if (isInStock()) {
+    const hasInStock  = selectedSet.includes('Deluxe') && selectedYears.some(y => ['P1','P2','P3','P4','P5'].includes(y));
+    const hasPreOrder = selectedYears.includes('P6') || selectedSet.includes('Thriller');
+
+    if (hasInStock && !hasPreOrder) {
       badge.className = 'stock-badge in-stock';
-      badge.innerHTML = `✅ <strong>In Stock!</strong> Only ${STOCK_COUNT} Deluxe sets left for ${selectedYear} — ships within 3–5 working days.`;
+      badge.innerHTML = `✅ <strong>In Stock!</strong> Only ${STOCK_COUNT} Deluxe sets left per level — ships within 3–5 working days.`;
       btn.textContent = '🛒 Buy Now — S$49.90';
+      btn.className = 'submit-btn buy-now';
+    } else if (hasInStock && hasPreOrder) {
+      badge.className = 'stock-badge in-stock';
+      badge.innerHTML = `✅ Some levels are <strong>in stock</strong>, others are <strong>pre-order</strong>. We'll be in touch to confirm each level!`;
+      btn.textContent = '🛒 Submit Order';
       btn.className = 'submit-btn buy-now';
     } else {
       badge.className = 'stock-badge pre-order';
@@ -1894,20 +1908,32 @@
     document.querySelectorAll('.set-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     selectedSet = el.dataset.set;
-    updateStockUI();
+    // Reset year selection when set changes
+    selectedYears = [];
+    selectedYear = '';
+    document.querySelectorAll('.year-chip').forEach(c => c.classList.remove('active'));
+    document.getElementById('stockBadge').style.display = 'none';
+    document.getElementById('submitBtn').textContent = '🎴 Reserve My Set Now!';
+    document.getElementById('submitBtn').className = 'submit-btn';
   }
 
-  // ── YEAR SELECTION ──
-  let selectedYear = '';
-  function selectYear(el) {
-    document.querySelectorAll('.year-chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    selectedYear = el.dataset.year;
+  // ── YEAR SELECTION (multi-select) ──
+  let selectedYears = [];
+  function toggleYear(el) {
+    const year = el.dataset.year;
+    if (selectedYears.includes(year)) {
+      selectedYears = selectedYears.filter(y => y !== year);
+      el.classList.remove('active');
+    } else {
+      selectedYears.push(year);
+      el.classList.add('active');
+    }
+    selectedYear = selectedYears.join(', '); // keep for GA tracking
     updateStockUI();
   }
 
   // ── FORM SUBMISSION → GOOGLE APPS SCRIPT ──
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6DiTIjE4wCpZGugfltLj2OMlrJzUeo9WzK66--t0VDPnsxK-nnEQu4gElRlBqzsjA7w/exec';
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygn6IGGhM5SCUKKmN8wNhlNiKwTgojD49joQcGGKJIJZv7xtOIOtQDsEqUDs-ZlCeU/exec';
 
   async function submitOrder() {
     const name    = document.getElementById('f_name').value.trim();
@@ -1916,25 +1942,31 @@
     const address = document.getElementById('f_address').value.trim();
     const consent = document.getElementById('f_consent').checked;
 
-    if (!name)         { alert('Please enter your name 😊'); return; }
-    if (!email)        { alert('Please enter your email address 😊'); return; }
-    if (!selectedYear) { alert('Please select your child\'s school year 😊'); return; }
-    if (!address)      { alert('Please enter your delivery address 😊'); return; }
+    if (!name)                 { alert('Please enter your name 😊'); return; }
+    if (!email)                { alert('Please enter your email address 😊'); return; }
+    if (!selectedYears.length) { alert('Please select at least one school year 😊'); return; }
+    if (!address)              { alert('Please enter your delivery address 😊'); return; }
+
+    const setLabel = selectedSet.includes('Deluxe')
+      ? 'Deluxe – (Comprehensive coverage) -- (399 cards @ $49.90 )'
+      : 'Thriller -- (Light coverage) – (114 cards @ $19.90)';
+
+    const consentText = consent
+      ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
+      : 'No consent given';
 
     const payload = {
       name:       name,
       email:      email,
       phone:      phone || 'NA',
-      schoolYear: selectedYear,
-      setChoice:  selectedSet,
+      schoolYear: selectedYears.join(', '),
+      setChoice:  setLabel,
       address:    address,
       country:    'Singapore',
       notes:      selectedSet.includes('Thriller')
-                    ? 'Important Note: If you buy a Thriller set, there will not be a top-up to "upgrade" to the Deluxe Set later.'
+                    ? 'Thriller note: no upgrade to Deluxe later'
                     : 'Deluxe Set selected – comprehensive coverage',
-      consent:    consent
-                    ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
-                    : 'No consent given',
+      consent:    consentText,
     };
 
     try {
@@ -1951,7 +1983,6 @@
       }
     } catch (err) {
       console.error('Submission error:', err);
-      // Show success anyway — entry likely saved
       showSuccess();
     }
   }
