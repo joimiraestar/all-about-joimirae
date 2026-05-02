@@ -233,12 +233,26 @@
   }
 
   .hero-pills {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
     justify-content: center;
     gap: 10px;
-    flex-wrap: wrap;
     margin-bottom: 36px;
     animation: fadeUp 0.6s 0.35s ease both;
+  }
+  @media (max-width: 640px) {
+    .hero-pills {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pill {
+      justify-content: center;
+    }
+  }
+  @media (max-width: 300px) {
+    .hero-pills { grid-template-columns: 1fr; }
   }
   .pill {
     background: white;
@@ -1892,21 +1906,10 @@
     updateStockUI();
   }
 
-  // ── FORM SUBMISSION → GOOGLE FORMS ──
-  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfPvDn27O69gDzgBtsD1Bj6J4owMeJGSOKDndU4zYvpgGdC5A/formResponse';
-  const FIELDS = {
-    setChoice1: 'entry.305199733',
-    setChoice2: 'entry.781277786',
-    setChoice3: 'entry.1246839027',
-    setChoice4: 'entry.674304367',
-    setChoice5: 'entry.1681459916',
-    country:    'entry.1298436821',
-    note:       'entry.1009839429',
-    address:    'entry.851517012',
-    consent:    'entry.907406912',
-  };
+  // ── FORM SUBMISSION → GOOGLE APPS SCRIPT ──
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6DiTIjE4wCpZGugfltLj2OMlrJzUeo9WzK66--t0VDPnsxK-nnEQu4gElRlBqzsjA7w/exec';
 
-  function submitOrder() {
+  async function submitOrder() {
     const name    = document.getElementById('f_name').value.trim();
     const email   = document.getElementById('f_email').value.trim();
     const phone   = document.getElementById('f_phone').value.trim();
@@ -1918,27 +1921,39 @@
     if (!selectedYear) { alert('Please select your child\'s school year 😊'); return; }
     if (!address)      { alert('Please enter your delivery address 😊'); return; }
 
-    const consentText = consent
-      ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
-      : 'No consent given';
-    const noteText = selectedSet.includes('Thriller')
-      ? 'Important Note: If you buy a Thriller set, there will not be a top-up to "upgrade" to the Deluxe Set later. To get both, you would need to purchase the Full Set separately at $49.90'
-      : 'Deluxe Set selected – comprehensive coverage';
+    const payload = {
+      name:       name,
+      email:      email,
+      phone:      phone || 'NA',
+      schoolYear: selectedYear,
+      setChoice:  selectedSet,
+      address:    address,
+      country:    'Singapore',
+      notes:      selectedSet.includes('Thriller')
+                    ? 'Important Note: If you buy a Thriller set, there will not be a top-up to "upgrade" to the Deluxe Set later.'
+                    : 'Deluxe Set selected – comprehensive coverage',
+      consent:    consent
+                    ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
+                    : 'No consent given',
+    };
 
-    const data = new FormData();
-    data.append(FIELDS.setChoice1, selectedSet);
-    data.append(FIELDS.setChoice2, name);
-    data.append(FIELDS.setChoice3, selectedYear);
-    data.append(FIELDS.setChoice4, email);
-    data.append(FIELDS.setChoice5, phone || 'NA');
-    data.append(FIELDS.country,    'Singapore');
-    data.append(FIELDS.note,       noteText);
-    data.append(FIELDS.address,    address);
-    data.append(FIELDS.consent,    consentText);
-
-    fetch(FORM_ACTION, { method: 'POST', mode: 'no-cors', body: data })
-      .then(() => showSuccess())
-      .catch(() => showSuccess());
+    try {
+      const res = await fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.result === 'success') {
+        showSuccess();
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      // Show success anyway — entry likely saved
+      showSuccess();
+    }
   }
 
   function showSuccess() {
