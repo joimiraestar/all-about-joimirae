@@ -1983,32 +1983,27 @@
       ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
       : 'No consent given';
 
-    const payload = {
-      name:       name,
-      email:      email,
-      phone:      phone || 'NA',
-      schoolYear: selectedYears.join(', '),
-      setChoice:  setLabel,
-      address:    address,
-      country:    'Singapore',
-      notes:      selectedSet.includes('Thriller')
-                    ? 'Thriller note: no upgrade to Deluxe later'
-                    : 'Deluxe Set selected – comprehensive coverage',
-      consent:    consentText,
-    };
-
     try {
-      const res = await fetch(WEB_APP_URL, {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(payload),
+      const params = new URLSearchParams({
+        email:      email,
+        name:       name,
+        phone:      phone || 'NA',
+        schoolYear: selectedYears.join(', '),
+        setChoice:  setLabel,
+        address:    address,
+        country:    'Singapore',
+        notes:      selectedSet.includes('Thriller')
+                      ? 'Thriller note: no upgrade to Deluxe later'
+                      : 'Deluxe Set selected – comprehensive coverage',
+        consent:    consentText,
       });
-      const data = await res.json();
-      if (data.result === 'success') {
-        showSuccess();
-      } else {
-        throw new Error(data.message);
-      }
+
+      await fetch(WEB_APP_URL + '?' + params.toString(), {
+        method: 'GET',
+        mode: 'no-cors',
+      });
+
+      showSuccess();
     } catch (err) {
       console.error('Submission error:', err);
       showSuccess();
