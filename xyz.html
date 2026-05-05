@@ -1153,7 +1153,7 @@
   /* ── OLD RESPONSIVE (kept, minus nav override now handled above) ── */
   @media (max-width: 768px) {
     nav { padding: 12px 4%; }
-    .hero { padding: 44px 5% 36px; }
+    .hero { padding: 44px 4% 36px; }
     .order-layout, .compare-grid, .coaching-layout, .contact-layout { grid-template-columns: 1fr; }
     .privacy-grid { grid-template-columns: 1fr !important; }
     .how-grid { grid-template-columns: 1fr; }
@@ -1163,8 +1163,36 @@
     .hero-product-img, .hero-product-img-placeholder { width: 100%; max-width: 380px; height: 220px; }
     .hero-product-row { gap: 20px; flex-direction: column; align-items: center; }
     .hero-stats-col { flex-direction: column; align-items: stretch; width: 100%; max-width: 380px; }
-    .hero-card-float { min-width: 140px; padding: 14px 16px; }
+    .hero-card-float { min-width: 0; width: 100%; padding: 14px 16px; }
     #about .about-bilingual { grid-template-columns: 1fr !important; }
+    .product-carousel { width: 100%; max-width: 100%; }
+    .order-form-wrap { padding: 22px 16px; }
+    .set-card { padding: 16px 14px; }
+    #order { padding: 50px 4%; }
+    #how, #why, #testimonials, #coaching, #about, #contact, #video { padding-left: 4%; padding-right: 4%; }
+    .hero-cta-row { flex-direction: column; align-items: center; }
+    .hero-cta-row .btn-primary,
+    .hero-cta-row .btn-secondary { width: 100%; text-align: center; }
+  }
+
+  /* Extra narrow — 360px and below */
+  @media (max-width: 380px) {
+    .wordmatchic-title { font-size: clamp(3rem, 18vw, 5rem); letter-spacing: -1px; }
+    .hero-sub { font-size: 1rem; }
+    .hero-tagline { font-size: 0.9rem; }
+    .section-title { font-size: clamp(1.4rem, 7vw, 2rem); }
+    .hero-pills { grid-template-columns: 1fr 1fr; max-width: 100%; }
+    .pill { font-size: 0.75rem; padding: 5px 10px; }
+    .set-name { font-size: 1.1rem; }
+    .set-price { font-size: 1.3rem; }
+    .year-chips { gap: 5px; }
+    .year-chip { padding: 6px 10px; font-size: 0.85rem; }
+    .btn-primary, .btn-secondary, .submit-btn { font-size: 0.95rem; padding: 12px 20px; }
+    .toggle-header { padding: 20px 4% 18px; }
+    .testimonial-card { padding: 18px 14px; }
+    .form-title { font-size: 1rem; }
+    .nav-logo span { font-size: 0.95rem; }
+    .contact-layout { gap: 24px; }
   }
 </style>
 </head>
@@ -1208,7 +1236,7 @@
     <span class="pill">⚡ Fast-paced gameplay</span>
     <span class="pill">🎯 P1 – P6 coverage</span>
     <span class="pill">👨‍👩‍👧 2–6 players</span>
-    <span class="pill">📦 Ships in Singapore</span>
+    <span class="pill">🤝 Delivered in Singapore</span>
   </div>
 
   <div class="hero-cta-row">
@@ -1382,7 +1410,7 @@
   </button>
   <div class="collapsible-body open" id="body-sec-video">
     <section id="video" style="padding-top:0;">
-      <p class="section-sub" style="margin-top:0;">Perfect for parents looking for fun ways to help kids learn Chinese at home.</p>
+      <p class="section-sub" style="margin-top:0;display:none;"></p>
       <div class="video-wrap">
         <iframe
           width="100%"
@@ -1522,7 +1550,7 @@
     <section id="about" style="padding-top:24px;">
       <p class="section-sub" style="margin-top:0;color:rgba(255,255,255,0.65);">学习如游戏般自然，启迪目标、好奇与勇气。<br>Inspiring purpose, curiosity, and courage.</p>
 
-      <div style="max-width:780px;margin:0 auto 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div style="max-width:780px;margin:0 auto 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
         <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:28px 24px;">
           <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--yellow-light);font-size:1rem;margin-bottom:12px;">Brand Philosophy</h3>
           <p style="color:rgba(255,255,255,0.75);font-size:0.88rem;line-height:1.75;margin-bottom:14px;">At JoiMirae, we believe that true learning begins with curiosity and flourishes through play. Playful learning is designed around each child, creating experiences that are engaging, challenging, and joyful, helping children of all ages develop grit, resilience, and creativity.</p>
@@ -1614,7 +1642,7 @@
       <div style="margin-top:48px;background:white;border-radius:var(--radius);padding:32px 28px;box-shadow:var(--shadow-card);max-width:860px;margin-left:auto;margin-right:auto;margin-top:40px;">
         <h3 style="font-family:'Lilita One',cursive;font-size:1.4rem;color:var(--navy);margin-bottom:6px;">🔒 Data Protection & Privacy</h3>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:20px;">
 
           <div>
             <h4 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--teal-dark);font-size:0.9rem;margin-bottom:8px;">📋 What Information We Collect</h4>
@@ -1886,12 +1914,12 @@
 
     if (hasInStock && !hasPreOrder) {
       badge.className = 'stock-badge in-stock';
-      badge.innerHTML = `✅ <strong>In Stock!</strong> Only ${STOCK_COUNT} Deluxe sets left per level — ships within 3–5 working days.`;
+      badge.innerHTML = `✅ <strong>In Stock!</strong> Only ${STOCK_COUNT} Deluxe sets left per level — we'll contact you within 3–5 working days to discuss delivery options.`;
       btn.textContent = '🛒 Buy Now — S$49.90';
       btn.className = 'submit-btn buy-now';
     } else if (hasInStock && hasPreOrder) {
       badge.className = 'stock-badge in-stock';
-      badge.innerHTML = `✅ Some levels are <strong>in stock</strong>, others are <strong>pre-order</strong>. We'll be in touch to confirm each level!`;
+      badge.innerHTML = `✅ Some levels are <strong>in stock</strong>, others are <strong>pre-order</strong>. We'll be in touch within 3–5 working days to discuss delivery options and confirm pre-order details!`;
       btn.textContent = '🛒 Submit Order';
       btn.className = 'submit-btn buy-now';
     } else {
@@ -1994,7 +2022,7 @@
     if (isInStock()) {
       document.getElementById('successIcon').textContent = '🛒';
       document.getElementById('successTitle').textContent = 'Order received!';
-      document.getElementById('successText').textContent = 'Thanks! We\'ll WhatsApp or email you within 1 working day to confirm payment and arrange delivery. Can\'t wait for you to play! 🏆';
+      document.getElementById('successText').textContent = 'Thanks! We\'ll contact you within 3–5 working days to discuss delivery options and confirm payment. Can\'t wait for you to play! 🏆';
     } else {
       document.getElementById('successIcon').textContent = '📋';
       document.getElementById('successTitle').textContent = 'Pre-order confirmed!';
