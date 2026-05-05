@@ -1344,11 +1344,6 @@
       <p class="form-title">📋 Your Details</p>
 
       <div id="orderFormInner">
-        <div class="form-group">
-          <label>YOUR NAME *</label>
-          <input type="text" id="f_name" placeholder="E.g. Sarah Tan" required>
-        </div>
-
         <div class="form-row">
           <div class="form-group">
             <label>EMAIL *</label>
@@ -1702,6 +1697,7 @@
 <footer>
   <p>© 2025 Joimirae · <a href="tel:+6581191958">+65 81191958</a> · Learn Laugh Live! 🌟</p>
   <p style="margin-top:6px;font-size:0.75rem;"><a href="#order">Reserve Wordmatchic</a></p>
+  <p style="margin-top:8px;font-size:0.65rem;opacity:0.4;">v0.0.0.1</p>
 </footer>
 
 <script>
@@ -1964,20 +1960,18 @@
   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygn6IGGhM5SCUKKmN8wNhlNiKwTgojD49joQcGGKJIJZv7xtOIOtQDsEqUDs-ZlCeU/exec';
 
   async function submitOrder() {
-    const name    = document.getElementById('f_name').value.trim();
     const email   = document.getElementById('f_email').value.trim();
     const phone   = document.getElementById('f_phone').value.trim();
     const address = document.getElementById('f_address').value.trim();
     const consent = document.getElementById('f_consent').checked;
 
-    if (!name)                 { alert('Please enter your name 😊'); return; }
     if (!email)                { alert('Please enter your email address 😊'); return; }
     if (!selectedYears.length) { alert('Please select at least one school year 😊'); return; }
     if (!address)              { alert('Please enter your delivery address 😊'); return; }
 
     const setLabel = selectedSet.includes('Deluxe')
-      ? 'Deluxe – (Comprehensive coverage) -- (399 cards @ $49.90 )'
-      : 'Thriller -- (Light coverage) – (114 cards @ $19.90)';
+      ? 'Deluxe \u2013 (Comprehensive coverage) -- (399 cards @ $49.90 )'
+      : 'Thriller -- (Light coverage) \u2013 (114 cards @ $19.90)';
 
     const consentText = consent
       ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
@@ -1986,15 +1980,11 @@
     try {
       const params = new URLSearchParams({
         email:      email,
-        name:       name,
         phone:      phone || 'NA',
         schoolYear: selectedYears.join(', '),
         setChoice:  setLabel,
         address:    address,
         country:    'Singapore',
-        notes:      selectedSet.includes('Thriller')
-                      ? 'Thriller note: no upgrade to Deluxe later'
-                      : 'Deluxe Set selected – comprehensive coverage',
         consent:    consentText,
       });
 
