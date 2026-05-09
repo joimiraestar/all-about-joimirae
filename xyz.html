@@ -1980,16 +1980,30 @@
   // ── FORM SUBMISSION → GOOGLE APPS SCRIPT ──
   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygn6IGGhM5SCUKKmN8wNhlNiKwTgojD49joQcGGKJIJZv7xtOIOtQDsEqUDs-ZlCeU/exec';
 
+  // ── DEBOUNCER ──
+  let isSubmitting = false;
+
   async function submitOrder() {
+    if (isSubmitting) return;
+    isSubmitting = true;
+    const btn = document.getElementById('submitBtn');
+    const originalText = btn.textContent;
+    btn.textContent = '⏳ Submitting...';
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'not-allowed';
     const email   = document.getElementById('f_email').value.trim();
     const phone   = document.getElementById('f_phone').value.trim();
     const address = document.getElementById('f_address').value.trim();
     const consent = document.getElementById('f_consent').checked;
 
-    if (!email)                { alert('Please enter your email address 😊'); return; }
-    if (!selectedYears.length) { alert('Please select at least one school year 😊'); return; }
-    if (!address)              { alert('Please enter your delivery address 😊'); return; }
+    if (!email)                { isSubmitting = false; btn.textContent = originalText; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; alert('Please enter your email address 😊'); return; }
+    if (!selectedYears.length) { isSubmitting = false; btn.textContent = originalText; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; alert('Please select at least one school year 😊'); return; }
+    if (!address)              { isSubmitting = false; btn.textContent = originalText; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; alert('Please enter your delivery address 😊'); return; }
     if (!consent) {
+      isSubmitting = false;
+      btn.textContent = originalText;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
       document.getElementById('consentWarning').style.display = 'block';
       document.getElementById('consentRow').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -2026,6 +2040,11 @@
     } catch (err) {
       console.error('Submission error:', err);
       showSuccess();
+    } finally {
+      isSubmitting = false;
+      btn.textContent = originalText;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
     }
   }
 
