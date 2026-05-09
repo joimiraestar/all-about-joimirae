@@ -1372,21 +1372,24 @@
           <input type="text" id="f_address" placeholder="Block / Street, Unit #, Postal Code">
         </div>
 
-        <div class="consent-row">
-          <input type="checkbox" id="f_consent" checked>
-          <label for="f_consent">I agree to be contacted by Joimirae about updates, pricing and pre-order details.</label>
+        <div class="consent-row" id="consentRow">
+          <input type="checkbox" id="f_consent" checked onchange="updateConsentWarning()">
+          <label for="f_consent">I agree to be contacted by Joimirae via email and WhatsApp about my order, updates, pricing and pre-order details. <span style="color:var(--coral);font-weight:800;">*</span></label>
         </div>
+        <p id="consentWarning" style="display:none;color:var(--coral);font-size:0.85rem;font-weight:700;margin-bottom:10px;padding:8px 12px;background:#FFF0F0;border-radius:var(--radius-sm);border:1.5px solid #FFD0D0;">⚠️ Please agree to be contacted so we can process your order.</p>
 
         <div class="stock-badge" id="stockBadge"></div>
 
         <button class="submit-btn" id="submitBtn" onclick="window._gaSubmitOrder ? window._gaSubmitOrder() : submitOrder()">🎴 Reserve My Set Now!</button>
-        <p class="form-note">🔒 Your data is safe with us · PDPA compliant · No spam, ever</p>
+        
       </div>
 
       <div class="success-message" id="successMsg">
         <span class="success-icon" id="successIcon">🎉</span>
         <h3 id="successTitle">You're on the list!</h3>
         <p id="successText">Thanks for your order! We'll WhatsApp/email you shortly to confirm payment and delivery details. 🏆</p>
+        <div id="orderSummary" style="background:var(--cream);border-radius:var(--radius-sm);padding:16px 18px;margin:18px 0;text-align:left;font-size:0.92rem;line-height:1.8;"></div>
+        <button onclick="editOrder()" style="background:none;border:2px solid var(--teal);color:var(--teal-dark);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:0.9rem;padding:10px 22px;border-radius:50px;cursor:pointer;margin-top:8px;transition:all 0.15s;" onmouseover="this.style.background='var(--teal-light)'" onmouseout="this.style.background='none'">← Edit my order</button>
       </div>
     </div>
   </div>
@@ -1883,6 +1886,12 @@
     });
   });
 
+  // ── CONSENT WARNING ──
+  function updateConsentWarning() {
+    const checked = document.getElementById('f_consent').checked;
+    document.getElementById('consentWarning').style.display = checked ? 'none' : 'none';
+  }
+
   // ── STOCK AWARENESS ──
   // P1–P5 Deluxe = in stock (4 each). Everything else = pre-order.
   const STOCK_COUNT = 4;
@@ -1956,6 +1965,18 @@
     updateStockUI();
   }
 
+  // ── ORDER REFERENCE GENERATOR ──
+  function generateOrderRef() {
+    const now = new Date();
+    const date = now.toISOString().slice(0,10).replace(/-/g,''); // 20250505
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let rand = '';
+    for (let i = 0; i < 4; i++) rand += chars[Math.floor(Math.random() * chars.length)];
+    return 'WM-' + date + '-' + rand; // e.g. WM-20250505-A3K9
+  }
+
+  let currentOrderRef = '';
+
   // ── FORM SUBMISSION → GOOGLE APPS SCRIPT ──
   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygn6IGGhM5SCUKKmN8wNhlNiKwTgojD49joQcGGKJIJZv7xtOIOtQDsEqUDs-ZlCeU/exec';
 
@@ -1968,17 +1989,25 @@
     if (!email)                { alert('Please enter your email address 😊'); return; }
     if (!selectedYears.length) { alert('Please select at least one school year 😊'); return; }
     if (!address)              { alert('Please enter your delivery address 😊'); return; }
+    if (!consent) {
+      document.getElementById('consentWarning').style.display = 'block';
+      document.getElementById('consentRow').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    currentOrderRef = generateOrderRef();
 
     const setLabel = selectedSet.includes('Deluxe')
       ? 'Deluxe \u2013 (Comprehensive coverage) -- (399 cards @ $49.90 )'
       : 'Thriller -- (Light coverage) \u2013 (114 cards @ $19.90)';
 
     const consentText = consent
-      ? 'I agree to be contacted by Joimirae about updates, pricing and pre-order details.'
+      ? 'I agree to be contacted by Joimirae via email and WhatsApp about my order, updates, pricing and pre-order details.'
       : 'No consent given';
 
     try {
       const params = new URLSearchParams({
+        orderRef:   currentOrderRef,
         email:      email,
         phone:      phone || 'NA',
         schoolYear: selectedYears.join(', '),
@@ -2004,15 +2033,41 @@
     document.getElementById('orderFormInner').style.display = 'none';
     const msg = document.getElementById('successMsg');
     msg.style.display = 'block';
+
+    const email   = document.getElementById('f_email').value.trim();
+    const phone   = document.getElementById('f_phone').value.trim();
+    const address = document.getElementById('f_address').value.trim();
+    const setName = selectedSet.includes('Deluxe') ? '👑 Deluxe Set' : '🎭 Thriller Set';
+    const years   = selectedYears.join(', ');
+
+    document.getElementById('orderSummary').innerHTML = `
+      <div style="background:var(--teal-light);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;text-align:center;">
+        <span style="font-size:0.78rem;color:var(--teal-dark);font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">Your Order Reference</span><br>
+        <span style="font-family:'Lilita One',cursive;font-size:1.5rem;color:var(--navy);letter-spacing:2px;">${currentOrderRef}</span><br>
+        <span style="font-size:0.75rem;color:var(--text-muted);">Please keep this for your records</span>
+      </div>
+      <strong>📦 Your Order Summary</strong><br>
+      Set: ${setName}<br>
+      Year(s): ${years}<br>
+      Email: ${email}<br>
+      ${phone ? 'Phone: ' + phone + '<br>' : ''}
+      Address: ${address}
+    `;
+
     if (isInStock()) {
       document.getElementById('successIcon').textContent = '🛒';
       document.getElementById('successTitle').textContent = 'Order received!';
-      document.getElementById('successText').textContent = 'Thanks! We\'ll contact you within 3–5 working days to discuss delivery options and confirm payment. Can\'t wait for you to play! 🏆';
+      document.getElementById('successText').textContent = 'We\'ll contact you within 3–5 working days to discuss delivery options and confirm payment. Can\'t wait for you to play! 🏆';
     } else {
       document.getElementById('successIcon').textContent = '📋';
       document.getElementById('successTitle').textContent = 'Pre-order confirmed!';
-      document.getElementById('successText').textContent = 'You\'re on the list! We\'ll contact you as soon as your set is ready. Keep practising — the race is almost here! 🎴';
+      document.getElementById('successText').textContent = 'You\'re on the list! We\'ll contact you within 3–5 working days to discuss delivery options. Keep practising — the race is almost here! 🎴';
     }
+  }
+
+  function editOrder() {
+    document.getElementById('successMsg').style.display = 'none';
+    document.getElementById('orderFormInner').style.display = 'block';
   }
 
   // ── VIDEO EMBED ──
