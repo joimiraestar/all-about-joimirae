@@ -1380,7 +1380,7 @@
 
         <div class="stock-badge" id="stockBadge"></div>
 
-        <button class="submit-btn" id="submitBtn" onclick="window._gaSubmitOrder ? window._gaSubmitOrder() : submitOrder()">🎴 Reserve My Set Now!</button>
+        <button class="submit-btn" id="submitBtn" onclick="submitOrder()">🎴 Reserve My Set Now!</button>
         
       </div>
 
@@ -1735,24 +1735,12 @@
   });
 
   // Track form submission attempt
-  const realSubmitOrder = submitOrder;
-  window._gaSubmitOrder = function() {
+  document.getElementById('submitBtn').addEventListener('click', function() {
     gtag('event', 'form_submit_attempt', {
-      set_choice: selectedSet,
-      school_year: selectedYears.join(", "),
+      set_choice:  selectedSet,
+      school_year: selectedYears.join(', '),
     });
-    realSubmitOrder();
-  };
-
-  // Track form success
-  const realShowSuccess = showSuccess;
-  window.showSuccess = function() {
-    gtag('event', 'reservation_complete', {
-      set_choice: selectedSet,
-      school_year: selectedYears.join(", "),
-    });
-    realShowSuccess();
-  };
+  });
 
   // Track collapsible section opens
   const realToggleSection = toggleSection;
@@ -2049,6 +2037,11 @@
   }
 
   function showSuccess() {
+    gtag('event', 'reservation_complete', {
+      set_choice:  selectedSet,
+      school_year: selectedYears.join(', '),
+      order_ref:   currentOrderRef,
+    });
     document.getElementById('orderFormInner').style.display = 'none';
     const msg = document.getElementById('successMsg');
     msg.style.display = 'block';
