@@ -1389,7 +1389,7 @@
         <h3 id="successTitle">You're on the list!</h3>
         <p id="successText">Thanks for your order! We'll WhatsApp/email you shortly to confirm payment and delivery details. 🏆</p>
         <div id="orderSummary" style="background:var(--cream);border-radius:var(--radius-sm);padding:16px 18px;margin:18px 0;text-align:left;font-size:0.92rem;line-height:1.8;"></div>
-        <button onclick="editOrder()" style="background:none;border:2px solid var(--teal);color:var(--teal-dark);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:0.9rem;padding:10px 22px;border-radius:50px;cursor:pointer;margin-top:8px;transition:all 0.15s;" onmouseover="this.style.background='var(--teal-light)'" onmouseout="this.style.background='none'">← Edit my order</button>
+        <button onclick="editOrder()" style="background:none;border:2px solid var(--teal);color:var(--teal-dark);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:0.9rem;padding:10px 22px;border-radius:50px;cursor:pointer;margin-top:8px;transition:all 0.15s;" onmouseover="this.style.background='var(--teal-light)'" onmouseout="this.style.background='none'">+ Make a new order</button>
       </div>
     </div>
   </div>
@@ -2078,8 +2078,16 @@
   }
 
   function editOrder() {
+    // Keep contact details, only reset set/year choices
+    selectedYears = [];
+    selectedYear = '';
+    document.querySelectorAll('.year-chip').forEach(c => c.classList.remove('active'));
+    document.getElementById('stockBadge').style.display = 'none';
+    document.getElementById('submitBtn').textContent = '🎴 Reserve My Set Now!';
+    document.getElementById('submitBtn').className = 'submit-btn';
     document.getElementById('successMsg').style.display = 'none';
     document.getElementById('orderFormInner').style.display = 'block';
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // ── VIDEO EMBED ──
